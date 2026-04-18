@@ -1,4 +1,4 @@
-# Pastor Olumide Oni — God of Elijah Ministry Website
+# Pastor Olumide Oni 
 
 ## What's in this folder
 
