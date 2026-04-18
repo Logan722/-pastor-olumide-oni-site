@@ -474,7 +474,7 @@ main { position: relative; z-index: 10; }
 .hero-frame-inner img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 25%;
   filter: brightness(0.94) contrast(1.04);
 }
 /* Subtle vignette + warm overlay to unify with cinematic palette */
@@ -1076,6 +1076,7 @@ main { position: relative; z-index: 10; }
 @media (max-width: 960px) {
   .about-hero { padding: 110px 0 60px; }
   .hero-frame-inner { aspect-ratio: 4/3; }
+    .hero-frame { padding: 0 8px; }
 
   .calling-mantra { grid-template-columns: repeat(2, 1fr); }
   .calling-word:nth-child(2) { border-right: none; }
@@ -1408,7 +1409,7 @@ body.mobile-nav-open {
       <span class="hero-frame-corner bl"></span>
       <span class="hero-frame-corner br"></span>
       <div class="hero-frame-inner">
-        <img src="img/photos/couple-outdoor.jpg" alt="Pastor Olumide Oni and Pastor (Mrs.) Oluwatoyin Oni" alt="Pastor Olumide Oni and Pastor (Mrs.) Oluwatoyin Oni" />
+        <img src="img/photos/couple-outdoor.jpg" alt="Pastor Olumide Oni and Pastor (Mrs.) Oluwatoyin Oni" />
       </div>
     </div>
 
