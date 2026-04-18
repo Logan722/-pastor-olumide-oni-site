@@ -788,6 +788,41 @@ img, svg { display: block; max-width: 100%; }
   border-radius: 3px;
 }
 .reading-pane::-webkit-scrollbar-thumb:hover { background: var(--r-gold-dim); }
+
+/* ── Scroll Mode ── */
+body[data-reading-mode="scroll"] .reading-pane {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+body[data-reading-mode="scroll"] .reading-content {
+  column-width: unset !important;
+  column-gap: unset !important;
+  height: auto !important;
+  transform: none !important;
+  max-width: 680px;
+  margin: 0 auto;
+  padding-bottom: 120px;
+}
+body[data-reading-mode="scroll"] #prevPage,
+body[data-reading-mode="scroll"] #nextPage,
+body[data-reading-mode="scroll"] #pageLabel {
+  display: none;
+}
+body[data-reading-mode="scroll"] .progress-bar { display: none; }
+body[data-reading-mode="scroll"] .toolbar-group:first-child {
+  visibility: hidden;
+  width: 0;
+  overflow: hidden;
+  gap: 0;
+  padding: 0;
+}
+/* Toggle button active state */
+.tool-btn.scroll-active {
+  color: var(--r-gold) !important;
+  background: rgba(212,168,83,0.12);
+}
+
 </style>
 </head>
 <body data-theme="dark">
@@ -1388,6 +1423,7 @@ img, svg { display: block; max-width: 100%; }
 
   // ── Keyboard shortcuts ──
   document.addEventListener('keydown', (e) => {
+      if (e.key === 's' || e.key === 'S') { toggleReadingMode(); return; }
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     switch (e.key) {
       case 'ArrowLeft':
