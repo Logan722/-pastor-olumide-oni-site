@@ -974,7 +974,7 @@ body.mobile-nav-open {
 @media(max-width:640px){.author-bio-wrap{flex-direction:column;text-align:center;gap:28px}.author-bio-photo{width:160px;height:160px}}
 </style>
 <style id="site-theme-toggle-css">
-/* ── Light Mode ── */
+/* ── Light Mode — Full Site ── */
 html.light-mode {
   --bg: #faf7f2;
   --bg-2: #f0ebe3;
@@ -990,19 +990,107 @@ html.light-mode {
   --line: rgba(158, 122, 44, 0.2);
   --line-strong: rgba(158, 122, 44, 0.4);
 }
-html.light-mode body { color: var(--text); }
-html.light-mode img { filter: none; }
+
+/* Body & full-page background */
+html.light-mode body { background: var(--bg); color: var(--text); }
+html.light-mode body::before {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(158, 122, 44, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 90%, rgba(158, 122, 44, 0.04) 0%, transparent 55%),
+    linear-gradient(180deg, #faf7f2 0%, #f5f0e8 60%, #efe9df 100%) !important;
+}
+
+/* Light shaft / decorative glow */
+html.light-mode .light-shaft { opacity: 0 !important; }
+html.light-mode .grain { opacity: 0 !important; }
+
+/* Nav */
 html.light-mode .nav {
   background: rgba(250, 247, 242, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
-html.light-mode .site-footer { background: #1a1714; color: #e8dfd0; }
+html.light-mode .nav.scrolled {
+  background: rgba(250, 247, 242, 0.95) !important;
+  border-bottom-color: rgba(158, 122, 44, 0.15);
+}
+html.light-mode .nav-brand span,
+html.light-mode .nav-links a { color: #2d2825; }
+html.light-mode .nav-links a:hover,
+html.light-mode .nav-links a.active { color: var(--gold); }
+
+/* Mobile nav */
+html.light-mode .mobile-nav {
+  background: rgba(250, 247, 242, 0.98) !important;
+}
+html.light-mode .mobile-nav-links a { color: #2d2825; }
+html.light-mode .mobile-nav-links a:hover,
+html.light-mode .mobile-nav-links a.active { color: var(--gold); }
+html.light-mode .mobile-nav-brand span { color: #2d2825; }
+
+/* Buttons */
+html.light-mode .nav-cta {
+  background: var(--gold);
+  color: #fff;
+}
+html.light-mode .btn-primary {
+  background: var(--gold);
+  color: #fff;
+}
+
+/* Cards & panels */
+html.light-mode .info-card,
+html.light-mode .form-wrap,
+html.light-mode .contact-card {
+  background: linear-gradient(180deg, rgba(0,0,0,0.015), rgba(0,0,0,0.005)) !important;
+  border-color: rgba(158, 122, 44, 0.15);
+}
+
+/* Sections with dark gradients */
+html.light-mode [style*="rgba(255,255,255,0.02"],
+html.light-mode [style*="rgba(255,255,255,0.01"] {
+  background: transparent !important;
+}
+
+/* CTA / highlight sections */
+html.light-mode .final-cta-wrap,
+html.light-mode .obtain-wrap,
+html.light-mode .current-role-banner {
+  background: linear-gradient(135deg, #f0ebe3 0%, #faf7f2 100%) !important;
+}
+
+/* Sermon cards, book cards */
+html.light-mode .sermon-card,
+html.light-mode .book-card,
+html.light-mode .devcard {
+  background: rgba(0,0,0,0.02) !important;
+  border-color: rgba(158, 122, 44, 0.12);
+}
+
+/* Image overlays — reduce dark vignettes */
+html.light-mode .hero-frame-inner::after,
+html.light-mode .shared-image::after { opacity: 0.3; }
+
+/* Stat sections */
+html.light-mode .stat { border-color: rgba(158, 122, 44, 0.15); }
+
+/* Footer stays dark */
+html.light-mode .site-footer {
+  background: #1a1714 !important;
+  color: #e8dfd0;
+}
+html.light-mode .site-footer * { color: inherit; }
 html.light-mode .site-footer .footer-brand,
 html.light-mode .site-footer h4,
-html.light-mode .site-footer a { color: #e8dfd0; }
+html.light-mode .site-footer a { color: #e8dfd0 !important; }
 html.light-mode .site-footer p,
-html.light-mode .site-footer .footer-legal p { color: #8a8275; }
+html.light-mode .site-footer .footer-legal p { color: #8a8275 !important; }
+
+/* Back to top button */
+html.light-mode .back-to-top {
+  background: rgba(158, 122, 44, 0.95);
+  color: #fff;
+}
 
 /* Theme toggle button */
 .theme-mode-toggle {
@@ -1018,10 +1106,15 @@ html.light-mode .site-footer .footer-legal p { color: #8a8275; }
 .theme-mode-toggle .icon-moon { display: block; }
 html.light-mode .theme-mode-toggle .icon-sun { display: block; }
 html.light-mode .theme-mode-toggle .icon-moon { display: none; }
+html.light-mode .theme-mode-toggle { border-color: rgba(158,122,44,0.3); }
 
 /* Mobile nav theme toggle */
 .mobile-theme-toggle { display: flex; align-items: center; gap: 10px; padding: 16px 0; margin-top: 12px; border-top: 1px solid var(--line); }
 .mobile-theme-toggle span { font-family: var(--sans); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
+
+/* Smooth transition on toggle */
+html { transition: background 0.4s ease; }
+body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.4s ease, color 0.4s ease; }
 </style>
 </head>
 <body>
