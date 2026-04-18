@@ -296,7 +296,7 @@ img, svg { display: block; max-width: 100%; }
 
 .reading-content {
   height: 100%;
-  padding: 48px 0 32px;
+  padding: 48px 24px 32px;
   font-family: var(--r-reading);
   font-size: var(--r-font-size);
   line-height: var(--r-line-height);
@@ -1108,7 +1108,12 @@ img, svg { display: block; max-width: 100%; }
     return COLUMN_GAP;
   }
 
-  function setupPagination() {
+  function getContentWidth() {
+      const cs = getComputedStyle(readingContent);
+      return readingPane.clientWidth - parseFloat(cs.paddingLeft || 0) - parseFloat(cs.paddingRight || 0);
+    }
+
+    function setupPagination() {
     // Each column = full pane width, so one column fills the viewport exactly
     const paneWidth = readingPane.clientWidth;
     const gap = getGap();
