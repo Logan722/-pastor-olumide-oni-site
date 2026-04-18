@@ -848,12 +848,57 @@ main { position: relative; z-index: 10; }
   align-items: center;
 }
 
+/* Outer decorative frame — matte gap, gold accent line, corner brackets, ambient glow */
+.about-image-frame {
+  position: relative;
+  padding: 14px;
+  background: linear-gradient(155deg, rgba(20, 17, 12, 0.85) 0%, rgba(10, 9, 7, 0.95) 100%);
+  border: 1px solid rgba(212, 168, 83, 0.35);
+  box-shadow:
+    inset 0 0 0 1px rgba(10, 9, 7, 0.6),
+    0 30px 70px rgba(0, 0, 0, 0.55),
+    0 0 90px rgba(212, 168, 83, 0.06);
+}
+/* Corner brackets in gold — all four corners */
+.about-image-frame::before,
+.about-image-frame::after {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+  border-color: var(--gold);
+  border-style: solid;
+}
+.about-image-frame::before {
+  top: -3px;
+  left: -3px;
+  border-width: 2px 0 0 2px;
+  box-shadow: -1px -1px 0 rgba(10, 9, 7, 0.6);
+}
+.about-image-frame::after {
+  bottom: -3px;
+  right: -3px;
+  border-width: 0 2px 2px 0;
+  box-shadow: 1px 1px 0 rgba(10, 9, 7, 0.6);
+}
+/* Secondary corners (TR + BL) via the inner element */
 .about-image {
   position: relative;
   aspect-ratio: 4/5;
   border-radius: 2px;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(212, 168, 83, 0.18);
+}
+.about-image::before {
+  content: '';
+  position: absolute;
+  top: -17px; right: -17px;
+  width: 26px; height: 26px;
+  border-top: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  pointer-events: none;
+  z-index: 3;
 }
 .about-image img {
   width: 100%; height: 100%;
@@ -866,6 +911,16 @@ main { position: relative; z-index: 10; }
   inset: 0;
   background: linear-gradient(180deg, transparent 40%, rgba(10, 9, 7, 0.45) 100%);
   pointer-events: none;
+}
+/* BL corner via the badge area */
+.about-image-frame .about-image-bl-corner {
+  position: absolute;
+  bottom: -3px; left: -3px;
+  width: 26px; height: 26px;
+  border-bottom: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  pointer-events: none;
+  z-index: 3;
 }
 .about-image-badge {
   position: absolute;
@@ -1710,12 +1765,15 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
 <section class="about">
   <div class="container">
     <div class="about-grid">
-      <div class="about-image reveal">
-        <img src="img/photos/couple-gold.jpg" alt="Pastor Olumide &amp; Pastor (Mrs.) Oluwatoyin Oni" />
-        <div class="about-image-badge">
-          <div class="about-image-badge-kicker">The Ministry</div>
-          <div class="about-image-badge-title">Pastor Olumide &amp; Pastor (Mrs.) Oluwatoyin Oni</div>
+      <div class="about-image-frame reveal">
+        <div class="about-image">
+          <img src="img/photos/couple-gold.jpg" alt="Pastor Olumide &amp; Pastor (Mrs.) Oluwatoyin Oni" />
+          <div class="about-image-badge">
+            <div class="about-image-badge-kicker">The Ministry</div>
+            <div class="about-image-badge-title">Pastor Olumide &amp; Pastor (Mrs.) Oluwatoyin Oni</div>
+          </div>
         </div>
+        <div class="about-image-bl-corner"></div>
       </div>
 
       <div class="about-content reveal">
