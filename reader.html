@@ -1115,7 +1115,7 @@ img, svg { display: block; max-width: 100%; }
 
     function setupPagination() {
     // Each column = full pane width, so one column fills the viewport exactly
-    const paneWidth = readingPane.clientWidth;
+    const paneWidth = getContentWidth();
     const gap = getGap();
 
     readingContent.style.columnWidth = paneWidth + 'px';
@@ -1138,7 +1138,7 @@ img, svg { display: block; max-width: 100%; }
     if (page < 0 || page >= state.totalPages) return;
     state.currentPage = page;
 
-    const paneWidth = readingPane.clientWidth;
+    const paneWidth = getContentWidth();
     const gap = getGap();
     const offset = page * (paneWidth + gap);
 
@@ -1154,7 +1154,7 @@ img, svg { display: block; max-width: 100%; }
     const el = state.sections[idx].el;
 
     // Find which page this section starts on
-    const paneWidth = readingPane.clientWidth;
+    const paneWidth = getContentWidth();
     const gap = getGap();
     const pageWidth = paneWidth + gap;
 
@@ -1182,7 +1182,7 @@ img, svg { display: block; max-width: 100%; }
 
   function detectActiveSection() {
     // Which section is visible on the current page?
-    const paneWidth = readingPane.clientWidth;
+    const paneWidth = getContentWidth();
     const gap = getGap();
     const pageWidth = paneWidth + gap;
     const pageLeft = state.currentPage * pageWidth;
