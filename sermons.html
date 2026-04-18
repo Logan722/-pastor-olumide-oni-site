@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sermons — Pastor Olumide Oni</title>
+<meta name="description" content="Watch the latest sermons from Pastor Olumide Oni — prophetic teaching, biblical depth, and the uncompromised Word of God." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style id="site-css">
+/* =========================================================================
+   GOD OF ELIJAH — Site-wide design system (shared)
+   ========================================================================= */
+:root {
+  --bg: #0a0907;
+  --bg-2: #120f0a;
+  --bg-panel: #0f0c08;
+  --gold: #d4a853;
+  --gold-soft: #c89a47;
+  --gold-dim: #8b6f33;
+  --gold-glow: rgba(212, 168, 83, 0.18);
+  --cream: #f2e8d5;
+  --text: #e8dfd0;
+  --text-muted: #8a8275;
+  --text-dim: #6a6356;
+  --line: rgba(212, 168, 83, 0.18);
+  --line-strong: rgba(212, 168, 83, 0.4);
+  --gutter: 24px;
+  --section-y: 120px;
+  --container-max: 1200px;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { background: var(--bg); scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img, svg, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(212, 168, 83, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 90%, rgba(139, 111, 51, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 40%, rgba(212, 168, 83, 0.04) 0%, transparent 45%),
+    linear-gradient(180deg, #0a0907 0%, #08070a 60%, #050404 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.light-shaft {
+  position: fixed;
+  top: -5%; left: 50%;
+  transform: translateX(-50%);
+  width: 75vw; max-width: 900px; height: 110vh;
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(255, 220, 150, 0.10) 0%,
+    rgba(212, 168, 83, 0.05) 28%,
+    rgba(212, 168, 83, 0.015) 55%,
+    transparent 78%);
+  pointer-events: none;
+  z-index: 1;
+  animation: breathe 10s ease-in-out infinite alternate;
+  filter: blur(0.5px);
+}
+@keyframes breathe {
+  0%   { opacity: 0.7; transform: translateX(-50%) scale(1); }
+  100% { opacity: 1;   transform: translateX(-50%) scale(1.05); }
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 3;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+main { position: relative; z-index: 10; }
+
+/* Nav */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100; padding: 18px 0;
+  transition: background 0.5s ease, padding 0.5s ease, border 0.5s ease;
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  background: rgba(10, 9, 7, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--serif); font-weight: 300; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--cream);
+}
+.nav-brand em { font-style: italic; color: var(--gold); margin-right: 2px; }
+.nav-brand-mark {
+  width: 28px; height: 28px; border: 1px solid var(--gold-dim);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--gold);
+  flex-shrink: 0;
+}
+.nav-links { display: flex; align-items: center; gap: 34px; list-style: none; }
+.nav-links a {
+  font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-muted); transition: color 0.3s ease;
+  position: relative; padding: 4px 0;
+}
+.nav-links a:hover { color: var(--cream); }
+.nav-links a.active { color: var(--gold); }
+.nav-links a.active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -4px;
+  height: 1px; background: var(--gold);
+}
+.nav-cta {
+  padding: 9px 18px; font-size: 11.5px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--bg); background: var(--gold);
+  border-radius: 2px; transition: all 0.3s ease; font-weight: 500;
+}
+.nav-cta:hover {
+  background: var(--cream);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -8px var(--gold-glow);
+}
+.nav-toggle { display: none; width: 28px; height: 28px; color: var(--cream); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 15px 26px; font-size: 12px; letter-spacing: 0.22em;
+  text-transform: uppercase; font-weight: 500; border-radius: 2px;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: pointer; position: relative; overflow: hidden;
+}
+.btn-primary { color: var(--bg); background: var(--gold); }
+.btn-primary:hover {
+  background: var(--cream);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -10px rgba(212, 168, 83, 0.35);
+}
+.btn-ghost {
+  color: var(--cream); background: transparent;
+  border: 1px solid var(--line-strong);
+}
+.btn-ghost:hover {
+  background: rgba(212, 168, 83, 0.06);
+  border-color: var(--gold); color: var(--gold);
+}
+.btn svg { transition: transform 0.3s ease; }
+.btn:hover svg { transform: translateX(4px); }
+
+/* Section heads */
+.section-head { text-align: center; margin-bottom: 64px; }
+.section-kicker {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 11px; letter-spacing: 0.38em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 22px;
+}
+.section-kicker::before, .section-kicker::after {
+  content: ''; width: 28px; height: 1px; background: var(--gold-dim);
+}
+.section-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(32px, 4.8vw, 52px); line-height: 1.08;
+  letter-spacing: -0.02em; color: var(--cream);
+  max-width: 680px; margin: 0 auto;
+}
+.section-title em { font-style: italic; color: var(--gold); font-weight: 300; }
+.section-sub {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 17px; color: var(--text-muted);
+  max-width: 560px; margin: 18px auto 0; line-height: 1.55;
+}
+
+/* Footer */
+.site-footer {
+  position: relative; z-index: 10;
+  border-top: 1px solid var(--line);
+  margin-top: 120px; padding: 80px 0 40px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 56px; margin-bottom: 64px;
+}
+.footer-brand {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 26px; line-height: 1.15;
+  color: var(--cream); letter-spacing: -0.02em; margin-bottom: 18px;
+}
+.footer-brand em { font-style: italic; color: var(--gold); }
+.footer-scripture {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 15px; color: var(--text-muted);
+  max-width: 340px; line-height: 1.6;
+}
+.footer-scripture-ref {
+  display: block; margin-top: 10px;
+  font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em;
+  font-style: normal; text-transform: uppercase; color: var(--gold-dim);
+}
+.footer-col-title {
+  font-family: var(--sans); font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px; font-weight: 500;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a { font-size: 14px; color: var(--text-muted); transition: color 0.25s ease; }
+.footer-col a:hover { color: var(--cream); }
+.footer-socials { display: flex; gap: 12px; }
+.footer-social {
+  width: 38px; height: 38px;
+  border: 1px solid var(--line); border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold-dim); transition: all 0.3s ease;
+}
+.footer-social:hover {
+  border-color: var(--gold); color: var(--gold);
+  background: rgba(212, 168, 83, 0.05);
+  transform: translateY(-2px);
+}
+.footer-bottom {
+  padding-top: 32px; border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 16px;
+}
+.footer-bottom p { font-size: 12px; letter-spacing: 0.1em; color: var(--text-dim); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.reveal { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .js-enabled .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .js-enabled .reveal.in-view { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 960px) {
+  :root { --section-y: 80px; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-toggle { display: flex; align-items: center; justify-content: center; }
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 560px) { :root { --gutter: 18px; --section-y: 72px; } }
+</style>
+
+<style>
+/* =========================================================================
+   SERMONS — page-specific styles
+   ========================================================================= */
+
+/* ----- HERO (page header) ----- */
+.sermons-hero {
+  padding: 140px 0 60px;
+  text-align: center;
+}
+.sermons-hero-kicker {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 11px; letter-spacing: 0.42em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 26px;
+  opacity: 0; animation: fadeUp 1s ease-out 0.15s forwards;
+}
+.sermons-hero-kicker::before, .sermons-hero-kicker::after {
+  content: ''; width: 28px; height: 1px; background: var(--gold-dim);
+}
+.sermons-hero-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(44px, 6.5vw, 82px); line-height: 1.02;
+  letter-spacing: -0.03em; color: var(--cream);
+  max-width: 860px; margin: 0 auto 24px;
+  opacity: 0; animation: fadeUp 1.1s ease-out 0.35s forwards;
+}
+.sermons-hero-title em { font-style: italic; color: var(--gold); font-weight: 300; }
+.sermons-hero-sub {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 18px; color: var(--text-muted);
+  max-width: 560px; margin: 0 auto; line-height: 1.55;
+  opacity: 0; animation: fadeUp 1s ease-out 0.55s forwards;
+}
+
+/* =========================================================================
+   FEATURED / LATEST SERMON
+   ========================================================================= */
+.featured {
+  padding: 40px 0 60px;
+}
+.featured-card {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 56px;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.featured-card::before {
+  content: ''; position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--gold);
+}
+.featured-label {
+  position: absolute; top: 20px; left: 28px;
+  padding: 6px 12px; background: var(--gold); color: var(--bg);
+  font-size: 9.5px; font-weight: 600; letter-spacing: 0.28em;
+  text-transform: uppercase; border-radius: 1px;
+}
+.featured-thumb {
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.featured-thumb:hover { transform: translateY(-3px); }
+
+/* Designed typographic thumbnail — a "scripture poster" (swap for real YouTube thumb when videoId set) */
+.thumb-poster {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(212, 168, 83, 0.18), transparent 65%),
+    linear-gradient(135deg, #1a1510 0%, #120f0a 50%, #0a0907 100%);
+  padding: 22px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: space-between;
+  text-align: center;
+}
+.thumb-poster-kicker {
+  font-family: var(--sans); font-size: 9px;
+  letter-spacing: 0.34em; text-transform: uppercase;
+  color: var(--gold); font-weight: 500;
+  align-self: flex-start;
+}
+/* Scripture reference is the hero visual */
+.thumb-poster-scripture {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: clamp(22px, 3vw, 36px);
+  line-height: 1.1; letter-spacing: -0.01em;
+  color: var(--cream);
+  margin: auto 0;
+  padding-top: 28px;
+}
+.thumb-poster-scripture strong {
+  display: block;
+  font-style: normal;
+  font-weight: 300;
+  color: var(--gold);
+  margin-top: 4px;
+  font-size: 0.52em;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+.thumb-poster-brand {
+  font-family: var(--serif); font-style: italic;
+  font-size: 11px; color: var(--gold-dim);
+  align-self: flex-end;
+  letter-spacing: 0.02em;
+}
+/* Decorative corners on poster */
+.thumb-poster-corner {
+  position: absolute; width: 14px; height: 14px;
+  border: 1px solid var(--gold);
+}
+.thumb-poster-corner.tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.thumb-poster-corner.tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+.thumb-poster-corner.bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+.thumb-poster-corner.br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+/* Play button overlay — sits on top of everything via its own higher z layer */
+.thumb-play-wrap {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.thumb-play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: rgba(212, 168, 83, 0.82);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--bg);
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 0 6px rgba(212, 168, 83, 0.12);
+  z-index: 3;
+  opacity: 0.88;
+}
+.featured-thumb:hover .thumb-play,
+.sermon-card:hover .thumb-play {
+  background: var(--cream);
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 14px 50px rgba(0,0,0,0.5), 0 0 0 10px rgba(212, 168, 83, 0.2);
+  opacity: 1;
+}
+.thumb-duration {
+  position: absolute; bottom: 12px; right: 12px;
+  background: rgba(10, 9, 7, 0.85);
+  color: var(--cream);
+  font-size: 11px; font-weight: 500;
+  padding: 4px 9px;
+  border-radius: 1px;
+  letter-spacing: 0.02em;
+  z-index: 2;
+}
+
+.featured-body { padding: 8px 0; }
+.featured-kicker {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 11px; letter-spacing: 0.38em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 18px;
+}
+.featured-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.12;
+  letter-spacing: -0.02em; color: var(--cream); margin-bottom: 18px;
+}
+.featured-meta {
+  display: flex; flex-wrap: wrap; gap: 18px;
+  font-size: 12px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--text-dim);
+  margin-bottom: 20px;
+}
+.featured-meta-sep { color: var(--gold-dim); }
+.featured-excerpt {
+  font-size: 15px; line-height: 1.7;
+  color: var(--text-muted); margin-bottom: 32px;
+}
+
+/* =========================================================================
+   SERMON GRID
+   ========================================================================= */
+.sermon-grid-section {
+  padding: var(--section-y) 0 calc(var(--section-y) - 40px);
+}
+
+.grid-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.grid-head-left { flex: 1; min-width: 280px; }
+.grid-head-kicker {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 11px; letter-spacing: 0.38em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px;
+}
+.grid-head-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(30px, 4vw, 44px); line-height: 1.1;
+  letter-spacing: -0.02em; color: var(--cream);
+}
+.grid-head-title em { font-style: italic; color: var(--gold); }
+.grid-count {
+  font-family: var(--sans); font-size: 11px;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--text-dim); padding-bottom: 6px;
+}
+.grid-count strong { color: var(--cream); font-weight: 500; }
+
+.sermon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.sermon-card {
+  display: block;
+  color: inherit;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.sermon-card:hover { transform: translateY(-4px); }
+
+.sermon-card-thumb {
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  margin-bottom: 20px;
+  transition: border-color 0.4s ease;
+}
+.sermon-card:hover .sermon-card-thumb {
+  border-color: var(--line-strong);
+}
+
+/* Smaller poster for grid thumbs */
+.sermon-card .thumb-poster { padding: 14px; }
+.sermon-card .thumb-poster-kicker { font-size: 8px; letter-spacing: 0.3em; }
+.sermon-card .thumb-poster-scripture {
+  font-size: clamp(16px, 1.9vw, 22px);
+  padding-top: 14px;
+}
+.sermon-card .thumb-poster-scripture strong {
+  font-size: 0.5em;
+  letter-spacing: 0.28em;
+}
+.sermon-card .thumb-poster-brand { font-size: 9.5px; }
+.sermon-card .thumb-poster-corner { width: 10px; height: 10px; }
+.sermon-card .thumb-poster-corner.tl { top: 6px; left: 6px; }
+.sermon-card .thumb-poster-corner.tr { top: 6px; right: 6px; }
+.sermon-card .thumb-poster-corner.bl { bottom: 6px; left: 6px; }
+.sermon-card .thumb-poster-corner.br { bottom: 6px; right: 6px; }
+
+.sermon-card .thumb-play {
+  width: 52px; height: 52px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.4), 0 0 0 4px rgba(212, 168, 83, 0.12);
+}
+.sermon-card .thumb-play svg { width: 18px; height: 18px; }
+
+.sermon-card-new {
+  position: absolute; top: 12px; left: 12px;
+  padding: 3px 8px; background: var(--gold); color: var(--bg);
+  font-size: 9px; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; border-radius: 1px;
+  z-index: 3;
+}
+
+.sermon-card-date {
+  font-family: var(--sans); font-size: 10.5px;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: 10px;
+}
+.sermon-card-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 19px; line-height: 1.3;
+  letter-spacing: -0.01em; color: var(--cream);
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+.sermon-card:hover .sermon-card-title { color: var(--gold); }
+.sermon-card-title em { font-style: italic; color: var(--gold); }
+.sermon-card-excerpt {
+  font-size: 13.5px; line-height: 1.6;
+  color: var(--text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.grid-footer {
+  text-align: center;
+  margin-top: 64px;
+}
+
+/* =========================================================================
+   SUBSCRIBE CTA
+   ========================================================================= */
+.subscribe {
+  padding: calc(var(--section-y) - 20px) 0 var(--section-y);
+}
+.subscribe-wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 72px 48px;
+  background: linear-gradient(180deg, rgba(212, 168, 83, 0.04), rgba(212, 168, 83, 0.01));
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+.subscribe-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 65%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.subscribe-icon {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: rgba(212, 168, 83, 0.12);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  margin: 0 auto 28px;
+  display: flex; align-items: center; justify-content: center;
+}
+.subscribe-kicker {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+}
+.subscribe-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(28px, 3.6vw, 42px); line-height: 1.15;
+  letter-spacing: -0.02em; color: var(--cream);
+  margin-bottom: 20px;
+}
+.subscribe-title em { font-style: italic; color: var(--gold); }
+.subscribe-sub {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 17px; color: var(--text-muted);
+  max-width: 540px; margin: 0 auto 36px;
+  line-height: 1.55;
+}
+
+/* =========================================================================
+   LIVE RSS INTEGRATION — styles for real thumbnails, loading, and errors
+   ========================================================================= */
+
+/* Real YouTube thumbnail treatment — photographic image with cinematic overlay */
+.thumb-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.92) contrast(1.04);
+}
+/* Dark gradient overlay at bottom + gold vignette for cohesion */
+.thumb-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(10,9,7,0.35) 100%),
+    linear-gradient(180deg, transparent 55%, rgba(10,9,7,0.55) 100%);
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer-line {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    rgba(212, 168, 83, 0.05) 0%,
+    rgba(212, 168, 83, 0.15) 50%,
+    rgba(212, 168, 83, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.2s ease-in-out infinite;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+/* Skeleton card body for grid */
+.sermon-card--skeleton .sermon-card-thumb { background: rgba(212, 168, 83, 0.04); }
+.sermon-card--skeleton .shimmer-block {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    rgba(212, 168, 83, 0.05) 0%,
+    rgba(212, 168, 83, 0.12) 50%,
+    rgba(212, 168, 83, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.2s ease-in-out infinite;
+  border-radius: 2px;
+  height: 14px;
+  margin-bottom: 10px;
+}
+
+/* Error state */
+.sermon-error {
+  max-width: 540px;
+  margin: 40px auto 0;
+  text-align: center;
+  padding: 48px 32px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+}
+.sermon-error-kicker {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 11px; letter-spacing: 0.38em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+}
+.sermon-error-body {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 16px; line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 420px;
+  margin: 0 auto 28px;
+}
+
+/* Preview-mode banner (only shown when file:// is detected) */
+.preview-banner {
+  position: relative;
+  z-index: 50;
+  background: linear-gradient(180deg, rgba(212, 168, 83, 0.12), rgba(212, 168, 83, 0.06));
+  border-bottom: 1px solid var(--line-strong);
+  padding: 11px 0;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--cream);
+  text-align: center;
+}
+.preview-banner strong {
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+.preview-banner-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-right: 10px;
+  vertical-align: 1px;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; box-shadow: 0 0 8px rgba(212, 168, 83, 0.6); }
+}
+/* Nudge nav down when banner is present so it doesn't overlap */
+body:has(.preview-banner) .nav { top: 42px; }
+@media (max-width: 560px) {
+  .preview-banner { font-size: 11px; padding: 10px 0; }
+  .preview-banner .container { padding: 0 18px; }
+}
+
+/* Graceful fallback when thumb-img has no src or fails to load —
+   the thumb container keeps its shape with a subtle gradient instead */
+.thumb-img:not([src]),
+.thumb-img[src=""] {
+  display: none;
+}
+.sermon-card-thumb,
+.featured-thumb {
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(212, 168, 83, 0.12), transparent 65%),
+    linear-gradient(135deg, #1a1510 0%, #120f0a 50%, #0a0907 100%);
+}
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+@media (max-width: 1024px) {
+  .sermon-grid { grid-template-columns: repeat(2, 1fr); }
+  .featured-card { padding: 36px; gap: 36px; }
+}
+
+@media (max-width: 820px) {
+  .sermons-hero { padding: 110px 0 40px; }
+  .featured-card {
+    grid-template-columns: 1fr;
+    padding: 28px;
+    gap: 28px;
+  }
+  .featured-label { top: 16px; left: 20px; }
+}
+
+@media (max-width: 560px) {
+  .sermon-grid { grid-template-columns: 1fr; gap: 20px; }
+  .featured-card { padding: 22px; }
+  .subscribe-wrap { padding: 48px 24px; }
+}
+</style>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTAiIGZpbGw9IiMwYTA5MDciLz4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIyNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDRhODUzIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNTUiLz4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIyMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDRhODUzIiBzdHJva2Utd2lkdGg9IjAuNiIgb3BhY2l0eT0iMC4zNSIvPgogIDx0ZXh0IHg9IjMyIiB5PSI0NCIgdGV4dC1hbmNob3I9Im1pZGRsZSIKICAgICAgICBmb250LWZhbWlseT0iR2VvcmdpYSwgc2VyaWYiIGZvbnQtc3R5bGU9Iml0YWxpYyIgZm9udC13ZWlnaHQ9IjQwMCIKICAgICAgICBmb250LXNpemU9IjM2IiBmaWxsPSIjZDRhODUzIiBsZXR0ZXItc3BhY2luZz0iLTEiPk88L3RleHQ+Cjwvc3ZnPg==">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAC3ElEQVR4nGPk4mRnoCVgoqnpDAwMLMQoOjXfB6u4WeIWSi2AGI3LIPyyEMCIKw6I0UyMSuwWnJrvg6ahMU0HTU39rCv4teC0AE0pxGg047CKY7UD3QJkRViN5mJnYWVl+vT11///WNRg2oFiAZrpyEaryPBGuClZ64mxszEzMDCwsTCdvvZm1oab1x98RFOMbgcXJzscXVkRDGF05xvDBXm4OIpj9M8tDiyK1lOUFoAIqisIzaqyvbQsyNtGHk0L3BAIYsLqfIQHGRlqkvRiPZWLJ56ese7my3ffIeKPX34tm3Lm+dvvdckGgrxsyFrMErcg5xssORnZv5GuSj42svM23z559TWasl+//+059Yybk8XDUhoSDZgpDWEBVucL8rJlBqt//vp7yfa7mDoZGBievv7GwMCgqSCAJo7sCXQfIDs/wEGenY1575nnP379xWoBMxMjAwMDBxszhIvVE/gKO1t9MQYGhpNX0AMHDiSEORkYGN5++onHEJwWMDIyqMvzMzAwXHvwEZcaFVk+BgaGW49wKsBnAT83GysL079//1++/Y5VASsLk4Gq0P//DMcv4/QiPgt+/f7HwMDw5+//f5AsiwFs9MW4OVkOXXjxAocLCFjw7eefZ6+/sbEy8XKxYtHGyJjoq/rz19+pa27gMR2LBcgpYdPhxwwMDA5GEpja0gPV1OT42hZcevDsC1wQrXRBsQAt+0HAku13r93/kBeuaaguBBcU5GOvTtQLd1Wsm3l++/GnWF2NnKuw1GgQT9TPuvLrz7/s7hM5oZoTi8xfv//x8t13Pm42SWHOfWefR9Yeev7mG7IurM5HsQDiCbT8/PX7n85Fl/uXX1WQ5OHmZPn45ffD51/+/sMe7ZjOZ8AVyWh58tfvf7cefTp/8929p5+xmo7L+QxkVDiYRjMQX+FgVUTlKhOXUmpW+nANDLRrthCpmaKGF6ZBmIAY/xFlASWA5q1rAIYWadWKPtpUAAAAAElFTkSuQmCC">
+<link rel="apple-touch-icon" sizes="192x192" href="data:image/png;base64,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">
+<meta name="theme-color" content="#0a0907">
+
+
+
+<style id="mobile-improvements-css">
+/* =========================================================================
+   MOBILE IMPROVEMENTS — back-to-top, mobile nav drawer, preview banner
+   ========================================================================= */
+
+/* ---------- Back to top button ---------- */
+.back-to-top {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 95;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(212, 168, 83, 0.95);
+  color: #0a0907;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease, background 0.3s ease;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.4), 0 0 0 1px rgba(212, 168, 83, 0.3);
+  border: none;
+}
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: #f2e8d5;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(212, 168, 83, 0.5);
+  outline: none;
+}
+.back-to-top:active {
+  transform: translateY(-1px);
+}
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+/* ---------- Mobile nav drawer ---------- */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(10, 9, 7, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.mobile-nav.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+body.mobile-nav-open {
+  overflow: hidden;
+}
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 22px;
+  border-bottom: 1px solid rgba(212, 168, 83, 0.18);
+}
+.mobile-nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-size: 17px;
+  color: #f2e8d5;
+  letter-spacing: -0.01em;
+}
+.mobile-nav-brand em {
+  font-style: italic;
+  color: #d4a853;
+  margin-right: 2px;
+}
+.mobile-nav-brand-mark {
+  width: 28px; height: 28px;
+  border: 1px solid #8b6f33;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #d4a853;
+  flex-shrink: 0;
+}
+.mobile-nav-close {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  color: #f2e8d5;
+  background: transparent;
+  border: 1px solid rgba(212, 168, 83, 0.18);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.mobile-nav-close:hover,
+.mobile-nav-close:focus-visible {
+  border-color: #d4a853;
+  color: #d4a853;
+  outline: none;
+}
+.mobile-nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 40px 22px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mobile-nav-links li {
+  border-bottom: 1px solid rgba(212, 168, 83, 0.1);
+}
+.mobile-nav-links li:last-child {
+  border-bottom: none;
+}
+.mobile-nav-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 4px;
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  font-size: 26px;
+  letter-spacing: -0.01em;
+  color: #f2e8d5;
+  transition: color 0.3s ease, padding 0.3s ease;
+  text-decoration: none;
+}
+.mobile-nav-links a.active {
+  color: #d4a853;
+  font-style: italic;
+}
+.mobile-nav-links a:hover,
+.mobile-nav-links a:focus-visible {
+  color: #d4a853;
+  padding-left: 12px;
+  outline: none;
+}
+.mobile-nav-links a span.arrow {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8b6f33;
+  font-weight: 500;
+}
+.mobile-nav-footer {
+  margin-top: auto;
+  padding: 28px 22px 36px;
+  border-top: 1px solid rgba(212, 168, 83, 0.18);
+}
+.mobile-nav-scripture {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  color: #8a8275;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.mobile-nav-scripture-ref {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #8b6f33;
+  margin-bottom: 22px;
+}
+.mobile-nav-socials {
+  display: flex;
+  gap: 12px;
+}
+.mobile-nav-socials a {
+  width: 42px; height: 42px;
+  border: 1px solid rgba(212, 168, 83, 0.18);
+  border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+  color: #8b6f33;
+  transition: all 0.3s ease;
+}
+.mobile-nav-socials a:hover,
+.mobile-nav-socials a:focus-visible {
+  border-color: #d4a853;
+  color: #d4a853;
+  background: rgba(212, 168, 83, 0.06);
+  outline: none;
+}
+
+/* Make the existing hamburger button actually tappable (44x44 min) */
+.nav-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+/* ---------- Preview banner: shorter on narrow screens ---------- */
+@media (max-width: 560px) {
+  .preview-banner .full-message { display: none; }
+  .preview-banner .short-message { display: inline; }
+}
+@media (min-width: 561px) {
+  .preview-banner .full-message { display: inline; }
+  .preview-banner .short-message { display: none; }
+}
+
+/* ---------- Touch target minimum sizing for nav/buttons on mobile ---------- */
+@media (max-width: 960px) {
+  .btn { min-height: 48px; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="light-shaft"></div>
+<div class="grain"></div>
+
+<!-- =====================================================
+     NAVIGATION
+     ===================================================== -->
+<nav class="nav" id="siteNav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand" aria-label="Pastor Olumide Oni — Home">
+        <span class="nav-brand-mark">O</span>
+        <span>Pastor Olumide <em>Oni</em></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="sermons.html" class="active">Sermons</a></li>
+        <li><a href="books.html">Books</a></li>
+        <li><a href="devotionals.html">Devotionals</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <a href="https://www.youtube.com/@PastorOlumideOni" target="_blank" rel="noopener" class="nav-cta">Subscribe</a>
+
+      <button class="nav-toggle" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <line x1="3" y1="7" x2="21" y2="7"/>
+          <line x1="3" y1="17" x2="21" y2="17"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- =====================================================
+     PAGE HERO
+     ===================================================== -->
+<section class="sermons-hero">
+  <div class="container">
+    <div class="sermons-hero-kicker">
+      <span>The Pulpit</span>
+    </div>
+    <h1 class="sermons-hero-title">
+      Sermons &amp; <em>the Word</em> preached.
+    </h1>
+    <p class="sermons-hero-sub">
+      Every message is a call to stand before the Lord — to hear His voice, receive His fire, and walk in the power of His Spirit.
+    </p>
+  </div>
+</section>
+
+<!-- =====================================================
+     FEATURED LATEST SERMON  (populated by JS from YouTube RSS)
+     ===================================================== -->
+<section class="featured">
+  <div class="container">
+    <div id="featuredSlot" class="featured-slot">
+      <!-- Skeleton placeholder while loading; replaced by JS -->
+      <div class="featured-card featured-card--skeleton">
+        <span class="featured-label">Loading</span>
+        <div class="featured-thumb">
+          <div class="thumb-poster">
+            <span class="thumb-poster-corner tl"></span>
+            <span class="thumb-poster-corner tr"></span>
+            <span class="thumb-poster-corner bl"></span>
+            <span class="thumb-poster-corner br"></span>
+            <div class="thumb-poster-kicker">Pastor Olumide Oni</div>
+            <div class="thumb-poster-scripture">
+              <span class="shimmer-line" style="width:180px;height:32px;"></span>
+            </div>
+            <div class="thumb-poster-brand">God of Elijah &middot; Sermon</div>
+          </div>
+        </div>
+        <div class="featured-body">
+          <div class="featured-kicker">Featured Sermon</div>
+          <h2 class="featured-title"><span class="shimmer-line" style="width:70%;height:32px;"></span></h2>
+          <div class="featured-meta">
+            <span class="shimmer-line" style="width:220px;height:12px;"></span>
+          </div>
+          <p class="featured-excerpt">
+            <span class="shimmer-line" style="width:100%;height:14px;margin-bottom:8px;"></span>
+            <span class="shimmer-line" style="width:90%;height:14px;margin-bottom:8px;"></span>
+            <span class="shimmer-line" style="width:60%;height:14px;"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SERMON GRID  (populated by JS from YouTube RSS)
+     ===================================================== -->
+<section class="sermon-grid-section">
+  <div class="container">
+
+    <div class="grid-head reveal">
+      <div class="grid-head-left">
+        <div class="grid-head-kicker">The Archive</div>
+        <h2 class="grid-head-title">Recent <em>messages</em></h2>
+      </div>
+      <div class="grid-count" id="gridCount"><strong>&mdash;</strong> &nbsp;Sermons</div>
+    </div>
+
+    <div class="sermon-grid" id="sermonGrid">
+      <!-- Skeleton cards while loading; replaced by JS -->
+    </div>
+
+    <div class="grid-footer reveal" id="gridFooter" style="display:none;">
+      <a href="https://www.youtube.com/@PastorOlumideOni" target="_blank" rel="noopener" class="btn btn-ghost">
+        View Full Archive on YouTube
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Error state (shown if RSS fetch fails) -->
+    <div id="sermonError" class="sermon-error" style="display:none;">
+      <div class="sermon-error-kicker">Unable to load sermons</div>
+      <p class="sermon-error-body">
+        We couldn't reach the YouTube feed just now. Please check back in a moment, or watch directly on our channel.
+      </p>
+      <a href="https://www.youtube.com/@PastorOlumideOni" target="_blank" rel="noopener" class="btn btn-primary">
+        Watch on YouTube
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- =====================================================
+     SUBSCRIBE CTA
+     ===================================================== -->
+<section class="subscribe">
+  <div class="container">
+    <div class="subscribe-wrap reveal">
+
+      <div class="subscribe-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+      </div>
+
+      <div class="subscribe-kicker">Never miss a sermon</div>
+      <h2 class="subscribe-title">Subscribe on <em>YouTube</em></h2>
+      <p class="subscribe-sub">
+        New sermons are posted regularly. Subscribe and tap the bell so you're the first to hear every message the Lord lays on Pastor Olumide Oni's heart.
+      </p>
+      <a href="https://www.youtube.com/@PastorOlumideOni" target="_blank" rel="noopener" class="btn btn-primary">
+        Subscribe to the Channel
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><em>Pastor</em> Olumide Oni</div>
+        <p class="footer-scripture">
+          Then the fire of the Lord fell.
+          <span class="footer-scripture-ref">1 Kings 18 : 38</span>
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Explore</div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="books.html">Books</a></li>
+          <li><a href="devotionals.html">Devotionals</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Connect</div>
+        <div class="footer-socials">
+          <a href="https://www.youtube.com/@PastorOlumideOni" class="footer-social" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/PastorOlumideOni" class="footer-social" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2.5" y="2.5" width="19" height="19" rx="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/PastorOlumideOni" class="footer-social" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Pastor Olumide Oni. All rights reserved.</p>
+      <p style="font-family: var(--serif); font-style: italic; color: var(--gold-dim);">Before Whom I Stand</p>
+    </div>
+  </div>
+</footer>
+
+<!-- =====================================================
+     SCRIPTS
+     ===================================================== -->
+<script>
+  /* ======================================================================
+     YOUTUBE RSS INTEGRATION
+     Pulls latest videos from the channel's public RSS feed via a free
+     JSON proxy (rss2json.com). No API key required. Updates automatically
+     as new sermons are published — typical freshness: 15 min to ~2 hours
+     depending on caching at YouTube and the proxy.
+
+     TO CHANGE THE CHANNEL: update YT_CHANNEL_ID below.
+     TO SWAP THE PROXY: update buildApiUrl() if rss2json ever stops working.
+     rss2json free tier: 10,000 requests/day — plenty for a ministry site.
+     ====================================================================== */
+  const YT_CHANNEL_ID = 'UCoVS2R6n3ewcIvSb_OzLLQg';
+  const YT_CHANNEL_URL = 'https://www.youtube.com/@PastorOlumideOni';
+
+  function buildApiUrl(channelId) {
+    const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+    return `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+  }
+
+  /* ---------- Helpers ---------- */
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    })[c]);
+  }
+  function extractVideoId(link) {
+    if (!link) return null;
+    const m = link.match(/[?&]v=([^&]+)/);
+    return m ? m[1] : null;
+  }
+  function formatDate(isoString) {
+    if (!isoString) return '';
+    // rss2json returns 'YYYY-MM-DD HH:MM:SS' (no timezone).
+    // Replace space with T and treat as UTC to avoid invalid-date edge cases.
+    const normalized = String(isoString).replace(' ', 'T');
+    const date = new Date(normalized + (normalized.endsWith('Z') ? '' : 'Z'));
+    if (isNaN(date)) return '';
+    return date.toLocaleDateString('en-US', {
+      day: 'numeric', month: 'long', year: 'numeric'
+    });
+  }
+  function cleanExcerpt(description, maxLen) {
+    if (!description) return '';
+    // Strip URLs, hashtags lines, and excessive whitespace
+    let t = description
+      .replace(/https?:\/\/\S+/g, '')
+      .replace(/#\w+/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    // Take up to first natural sentence break, capped at maxLen
+    if (t.length > maxLen) {
+      const cut = t.slice(0, maxLen);
+      const lastPeriod = cut.lastIndexOf('. ');
+      t = (lastPeriod > maxLen * 0.5 ? cut.slice(0, lastPeriod + 1) : cut.trim() + '…');
+    }
+    return t;
+  }
+  function bestThumbnail(item) {
+    // rss2json provides item.thumbnail; fall back to YouTube's own hqdefault URL
+    // which always exists for public videos. Returns empty string if no video
+    // ID can be found, in which case the CSS gradient fallback is shown.
+    const videoId = extractVideoId(item.link);
+    if (videoId) {
+      return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+    }
+    return item.thumbnail || '';
+  }
+
+  /* ---------- Rendering ---------- */
+  function renderFeatured(item) {
+    const watchUrl = item.link || YT_CHANNEL_URL;
+    const thumb = bestThumbnail(item);
+    const dateStr = formatDate(item.pubDate);
+    const excerpt = cleanExcerpt(item.description, 220);
+
+    const html = `
+      <div class="featured-card reveal in-view">
+        <span class="featured-label">Latest</span>
+
+        <a href="${escapeHtml(watchUrl)}" target="_blank" rel="noopener" class="featured-thumb" aria-label="Watch latest sermon">
+          ${thumb ? `<img class="thumb-img" src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" />` : ''}
+          <div class="thumb-overlay"></div>
+          <div class="thumb-play" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </a>
+
+        <div class="featured-body">
+          <div class="featured-kicker">Featured Sermon</div>
+          <h2 class="featured-title">${escapeHtml(item.title)}</h2>
+          <div class="featured-meta">
+            ${dateStr ? `<span>${escapeHtml(dateStr)}</span>` : ''}
+            ${dateStr ? '<span class="featured-meta-sep">&middot;</span>' : ''}
+            <span>Pastor Olumide Oni</span>
+          </div>
+          ${excerpt ? `<p class="featured-excerpt">${escapeHtml(excerpt)}</p>` : ''}
+          <a href="${escapeHtml(watchUrl)}" target="_blank" rel="noopener" class="btn btn-primary">
+            Watch Now
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    `;
+    document.getElementById('featuredSlot').innerHTML = html;
+  }
+
+  function renderGridCard(item, isNew) {
+    const watchUrl = item.link || YT_CHANNEL_URL;
+    const thumb = bestThumbnail(item);
+    const dateStr = formatDate(item.pubDate);
+    const excerpt = cleanExcerpt(item.description, 140);
+
+    return `
+      <a href="${escapeHtml(watchUrl)}" target="_blank" rel="noopener" class="sermon-card reveal in-view">
+        <div class="sermon-card-thumb">
+          ${isNew ? '<span class="sermon-card-new">New</span>' : ''}
+          ${thumb ? `<img class="thumb-img" src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" />` : ''}
+          <div class="thumb-overlay"></div>
+          <div class="thumb-play" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        ${dateStr ? `<div class="sermon-card-date">${escapeHtml(dateStr)}</div>` : ''}
+        <h3 class="sermon-card-title">${escapeHtml(item.title)}</h3>
+        ${excerpt ? `<p class="sermon-card-excerpt">${escapeHtml(excerpt)}</p>` : ''}
+      </a>
+    `;
+  }
+
+  function renderGrid(items) {
+    const grid = document.getElementById('sermonGrid');
+    grid.innerHTML = items.map((item, i) => renderGridCard(item, i === 0)).join('');
+    document.getElementById('gridFooter').style.display = '';
+    document.getElementById('gridCount').innerHTML =
+      `<strong>${items.length}</strong> &nbsp;Sermons`;
+  }
+
+  function showSkeletonGrid() {
+    const grid = document.getElementById('sermonGrid');
+    const skeletonCard = `
+      <div class="sermon-card sermon-card--skeleton">
+        <div class="sermon-card-thumb"></div>
+        <div class="shimmer-block" style="width:40%;margin-top:20px;"></div>
+        <div class="shimmer-block" style="width:90%;height:18px;"></div>
+        <div class="shimmer-block" style="width:100%;"></div>
+        <div class="shimmer-block" style="width:70%;"></div>
+      </div>
+    `;
+    grid.innerHTML = Array(9).fill(skeletonCard).join('');
+  }
+
+  function showError() {
+    document.getElementById('featuredSlot').style.display = 'none';
+    document.getElementById('sermonGrid').style.display = 'none';
+    document.getElementById('gridFooter').style.display = 'none';
+    document.getElementById('sermonError').style.display = '';
+  }
+
+  /* ---------- Loader ---------- */
+
+  /* Demo data used only in local file preview (where rss2json is CORS-blocked
+     due to the null origin of file:// URLs). Once deployed to an HTTPS domain,
+     the real RSS feed is fetched instead. */
+  const DEMO_ITEMS = [
+    {
+      title: "The Mantle of Elijah and the Fire that Never Dies",
+      pubDate: "2026-04-14 10:30:00",
+      link: "https://www.youtube.com/@PastorOlumideOni",
+      description: "A prophetic charge on the unshakable identity of the believer — and how the same fire that fell on Mount Carmel is still available to every son and daughter standing before the Lord today."
+    },
+    {
+      title: "When the Altar Is Ready, the Fire Will Fall",
+      pubDate: "2026-04-07 10:30:00",
+      link: "https://www.youtube.com/@PastorOlumideOni",
+      description: "Before Elijah saw the fire fall, he first rebuilt the broken altar. A message on preparation and surrender before the presence of God."
+    },
+    {
+      title: "Before Whom I Stand — The Posture of a Prophet",
+      pubDate: "2026-03-31 10:30:00",
+      link: "https://www.youtube.com/@PastorOlumideOni",
+      description: "Elijah's authority flowed from one unshakable posture — standing before the Lord before ever speaking before kings."
+    },
+    {
+      title: "Exposing the False Altars in Your Life",
+      pubDate: "2026-03-24 10:30:00",
+      link: "https://www.youtube.com/@PastorOlumideOni",
+      description: "Every prophet of Baal must be confronted. A teaching on discerning and dismantling false altars that hinder the move of God."
+    },
+    {
+      title: "The Widow of Zarephath — Miracles in Scarcity",
+      pubDate: "2026-03-17 10:30:00",
+      link: "https://www.youtube.com/@PastorOlumideOni",
+      description: "When the brook dries up, God has already spoken to a widow. Learn to recognise the next season of provision."
+    },
+    {
+      title: "Double Portion — Inheriting the Father's Anointing",
+      pubDate: "2026-03-10 10:30:00",
+      link: "https://www.youtube.com/@PastorOlumideOni",
+      description: "Elisha asked for what most believers never pursue. A message on generational impartation and spiritual inheritance."
+    },
+    {
+      title: "Praying the Prayers that Shift Heaven",
+      pubDate: "2026-03-03 10:30:00",
+      link: "https://www.youtube.com/@PastorOlumideOni",
+      description: "Elijah was a man of like passions with us — yet his prayer shut the heavens for three and a half years. Your prayers are not smaller than his."
+    },
+    {
+      title: "Run, Elijah, Run — The Prophet in the Wilderness",
+      pubDate: "2026-02-24 10:30:00",
+      link: "https://www.youtube.com/@PastorOlumideOni",
+      description: "Even the most powerful prophet had a moment under the juniper tree. God's gentle dealings with discouraged servants."
+    },
+    {
+      title: "The Still Small Voice Still Speaks",
+      pubDate: "2026-02-17 10:30:00",
+      link: "https://www.youtube.com/@PastorOlumideOni",
+      description: "Not in the wind, not in the earthquake, not in the fire — but in a whisper. Learn to hear the gentle voice of the Spirit."
+    },
+    {
+      title: "Chariots of Fire — Heaven's Protection Over the Seer",
+      pubDate: "2026-02-10 10:30:00",
+      link: "https://www.youtube.com/@PastorOlumideOni",
+      description: "There are more with you than those who are against you. A teaching on the invisible army surrounding the servants of God."
+    }
+  ];
+
+  function showPreviewBanner() {
+    const banner = document.createElement('div');
+    banner.className = 'preview-banner';
+    banner.innerHTML = `
+      <div class="container">
+        <span class="preview-banner-dot"></span>
+        <strong>Preview Mode</strong> &middot;
+        Showing sample content. Live sermons from YouTube will load automatically once this site is deployed to a public URL.
+      </div>
+    `;
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
+
+  function renderDemoMode() {
+    showPreviewBanner();
+    renderFeatured(DEMO_ITEMS[0]);
+    renderGrid(DEMO_ITEMS.slice(1, 10));
+  }
+
+  async function loadSermons() {
+    showSkeletonGrid();
+
+    // Detect local file preview — rss2json's CORS policy blocks null origins,
+    // so live RSS won't work until deployed. Show demo content with a banner
+    // instead of a confusing error state.
+    if (location.protocol === 'file:') {
+      console.log('[sermons] Local preview detected — rendering demo content.');
+      renderDemoMode();
+      return;
+    }
+
+    try {
+      const res = await fetch(buildApiUrl(YT_CHANNEL_ID), { cache: 'default' });
+      if (!res.ok) throw new Error('Network response not ok');
+      const data = await res.json();
+      if (data.status !== 'ok' || !Array.isArray(data.items) || data.items.length === 0) {
+        throw new Error('Feed returned no items');
+      }
+      // First item is the featured/latest
+      renderFeatured(data.items[0]);
+      // Next up to 9 items populate the grid
+      const gridItems = data.items.slice(1, 10);
+      if (gridItems.length > 0) {
+        renderGrid(gridItems);
+      } else {
+        document.getElementById('sermonGrid').innerHTML = '';
+        document.getElementById('gridCount').innerHTML = '<strong>1</strong> &nbsp;Sermon';
+        document.getElementById('gridFooter').style.display = '';
+      }
+    } catch (err) {
+      console.error('[sermons] Failed to load YouTube feed:', err);
+      showError();
+    }
+  }
+
+  /* ======================================================================
+     GLOBAL SCRIPTS — nav, reveals
+     ====================================================================== */
+  document.documentElement.classList.add('js-enabled');
+
+  const nav = document.getElementById('siteNav');
+  const onScroll = () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.in-view)').forEach(el => el.classList.add('in-view'));
+    }, 2500);
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
+  }
+
+  /* Kick off the feed load */
+  loadSermons();
+</script>
+
+
+
+
+<nav id="mobileNav" class="mobile-nav" aria-hidden="true" role="dialog" aria-label="Main navigation">
+  <div class="mobile-nav-header">
+    <a href="index.html" class="mobile-nav-brand">
+      <span class="mobile-nav-brand-mark">O</span>
+      <span>Pastor Olumide <em>Oni</em></span>
+    </a>
+    <button class="mobile-nav-close" aria-label="Close menu" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"/>
+        <line x1="18" y1="6" x2="6" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">Home <span class="arrow">&rarr;</span></a></li>
+    <li><a href="about.html">About <span class="arrow">&rarr;</span></a></li>
+    <li><a href="sermons.html" class="active">Sermons <span class="arrow">&rarr;</span></a></li>
+    <li><a href="books.html">Books <span class="arrow">&rarr;</span></a></li>
+    <li><a href="devotionals.html">Devotionals <span class="arrow">&rarr;</span></a></li>
+    <li><a href="contact.html">Contact <span class="arrow">&rarr;</span></a></li>
+  </ul>
+
+  <div class="mobile-nav-footer">
+    <p class="mobile-nav-scripture">Then the fire of the Lord fell.</p>
+    <p class="mobile-nav-scripture-ref">1 Kings 18 : 38</p>
+    <div class="mobile-nav-socials">
+      <a href="https://www.youtube.com/@PastorOlumideOni" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/PastorOlumideOni" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/PastorOlumideOni" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<button id="backToTop" class="back-to-top" aria-label="Back to top" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="12" y1="19" x2="12" y2="5"/>
+    <polyline points="5 12 12 5 19 12"/>
+  </svg>
+</button>
+
+<script id="mobile-improvements-js">
+(function() {
+  /* ---------- Back to top ---------- */
+  const btt = document.getElementById('backToTop');
+  if (btt) {
+    const onScroll = () => {
+      if (window.scrollY > 400) btt.classList.add('visible');
+      else btt.classList.remove('visible');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    btt.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* ---------- Mobile nav drawer ---------- */
+  const toggle    = document.querySelector('.nav-toggle');
+  const mobileNav = document.getElementById('mobileNav');
+  const closeBtn  = mobileNav ? mobileNav.querySelector('.mobile-nav-close') : null;
+  const links     = mobileNav ? mobileNav.querySelectorAll('a') : [];
+
+  function openNav() {
+    if (!mobileNav) return;
+    mobileNav.classList.add('open');
+    mobileNav.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('mobile-nav-open');
+  }
+  function closeNav() {
+    if (!mobileNav) return;
+    mobileNav.classList.remove('open');
+    mobileNav.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('mobile-nav-open');
+  }
+
+  if (toggle) toggle.addEventListener('click', openNav);
+  if (closeBtn) closeBtn.addEventListener('click', closeNav);
+
+  // Close on link tap (for anchor links on same page) and on Escape key
+  links.forEach(a => a.addEventListener('click', () => {
+    // Give the browser a tick to begin navigation before we close
+    setTimeout(closeNav, 50);
+  }));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('open')) {
+      closeNav();
+    }
+  });
+
+  /* ---------- Preview-banner: set short/long variants so CSS can swap by width ---------- */
+  const pb = document.querySelector('.preview-banner .container');
+  if (pb && !pb.dataset.wrapped) {
+    const html = pb.innerHTML;
+    // Wrap the descriptive part so we can hide it on narrow screens
+    pb.innerHTML = html.replace(
+      /Showing sample content[^<]*/,
+      '<span class="full-message">Showing sample content. Live sermons from YouTube will load automatically once this site is deployed to a public URL.</span><span class="short-message">Sample content &mdash; deploy to see live data.</span>'
+    );
+    pb.dataset.wrapped = '1';
+  }
+})();
+</script>
+
+</body>
+</html>
