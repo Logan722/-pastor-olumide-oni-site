@@ -296,24 +296,43 @@ img, svg { display: block; max-width: 100%; }
 
 .reading-content {
   height: 100%;
-  padding: 48px 48px 32px;
+  padding: 48px 0 32px;
   font-family: var(--r-reading);
   font-size: var(--r-font-size);
   line-height: var(--r-line-height);
   color: var(--r-ink);
   column-fill: auto;
-  column-gap: 80px;
-  /* column-width set by JS to match pane width */
+  /* column-width and column-gap set by JS */
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
+}
+
+/* Limit text width within each column page */
+.reading-content .hero-section,
+.reading-content .section,
+.reading-content .chapter,
+.reading-content .prayer-section,
+.reading-content .book-meta {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Page turn animation */
 .reading-content.no-transition { transition: none; }
 
-/* On narrow screens, tighten padding */
+/* On narrow screens, tighten vertical padding */
 @media (max-width: 600px) {
-  .reading-content { padding: 32px 24px 24px; column-gap: 48px; }
+  .reading-content { padding: 32px 0 24px; }
+  .reading-content .hero-section,
+  .reading-content .section,
+  .reading-content .chapter,
+  .reading-content .prayer-section,
+  .reading-content .book-meta {
+    max-width: none;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
 
 /* ── Book content styles (mirror from book pages) ── */
@@ -926,8 +945,7 @@ img, svg { display: block; max-width: 100%; }
     themeOpen: false,
   };
 
-  const COLUMN_GAP = 80;
-  const COLUMN_GAP_MOBILE = 48;
+  const COLUMN_GAP = 2; // tiny gap to prevent sub-pixel bleed
 
   // ── DOM refs ──
   const $ = id => document.getElementById(id);
@@ -1086,14 +1104,14 @@ img, svg { display: block; max-width: 100%; }
   // ══════════════════════════════════════════════════════════════
 
   function getGap() {
-    return window.innerWidth <= 600 ? COLUMN_GAP_MOBILE : COLUMN_GAP;
+    return COLUMN_GAP;
   }
 
   function setupPagination() {
+    // Each column = full pane width, so one column fills the viewport exactly
     const paneWidth = readingPane.clientWidth;
     const gap = getGap();
 
-    // Set column width to exactly the pane width so each column = 1 page
     readingContent.style.columnWidth = paneWidth + 'px';
     readingContent.style.columnGap = gap + 'px';
 
