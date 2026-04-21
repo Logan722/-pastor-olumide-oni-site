@@ -7,7 +7,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pastor Olumide Oni — Before Whom I Stand</title>
-<meta name="description" content="The official website of Pastor Olumide Oni — sermons, books, devotionals, and the unfailing fire of the Word of God." />
+<meta name="description" content="The official website of Pastor Olumide Oni — sermons, books, daily word, and the unfailing fire of the Word of God." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -996,70 +996,49 @@ main { position: relative; z-index: 10; }
 }
 
 .dev-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
+  background: var(--bg-panel);
   border: 1px solid var(--line);
   border-radius: 3px;
-  padding: 34px 30px;
   transition: all 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 320px;
-}
-.dev-card::after {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 2px;
-  background: var(--gold);
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 0.4s ease;
 }
 .dev-card:hover {
   border-color: var(--line-strong);
   transform: translateY(-4px);
-  background: linear-gradient(180deg, rgba(212, 168, 83, 0.04), rgba(212, 168, 83, 0.01));
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.5);
 }
-.dev-card:hover::after { transform: scaleY(1); }
-
-.dev-date {
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--gold-dim);
-  margin-bottom: 18px;
+.dev-card-img {
+  width: 100%; aspect-ratio: 1;
+  object-fit: cover; display: block;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.dev-title {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: 22px;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: var(--cream);
-  margin-bottom: 14px;
+.dev-card:hover .dev-card-img { transform: scale(1.03); }
+.dev-card-body {
+  padding: 20px 22px 18px;
+  flex: 1; display: flex; flex-direction: column;
 }
-.dev-excerpt {
-  font-size: 14px;
-  line-height: 1.65;
+.dev-card-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 16px; line-height: 1.35;
+  color: var(--cream); margin-bottom: 8px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.dev-card-excerpt {
+  font-size: 13px; line-height: 1.6;
   color: var(--text-muted);
-  margin-bottom: auto;
-  padding-bottom: 24px;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  overflow: hidden; margin-bottom: auto;
 }
-.dev-read {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--gold);
-  transition: gap 0.3s ease;
-  margin-top: 12px;
+.dev-card-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-top: 14px; transition: gap 0.3s ease;
 }
-.dev-card:hover .dev-read { gap: 14px; color: var(--cream); }
+.dev-card:hover .dev-card-cta { gap: 14px; color: var(--cream); }
 
 .dev-viewall {
   text-align: center;
@@ -1797,25 +1776,28 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
 </section>
 
 <!-- =====================================================
-     DEVOTIONALS PREVIEW
+     DAILY WORD PREVIEW
      ===================================================== -->
 <section class="devotionals">
   <div class="container">
     <div class="section-head reveal">
-      <div class="section-kicker">Daily Word</div>
-      <h2 class="section-title">Devotionals &amp; <em>reflections</em></h2>
+      <div class="section-kicker">Feed Your Spirit</div>
+      <h2 class="section-title">Daily <em>Word</em></h2>
       <p class="section-sub">
-        Brief meditations from the Scriptures — written to feed your spirit and fuel your walk.
+        Prophetic declarations, teachings, and words of encouragement — delivered to build your faith and fuel your walk.
       </p>
     </div>
 
     <div class="dev-grid" id="homeDevGrid">
-      <!-- Populated by JS — rotates daily -->
+      <!-- Populated by JS from YouTube community posts -->
+      <div class="dev-card" style="min-height:280px;background:linear-gradient(110deg, var(--bg-2) 30%, rgba(212,168,83,0.04) 50%, var(--bg-2) 70%);background-size:200% 100%;animation:homeShimmer 1.8s ease-in-out infinite;"></div>
+      <div class="dev-card" style="min-height:280px;background:linear-gradient(110deg, var(--bg-2) 30%, rgba(212,168,83,0.04) 50%, var(--bg-2) 70%);background-size:200% 100%;animation:homeShimmer 1.8s ease-in-out infinite;"></div>
+      <div class="dev-card" style="min-height:280px;background:linear-gradient(110deg, var(--bg-2) 30%, rgba(212,168,83,0.04) 50%, var(--bg-2) 70%);background-size:200% 100%;animation:homeShimmer 1.8s ease-in-out infinite;"></div>
     </div>
 
     <div class="dev-viewall reveal">
       <a href="daily-word.html" class="btn btn-ghost">
-        All Devotionals
+        View All
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M13 6l6 6-6 6"/>
         </svg>
@@ -2021,122 +2003,54 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
     }
   }
 
-  const DEVOTIONALS = [
-  {
-    "num": "009",
-    "slug": "fire-falls-altar-ready",
-    "title": "When the Fire Falls, the <em>Altar</em> Must Be Ready",
-    "displayDate": "15 April 2026",
-    "readTime": "4 Min Read",
-    "scripture": "1 Kings 18 : 30&ndash;38",
-    "excerpt": "Before the fire fell at Carmel, Elijah rebuilt the broken altar. God still answers by fire &mdash; but He looks for altars that are ready to receive it."
-  },
-  {
-    "num": "008",
-    "slug": "stand-before-the-lord",
-    "title": "Stand <em>Before</em> the Lord, Then Speak",
-    "displayDate": "12 April 2026",
-    "readTime": "3 Min Read",
-    "scripture": "1 Kings 17 : 1",
-    "excerpt": "Elijah's authority came from one unshakable posture: he stood before the Lord first. Position yourself rightly, and your voice will carry weight where it matters."
-  },
-  {
-    "num": "007",
-    "slug": "still-small-voice",
-    "title": "The <em>Still Small Voice</em> Still Speaks",
-    "displayDate": "8 April 2026",
-    "readTime": "5 Min Read",
-    "scripture": "1 Kings 19 : 11&ndash;13",
-    "excerpt": "After the fire and the earthquake came a whisper. God is not always loudest where we expect Him. Learn to recognise the gentleness of the Spirit."
-  },
-  {
-    "num": "006",
-    "slug": "brook-dries-up",
-    "title": "When the <em>Brook</em> Dries Up, God Has Already Spoken",
-    "displayDate": "5 April 2026",
-    "readTime": "4 Min Read",
-    "scripture": "1 Kings 17 : 7&ndash;9",
-    "excerpt": "Cherith was never meant to be forever. The brook that sustained Elijah dried up because a widow in Zarephath was already prepared. Trust the transition."
-  },
-  {
-    "num": "005",
-    "slug": "double-portion-persistent",
-    "title": "The <em>Double Portion</em> Is for the Persistent",
-    "displayDate": "1 April 2026",
-    "readTime": "4 Min Read",
-    "scripture": "2 Kings 2 : 2&ndash;10",
-    "excerpt": "Elisha refused to leave his master's side even when told to stay behind. Inheritance flows where tenacity remains. Don't release what you are still waiting to receive."
-  },
-  {
-    "num": "004",
-    "slug": "prayer-that-shuts-heavens",
-    "title": "Praying the Prayer That <em>Shuts the Heavens</em>",
-    "displayDate": "28 March 2026",
-    "readTime": "4 Min Read",
-    "scripture": "James 5 : 17&ndash;18",
-    "excerpt": "James says Elijah was a man of like passions with us — yet his prayer held back the rain for three and a half years. Your prayers are not smaller than his."
-  },
-  {
-    "num": "003",
-    "slug": "chariots-of-fire",
-    "title": "There Are <em>More</em> with You than Against You",
-    "displayDate": "24 March 2026",
-    "readTime": "5 Min Read",
-    "scripture": "2 Kings 6 : 15&ndash;17",
-    "excerpt": "When Elisha's servant saw the Syrian army, he panicked. When his eyes were opened, he saw the chariots of fire. Pray for eyes that see the invisible army."
-  },
-  {
-    "num": "002",
-    "slug": "juniper-tree",
-    "title": "The <em>Juniper Tree</em> Is Not the End",
-    "displayDate": "20 March 2026",
-    "readTime": "3 Min Read",
-    "scripture": "1 Kings 19 : 4&ndash;9",
-    "excerpt": "Even the greatest prophet had a moment under a juniper tree, asking God to take his life. God answered with food, rest, and a gentle whisper — not with rebuke."
-  },
-  {
-    "num": "001",
-    "slug": "widows-obedience",
-    "title": "Miracles Often Begin with a <em>Widow's Obedience</em>",
-    "displayDate": "17 March 2026",
-    "readTime": "4 Min Read",
-    "scripture": "1 Kings 17 : 10&ndash;16",
-    "excerpt": "Before the barrel of meal failed not, a widow had to give her last handful first. God's multiplication usually begins on the far side of our obedience."
-  }
-];
-
-  function getTodaysFeaturedIndex() {
-    const now = new Date();
-    const start = new Date(now.getFullYear(), 0, 0);
-    const dayOfYear = Math.floor((now - start) / 86400000);
-    return dayOfYear % DEVOTIONALS.length;
+  /* ---------- HOME DAILY WORD — dynamic from YouTube community posts ---------- */
+  function extractTitle(text) {
+    if (!text) return 'Daily Word';
+    var lines = text.split('\n').filter(function(l) { return l.trim(); });
+    var first = lines[0] || '';
+    first = first.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
+    if (first.length > 50) first = first.substring(0, 47) + '…';
+    return first || 'Daily Word';
   }
 
-  function renderHomeDevotionals() {
-    const grid = document.getElementById('homeDevGrid');
+  function extractExcerpt(text) {
+    if (!text) return '';
+    var lines = text.split('\n').filter(function(l) { return l.trim(); });
+    // Skip title (first line), get body text
+    var body = lines.slice(1).join(' ').trim();
+    if (body.length > 120) body = body.substring(0, 117) + '…';
+    return body;
+  }
+
+  function renderHomeDailyWord(posts) {
+    var grid = document.getElementById('homeDevGrid');
     if (!grid) return;
-    const startIdx = getTodaysFeaturedIndex();
-    const items = [
-      DEVOTIONALS[startIdx],
-      DEVOTIONALS[(startIdx + 1) % DEVOTIONALS.length],
-      DEVOTIONALS[(startIdx + 2) % DEVOTIONALS.length],
-    ];
-    grid.innerHTML = items.map((d, i) => `
-      <a href="devotionals/${d.slug}.html" class="dev-card reveal in-view">
-        <div class="dev-date">${escapeHtml(d.displayDate)}${i === 0 ? ' &middot; <span style="color: var(--gold); letter-spacing: 0.18em;">Today</span>' : ''}</div>
-        <h3 class="dev-title">${d.title}</h3>
-        <p class="dev-excerpt">${escapeHtml(d.excerpt)}</p>
-        <span class="dev-read">
-          Read
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M13 6l6 6-6 6"/>
-          </svg>
-        </span>
-      </a>
-    `).join('');
+    var show = posts.slice(0, 3);
+    grid.innerHTML = show.map(function(post) {
+      return '<a href="daily-word.html" class="dev-card reveal in-view">' +
+        '<img class="dev-card-img" src="' + post.images[0].url + '" alt="' + escapeHtml(extractTitle(post.text)) + '" loading="lazy">' +
+        '<div class="dev-card-body">' +
+          '<div class="dev-card-title">' + escapeHtml(extractTitle(post.text)) + '</div>' +
+          '<p class="dev-card-excerpt">' + escapeHtml(extractExcerpt(post.text)) + '</p>' +
+          '<span class="dev-card-cta">View <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>' +
+        '</div></a>';
+    }).join('');
   }
 
-  renderHomeDevotionals();
+  // Fetch and render
+  fetch('/.netlify/functions/youtube-posts')
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.posts && data.posts.length > 0) {
+        renderHomeDailyWord(data.posts);
+      }
+    })
+    .catch(function() {
+      // On error, just hide the shimmer
+      var grid = document.getElementById('homeDevGrid');
+      if (grid) grid.innerHTML = '';
+    });
+
   loadHomeSermon();
 </script>
 
