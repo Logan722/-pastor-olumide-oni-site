@@ -1,0 +1,17 @@
+[build]
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/devotionals"
+  to = "/daily-word"
+  status = 301
+
+[[redirects]]
+  from = "/devotionals.html"
+  to = "/daily-word.html"
+  status = 301
+
+[[redirects]]
+  from = "/devotionals/*"
+  to = "/daily-word"
+  status = 301
