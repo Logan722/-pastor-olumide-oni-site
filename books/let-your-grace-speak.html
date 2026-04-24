@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Let Your Grace Speak — Pastor Olumide Oni</title>
+<meta name="description" content="A book by Pastor Olumide Oni on the power of God&#x27;s grace — for greatness, life change, every season, strength in weakness, and walking with Christ.">
+<meta name="theme-color" content="#0a0907">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTAiIGZpbGw9IiMwYTA5MDciLz4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIyNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDRhODUzIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNTUiLz4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIyMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDRhODUzIiBzdHJva2Utd2lkdGg9IjAuNiIgb3BhY2l0eT0iMC4zNSIvPgogIDx0ZXh0IHg9IjMyIiB5PSI0NCIgdGV4dC1hbmNob3I9Im1pZGRsZSIKICAgICAgICBmb250LWZhbWlseT0iR2VvcmdpYSwgc2VyaWYiIGZvbnQtc3R5bGU9Iml0YWxpYyIgZm9udC13ZWlnaHQ9IjQwMCIKICAgICAgICBmb250LXNpemU9IjM2IiBmaWxsPSIjZDRhODUzIiBsZXR0ZXItc3BhY2luZz0iLTEiPk88L3RleHQ+Cjwvc3ZnPg==">
+<style>
+  :root {
+    --bg: #0a0907;
+    --bg-soft: #14110c;
+    --bg-card: #1a1612;
+    --gold: #d4a853;
+    --gold-dim: #9a7a3c;
+    --cream: #f2e8d5;
+    --ink: #e8dfc9;
+    --muted: #8a8070;
+    --rule: rgba(212, 168, 83, 0.18);
+    --rule-strong: rgba(212, 168, 83, 0.4);
+    --display: 'Fraunces', 'Times New Roman', serif;
+    --body: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.75;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212, 168, 83, 0.05), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(212, 168, 83, 0.03), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+    animation: breathe 8s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.83 0 0 0 0 0.66 0 0 0 0 0.32 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.04;
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10, 9, 7, 0.85);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .brand em { color: var(--gold); font-style: italic; font-weight: 400; }
+  .nav { display: flex; gap: 36px; align-items: center; }
+  .nav a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .nav a:hover, .nav a.active { opacity: 1; color: var(--gold); }
+  .nav-toggle {
+    display: none;
+    background: none; border: none; color: var(--cream); cursor: pointer;
+    width: 28px; height: 28px;
+  }
+  @media (max-width: 768px) {
+    .nav { display: none; }
+    .nav-toggle { display: block; }
+    .site-header { padding: 14px 20px; }
+  }
+  .mobile-nav {
+    position: fixed; top: 0; right: -280px; width: 280px; height: 100vh;
+    background: var(--bg-soft); z-index: 100; transition: right 0.35s;
+    display: flex; flex-direction: column; padding: 80px 30px 30px;
+    border-left: 1px solid var(--rule);
+  }
+  .mobile-nav.open { right: 0; }
+  .mobile-nav a {
+    color: var(--cream); text-decoration: none; padding: 14px 0;
+    font-size: 15px; border-bottom: 1px solid var(--rule); letter-spacing: 0.06em;
+  }
+  .mobile-nav a.active { color: var(--gold); }
+  .mobile-nav-close {
+    position: absolute; top: 20px; right: 20px; background: none;
+    border: none; color: var(--cream); cursor: pointer; width: 28px; height: 28px;
+  }
+  .backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    z-index: 90; opacity: 0; pointer-events: none; transition: opacity 0.35s;
+  }
+  .backdrop.show { opacity: 1; pointer-events: auto; }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 100px 40px 80px;
+    position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 28px;
+  }
+  .hero-title {
+    font-family: var(--display); font-size: clamp(36px, 6vw, 56px);
+    font-weight: 700; color: var(--cream); line-height: 1.15; margin-bottom: 16px;
+  }
+  .hero-title em { color: var(--gold); font-style: italic; font-weight: 400; }
+  .hero-subtitle {
+    font-family: var(--display); font-size: 18px; font-weight: 400;
+    font-style: italic; color: var(--muted); margin-bottom: 32px;
+  }
+  .hero-rule {
+    width: 48px; height: 1px; background: var(--gold-dim);
+    margin: 0 auto 40px; opacity: 0.5;
+  }
+  .scripture-anchor {
+    max-width: 560px; margin: 0 auto; padding: 30px 28px;
+    border: 1px solid var(--rule); position: relative;
+  }
+  .scripture-anchor::before, .scripture-anchor::after {
+    content: '';
+    position: absolute; width: 14px; height: 14px;
+    border: 1px solid var(--gold-dim);
+  }
+  .scripture-anchor::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .scripture-anchor::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+  .scripture-text {
+    font-family: var(--display); font-size: 16px; font-style: italic;
+    color: var(--cream); line-height: 1.7; opacity: 0.85;
+  }
+  .scripture-ref {
+    margin-top: 16px; font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold-dim);
+  }
+
+  /* TOC */
+  .toc {
+    max-width: 520px; margin: 60px auto 80px;
+    border: 1px solid var(--rule); padding: 48px 40px;
+  }
+  .toc-heading {
+    font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 28px;
+  }
+  .toc-list { display: flex; flex-direction: column; gap: 0; }
+  .toc-list a {
+    display: flex; align-items: baseline; gap: 16px; padding: 11px 0;
+    border-bottom: 1px solid var(--rule); text-decoration: none; transition: color 0.2s;
+  }
+  .toc-list a:last-child { border-bottom: none; }
+  .toc-list a:hover { color: var(--gold); }
+  .ch-num { font-size: 11px; letter-spacing: 0.2em; color: var(--gold-dim); white-space: nowrap; min-width: 80px; }
+  .ch-title { font-family: var(--display); font-size: 16px; color: var(--cream); font-weight: 400; }
+  .toc-list a:hover .ch-title { color: var(--gold); }
+
+  /* Content sections */
+  .content {
+    max-width: 680px; margin: 0 auto; padding: 0 40px 80px;
+    position: relative; z-index: 2;
+  }
+  .section {
+    padding: 48px 0; border-top: 1px solid var(--rule);
+  }
+  .section:first-of-type { border-top: none; padding-top: 40px; }
+  .section-eyebrow {
+    font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 24px;
+  }
+  .section p {
+    margin-bottom: 18px; color: var(--ink); opacity: 0.88;
+  }
+  .dropcap {
+    float: left; font-family: var(--display); font-size: 64px;
+    line-height: 0.8; font-weight: 700; color: var(--gold);
+    margin: 4px 12px 0 0;
+  }
+  .chapter {
+    padding: 64px 0 48px; border-top: 1px solid var(--rule);
+  }
+  .section, .prayer-section {
+    padding: 48px 0; border-top: 1px solid var(--rule);
+  }
+  .chapter-header {
+    text-align: center; margin-bottom: 48px;
+  }
+  .chapter-number {
+    font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 14px;
+  }
+  .chapter-title {
+    font-family: var(--display); font-size: clamp(24px, 4vw, 34px);
+    font-weight: 600; color: var(--cream); line-height: 1.25;
+  }
+  .chapter-rule {
+    width: 40px; height: 1px; background: var(--gold-dim);
+    margin: 20px auto 0; opacity: 0.4;
+  }
+  .chapter-body p {
+    margin-bottom: 18px; color: var(--ink); opacity: 0.88;
+  }
+  .subsection-heading {
+    font-family: var(--display); font-size: 20px; font-weight: 600;
+    color: var(--cream); margin: 40px 0 20px;
+    padding-top: 32px; border-top: 1px solid var(--rule);
+  }
+
+  /* Prayer section */
+  .prayer-section {
+    margin-top: 40px;
+  }
+  .prayer-intro {
+    font-family: var(--display); font-style: italic;
+    font-size: 18px; color: var(--cream); opacity: 0.8;
+    margin-bottom: 32px; line-height: 1.6;
+  }
+  .prayer-group {
+    margin-bottom: 40px;
+  }
+  .prayer-group-title {
+    font-family: var(--display); font-size: 18px; font-weight: 600;
+    color: var(--gold); margin-bottom: 20px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--rule);
+  }
+  .prayer-list {
+    list-style: none; padding: 0;
+  }
+  .prayer-list li {
+    display: grid; grid-template-columns: 36px 1fr; gap: 16px;
+    padding: 14px 0; border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .prayer-list li:last-child { border-bottom: none; }
+  .prayer-num {
+    font-family: var(--display); font-size: 14px; font-weight: 600;
+    color: var(--gold-dim); text-align: right; padding-top: 2px;
+  }
+  .prayer-text {
+    color: var(--ink); font-size: 16px; opacity: 0.88; line-height: 1.65;
+  }
+
+  /* Footer */
+  .book-footer {
+    text-align: center; padding: 80px 40px 60px;
+    border-top: 1px solid var(--rule); margin-top: 40px;
+  }
+  .book-footer .meta-line {
+    font-size: 12px; letter-spacing: 0.2em; color: var(--muted);
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .book-footer .isbn {
+    font-size: 11px; color: var(--gold-dim);
+    letter-spacing: 0.15em; font-family: var(--body);
+  }
+  .return-link {
+    display: inline-block; margin-top: 36px; padding: 14px 32px;
+    border: 1px solid var(--rule-strong); color: var(--cream);
+    text-decoration: none; font-size: 12px; letter-spacing: 0.24em;
+    text-transform: uppercase; font-weight: 500; transition: all 0.3s;
+  }
+  .return-link:hover {
+    background: var(--gold); color: var(--bg); border-color: var(--gold);
+  }
+
+  /* Back to top */
+  .back-to-top {
+    position: fixed; bottom: 24px; right: 24px; width: 44px; height: 44px;
+    background: rgba(26, 22, 18, 0.9); border: 1px solid var(--rule-strong);
+    border-radius: 50%; color: var(--gold); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s;
+    backdrop-filter: blur(10px); z-index: 60;
+  }
+  .back-to-top.show { opacity: 1; pointer-events: auto; }
+  .back-to-top:hover { transform: translateY(-2px); background: var(--gold); color: var(--bg); }
+  .back-to-top svg { width: 18px; height: 18px; }
+
+  @media (max-width: 620px) {
+    body { font-size: 16px; }
+    .hero { padding: 60px 20px 70px; }
+    .content, .book-footer { padding-left: 20px; padding-right: 20px; }
+    .scripture-anchor { padding: 24px 22px; }
+    .toc { padding: 40px 20px; margin: 60px auto; }
+    .dropcap { font-size: 56px; }
+    .prayer-list li { grid-template-columns: 32px 1fr; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="brand">Pastor Olumide <em>Oni</em></a>
+  <nav class="nav">
+    <a href="../index.html">Home</a>
+    <a href="../about.html">About</a>
+    <a href="../sermons.html">Sermons</a>
+    <a href="../books.html" class="active">Books</a>
+    <a href="../devotionals.html">Devotionals</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</header>
+
+<div class="backdrop" id="backdrop"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="navClose" aria-label="Close menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <a href="../index.html">Home</a>
+  <a href="../about.html">About</a>
+  <a href="../sermons.html">Sermons</a>
+  <a href="../books.html" class="active">Books</a>
+  <a href="../devotionals.html">Devotionals</a>
+  <a href="../contact.html">Contact</a>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-eyebrow">A Book By Pastor Olumide Oni</div>
+    <h1 class="hero-title">Let Your Grace <em>Speak</em></h1>
+    <div class="hero-subtitle">Grace is not only what God gives us to be saved. Grace is what God releases to help us live, grow, endure, and finish well.</div>
+    <div class="hero-rule"></div>
+    <div class="scripture-anchor">
+      <div class="scripture-text">&ldquo;But by the grace of God I am what I am, and His grace toward me was not in vain.&rdquo;</div>
+      <div class="scripture-ref">1 Corinthians 15 : 10 · NKJV</div>
+    </div>
+  </section>
+
+  <nav class="toc">
+    <div class="toc-heading">Table of Contents</div>
+    <div class="toc-list">
+<a href="#chapter-1"><span class="ch-num">Chapter 1</span><span class="ch-title">Grace Is The Reason For Greatness</span></a>
+<a href="#chapter-2"><span class="ch-num">Chapter 2</span><span class="ch-title">When Grace Speaks, Life Changes</span></a>
+<a href="#chapter-3"><span class="ch-num">Chapter 3</span><span class="ch-title">Grace Must Increase For Every Season</span></a>
+<a href="#chapter-4"><span class="ch-num">Chapter 4</span><span class="ch-title">Sufficient Grace And The Promise Of Strength</span></a>
+<a href="#chapter-5"><span class="ch-num">Chapter 5</span><span class="ch-title">Receiving Grace Through Christ And Walking In It</span></a>
+    </div>
+  </nav>
+
+  <div class="content">
+
+    <section class="section" id="dedication">
+      <div class="section-eyebrow">Dedication</div>
+        <p>This book, Let Your Grace Speak, is wholeheartedly dedicated to Pastor Terry Obaseki, Coordinator of the Department of Revivalists, Mountain of Fire and Miracles Ministries Mega Region 2, and his wife, Pastor (Mrs.) Patience Obaseki, Head of the Community Service/Development. Your lives are living testimonies of grace in action — grace that teaches, strengthens, restores, and empowers. Through your leadership, vision, and unwavering commitment to revival, countless destinies have been ignited and aligned with God&#x27;s divine purpose. You have demonstrated that grace is not merely spoken, it is lived. May this book stand as a token of honor and deep appreciation for your tireless labor in the Kingdom. May the same grace you exemplify continually speak for you, before God and before men.</p>
+    </section>
+    <section class="section" id="acknowledgment">
+      <div class="section-eyebrow">Acknowledgment</div>
+        <p>I sincerely acknowledge my Father in the Lord, Dr. D. K. Olukoya, the General Overseer of MFM Worldwide, for his invaluable spiritual mentorship, leadership, guidance, and unwavering commitment to the work of God. His teachings and example have greatly shaped my walk with God and my commitment to ministry. I honor my beloved grandmother, Prophetess Moyoade Abake Oni, who handed me over to our choir master at CAC Itabale Olugbode, Ibadan, when I was just seven years old. That foundational step marked the beginning of my spiritual and musical journey. I remain deeply grateful for her vision, faith, and sacrifice. And to Shafe Ewuola, my editor and publisher, I express my sincere gratitude for your professionalism and dedication in bringing this book to completion. To God alone be all the glory for the people He has used, the path He has directed, and the calling He continues to sustain.</p>
+    </section>
+    <section class="section" id="introduction">
+      <div class="section-eyebrow">Introduction</div>
+        <p><span class="dropcap">S</span>ome messages do not begin with noise. They begin with a quiet realization that something unseen has been carrying you. You look back and notice moments that should have broken you, yet you are still standing. You remember doors that should have remained shut, yet somehow, they opened. You recall seasons when your strength ran out, yet help came from a direction you did not plan. Many people call it luck, connections, or timing. This book calls it what the Bible calls it, grace.</p>
+        <p>&quot;Let Your Grace Speak&quot; is built on a simple truth. Grace is not only what God gives us to be saved. Grace is what God releases to help us live, grow, endure, and finish well. Grace is the reason for greatness, because greatness in God is never produced by human sweat alone.</p>
+        <p>This book begins with the first part, Grace Is the Reason for Greatness. Many people want greatness, but they want it without God. They want increase, but they do not want the Giver. Yet every lasting lifting comes from above.</p>
+        <p>Then we move into the second part, When Grace Speaks, Life Changes. There are situations where talk does not help, argument does not help, and human effort reaches a limit. But when grace speaks, stubborn problems begin to bow. Grace can speak in the form of favor, mercy, or divine help.</p>
+        <p>One reason this message is urgent is that many people live as if yesterday&#x27;s grace is enough for today&#x27;s battles. That takes us to the third part, Grace Must Increase for Every Season. Life has seasons, and each season has its demands. Growth is not automatic. If you want to carry more, you must receive more.</p>
+        <p>The fourth part focuses on Sufficient Grace and the Promise of Strength. There are days when you are not asking for luxury, you are asking for survival. Grace is both an anchor and a compass. It anchors your heart so you do not drift into despair, and it guides your steps so you do not lose direction.</p>
+        <p>Finally, the fifth part brings us to Receiving Grace Through Christ and Walking in It. Grace is a gift to receive, and a Person to know. When you come to Christ, you come to the Distributor of the grace that matters.</p>
+        <p>If you have ever felt stuck, tired, attacked, or delayed, this message is for you. Most of all, this book is an invitation to stop striving like an orphan and start living like a child who knows help is available. As you read, make a simple prayer your daily language: &quot;Lord, let Your grace speak for me.&quot;</p>
+    </section>
+
+
+      <section class="chapter" id="chapter-1">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter 1</div>
+          <h2 class="chapter-title">Grace Is The Reason For Greatness</h2>
+          <div class="chapter-rule"></div>
+        </div>
+        <div class="chapter-body">
+          <p><span class="dropcap">K</span>ola was not the most gifted person in his graduating class. He was not the loudest. He was not the one people pointed to when they spoke about &quot;future leaders.&quot; He was simply consistent. He showed up early, stayed late, and tried his best to learn.</p>
+          <p>After graduation, he applied for jobs the way many people do. He sent emails, filled forms, and waited. Weeks passed; then months. Each rejection letter felt like a small cut. At some point, he stopped telling his friends about his applications because he was tired of hearing, &quot;Keep trying.&quot; He was trying. He just was not moving.</p>
+          <p>One morning, he attended a community event, not because he was hopeful, but because his aunt had insisted. During a break, an older man sat beside him and asked a simple question, &quot;Young man, what do you do?&quot; They spoke for ten minutes. The man only said, &quot;Send me your résumé.&quot; Two days later, Kola got a call. Not for an interview, but an offer. He sat on his bed and stared at his phone like it was not real. Later, he asked his aunt, &quot;How did you know that man would be there?&quot; She replied, &quot;I did not know. I only know that grace opens doors that effort alone cannot open.&quot;</p>
+          <h3 class="subsection-heading">What Grace Really Means</h3>
+          <p>Many people think grace is only what God gives when we fail. They see it as mercy after mistakes. That is part of it, but it is not the full picture. Grace is also God&#x27;s help before you fall. It is God&#x27;s support while you are walking. It is God&#x27;s strength when your strength is not enough. Grace is the hand of God on a person, making progress possible.</p>
+          <p>The Bible says, &quot;But by the grace of God I am what I am, and His grace toward me was not in vain&quot; (1 Corinthians 15:10). Paul did not deny labor. He labored. But he understood that the power behind his results was not human energy. It was grace. Grace is what makes your labor produce fruit.</p>
+          <p>It is possible to be faithful and still feel stuck. It is possible to be skilled and still be overlooked. This is why grace matters. Grace takes you to the next level of greatness. It shifts you from struggling to flowing. It moves you from pushing doors to finding doors already opened.</p>
+          <h3 class="subsection-heading">Grace Promotes Your Star Without Killing You</h3>
+          <p>Some people rise fast, but they rise into trouble. Others rise slowly, but they rise into peace. There is a difference between promotion and grace-based lifting. Grace promotes your star, but it also protects your soul. It lifts you without destroying you.</p>
+          <p>The Bible says, &quot;Unless the LORD builds the house, They labor in vain who build it&quot; (Psalm 127:1). If God is not the Builder, your success may look fine outside but is falling apart inside. Grace brings promotion with preservation. Grace can open doors for your career, and also keep you from pride. Grace can bless your ministry and also keep you humble. Grace can increase your finances and also keep you from greed. Many people want the crown, but they do not want the weight of it. Grace gives both lifting and balance.</p>
+          <h3 class="subsection-heading">Grace Connects You to Destiny Helpers</h3>
+          <p>Kola&#x27;s story shows something people do not talk about enough. Sometimes, what you need is not only money. It is not only intelligence. It is not only a skill. Sometimes, what you need is the right person at the right time. Grace connects you to destiny helpers. These helpers may not know you for long, but they can unlock years of delay.</p>
+          <p>The Bible says, &quot;A man&#x27;s gift makes room for him, And brings him before great men&quot; (Proverbs 18:16). Notice that the gift is not only talent. It includes God-given capacity and favor. Grace makes room. Grace creates access. Do not despise divine connections. They are not accidents. They are instruments of grace.</p>
+          <h3 class="subsection-heading">Grace Helps You Do the Right Thing at the Right Time</h3>
+          <p>Many problems in life are not caused by bad intentions. They are caused by wrong timing. A person can marry the right person at the wrong time and suffer. A person can accept the right job at the wrong time and lose peace. Grace allows you to do the right thing at the right time.</p>
+          <p>The Bible says, &quot;Trust in the LORD with all your heart... In all your ways acknowledge Him, And He shall direct your paths&quot; (Proverbs 3:5-6). Direction is a form of grace. It saves you from costly mistakes. Greatness is not only about speed. It is about wise steps. Grace makes progress without stress. This does not mean you will never work. It means your work will not crush you.</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="chapter-2">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter 2</div>
+          <h2 class="chapter-title">When Grace Speaks, Life Changes</h2>
+          <div class="chapter-rule"></div>
+        </div>
+        <div class="chapter-body">
+          <p><span class="dropcap">H</span>auwa did not sleep well that night. She had tried. She turned from left to right, then sat up and stared at the wall like it was her enemy. The letter on the table kept catching her attention. It was short, cold, and final. &quot;Your contract will not be renewed.&quot;</p>
+          <p>The next morning, she dressed and went out anyway. Not because she had a plan, but because staying indoors felt like a surrender. She boarded a bus to the city, holding her bag tightly and praying quietly. At one stop, a young man sat next to her and said, &quot;I do not know why, but I feel I should tell you this. Please do not make a desperate decision today. God is arranging something. Stay calm.&quot;</p>
+          <p>Two hours later, Hauwa stepped into a small office for a walk-in inquiry she almost canceled. The receptionist told her to wait. Then a woman walked out and said, &quot;Are you Hauwa? We had a last-minute opening. Can you start next week?&quot; On her way home, she remembered the stranger&#x27;s words, &quot;God is arranging something.&quot; That was the day she understood that grace can speak into a situation and change its direction.</p>
+          <h3 class="subsection-heading">When Grace Speaks, Problems Bow</h3>
+          <p>There are moments in life when you realize that some battles are too heavy for human hands. You can be hardworking and still meet resistance. You can be sincere and still face trouble. That is why this truth matters. When grace is speaking, problems will bow. When grace is speaking, enemies will surrender. When grace is speaking, heaven will open suddenly.</p>
+          <p>Grace does not always announce itself. It can be quiet, but it is powerful. Grace is God stepping into your matter, taking over what you cannot control, and shifting what you cannot move. The Bible says, &quot;Not by might nor by power, but by My Spirit, says the LORD of hosts&quot; (Zechariah 4:6). This means some victories will not come through muscle, connections, or human strategy. They will come through the help of God.</p>
+          <h3 class="subsection-heading">Grace Opens Heaven Over Ordinary Lives</h3>
+          <p>Many people think open heavens are for prophets alone. Yet the Bible shows that God&#x27;s favor can rest on ordinary people who trust Him. Jacob slept in a lonely place with a stone under his head, and heaven opened in a way he did not expect. He later said, &quot;Surely the LORD is in this place&quot; (Genesis 28:16). He was not in a church building. He was in a state of uncertainty, yet grace met him there.</p>
+          <p>When grace speaks, heaven opens. That means help arrives from a place you cannot reach by effort. The Bible says, &quot;Every good gift and every perfect gift is from above, and comes down from the Father of lights&quot; (James 1:17). When grace speaks, good things come down not because you manipulated God, but because God decided to help you.</p>
+          <h3 class="subsection-heading">Grace Protects You from Shame</h3>
+          <p>There is a kind of shame people fear more than poverty. It is the shame of being mocked. The shame of being stuck. The shame of being disgraced after trying so hard. This is why the message says, you cannot carry grace and be put to shame. The Bible says, &quot;Whoever believes on Him will not be put to shame&quot; (Romans 10:11).</p>
+          <p>Grace does not mean people will not plan evil. It means their plans will not have the final word. Grace can neutralize schemes. It can make your mockers lose interest. It can expose hidden plots. Grace can preserve your name when people want to stain it. The Bible says, &quot;If God is for us, who can be against us?&quot; (Romans 8:31). People can be against you, but they cannot defeat what God is defending.</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="chapter-3">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter 3</div>
+          <h2 class="chapter-title">Grace Must Increase For Every Season</h2>
+          <div class="chapter-rule"></div>
+        </div>
+        <div class="chapter-body">
+          <p><span class="dropcap">K</span>elechi used to laugh when older people talked about &quot;seasons of life.&quot; He was young, strong, and always busy. Then life changed in one year. He got married. His mother fell ill. His job role expanded. A new baby arrived earlier than expected. Bills rose. Sleep reduced.</p>
+          <p>One evening, he sat in his car outside his house and did not enter. He was not angry. He was not even afraid. He was simply empty. He whispered, &quot;Lord, I cannot do this.&quot; What came instead was a quiet thought in his heart: &quot;You are trying to use yesterday&#x27;s strength for today&#x27;s assignment.&quot; Within weeks, he changed. He became calmer. He learned to speak gently under pressure. That was when he understood this simple truth that grace must increase for every season.</p>
+          <h3 class="subsection-heading">Grace Is Not a One-Time Gift</h3>
+          <p>Some people treat grace like an event. Yet grace is for starting and continuing. The Bible says, &quot;And Jesus increased in wisdom and stature, and in favor with God and men&quot; (Luke 2:52). If Jesus increased, then growth and increase are part of God&#x27;s pattern.</p>
+          <p>The Bible also says, &quot;But grow in the grace and knowledge of our Lord and Savior Jesus Christ&quot; (2 Peter 3:18). Growth does not happen by accident. As grace can be received, it can also be grown in. You make room for it. You seek it. You depend on God for it.</p>
+          <p>Life moves in seasons. When seasons change, pressure changes. A young man may need grace to finish school. Later, he will need grace to keep a job. Then he will need grace to lead a home. This is why yesterday&#x27;s grace may not be sufficient for today. It is not because God reduced grace. It is because the assignment increased.</p>
+          <h3 class="subsection-heading">There Is Grace for Marriage, Home, and Children</h3>
+          <p>Marriage is a blessing, but it is also a responsibility. Love alone is not enough. Two imperfect people must learn patience, communication, forgiveness, and sacrifice. Grace is what helps love stay healthy. The Bible says, &quot;Be kind to one another, tenderhearted, forgiving one another, even as God in Christ forgave you&quot; (Ephesians 4:32). Kindness is not only a personality trait. Sometimes it is grace in action.</p>
+          <p>A home is more than a building. It is a system. It needs planning, order, discipline, and wisdom. The Bible says, &quot;Through wisdom a house is built, and by understanding it is established&quot; (Proverbs 24:3). Wisdom is grace in practical clothing.</p>
+          <p>Parenting is one of the most demanding assignments on earth. Children do not only need food. They need direction. The Bible says, &quot;Train up a child in the way he should go, and when he is old he will not depart from it&quot; (Proverbs 22:6). Training requires patience, consistency, and self-control. Grace gives a parent endurance.</p>
+          <h3 class="subsection-heading">There Is Grace to Lead and to Live in Peace</h3>
+          <p>Leadership is not a crown. It is a weight. Many people want to be in charge, but few understand what it demands. The Bible says, &quot;Not that we are sufficient of ourselves... but our sufficiency is from God&quot; (2 Corinthians 3:5). Leadership is not about pride. It is about dependence. Grace keeps a leader humble. Grace gives courage without arrogance.</p>
+          <p>Not every war comes from enemies. Some wars come from relationships. The Bible says, &quot;If it is possible, as much as depends on you, live peaceably with all men&quot; (Romans 12:18). Peace means you refuse to let bitterness rule you. Grace helps you hold your tongue when your emotions want to explode. It helps you walk away from needless fights.</p>
+          <h3 class="subsection-heading">How to Pray for an Increase of Grace</h3>
+          <p>If grace must increase, then we must learn to seek it in practical ways. Ask God daily. The Bible says, &quot;Ask, and it will be given to you&quot; (Matthew 7:7). Stay close to the Word. The Bible says, &quot;Let the word of Christ dwell in you richly&quot; (Colossians 3:16). Walk in humility. The Bible says, &quot;God resists the proud, but gives grace to the humble&quot; (James 4:6). Obey the light you already have. Grace increases in the path of obedience. Do not drain your soul with needless burdens. Some battles are not yours. Protect your peace. Grace works well in a clean atmosphere.</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="chapter-4">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter 4</div>
+          <h2 class="chapter-title">Sufficient Grace And The Promise Of Strength</h2>
+          <div class="chapter-rule"></div>
+        </div>
+        <div class="chapter-body">
+          <p><span class="dropcap">M</span>ariam was the kind of woman people called strong. If trouble came, she stood up. If bills piled up, she worked harder. If family issues arose, she carried the burden quietly. She did not like to complain. She believed that faith meant keeping a straight face.</p>
+          <p>Then a season came that did not respond to her strength. Her mother was sick. Her marriage was under pressure. Her workplace changed leadership, and the new manager seemed determined to frustrate her. Sleep left her. Peace became rare. One morning, she sat on the edge of her bed and said, &quot;God, I have prayed. I have tried. I am tired.&quot;</p>
+          <p>That day, she went to church and heard a verse she had heard before, but it sounded new: &quot;My grace is sufficient for you, for My strength is made perfect in weakness&quot; (2 Corinthians 12:9). Something changed inside her. She stopped trying to be her own savior. She began to lean on God more deeply. In that new posture, she began to rise again. That is the power of sufficient grace.</p>
+          <h3 class="subsection-heading">The Meaning of Sufficient Grace</h3>
+          <p>Sufficient grace means grace that is enough. It is not half supply. It is not grace that starts and stops. It is grace that covers every side of your life. It is grace that matches your season. It is grace that gives you stamina when you are tired, wisdom when you are confused, courage when you are afraid, and peace when everything around you is shaking.</p>
+          <p>Paul was not lazy. He was a serious servant of God. Yet he reached a point where he felt pressed and burdened. Instead of removing the pressure immediately, the Lord gave him a promise that was stronger than relief: &quot;My grace is sufficient for you, for My strength is made perfect in weakness&quot; (2 Corinthians 12:9).</p>
+          <p>That sentence means that weakness does not cancel destiny. Weakness becomes a place where God displays His strength. Sometimes we pray and expect God to remove the pressure. Yet God, in His wisdom, may do something deeper. He may strengthen you so that the pressure cannot destroy you.</p>
+          <h3 class="subsection-heading">When You Admit Weakness, God Shows Strength</h3>
+          <p>The world respects people who look strong. Many people hide their weaknesses because they fear being judged. Yet God works differently. When you admit your weakness to God, you create room for His strength. When you say, &quot;Lord, I cannot,&quot; you give Him space to say, &quot;I can.&quot;</p>
+          <p>A simple picture explains it. Think of a child trying to lift a heavy bag. The child struggles, shakes, and almost falls. Then the father steps in and lifts the bag easily. The child still walks, but the father carries the weight. That is what grace does. You still live your life. You still show up. You still take steps. But God carries the weight you cannot carry.</p>
+          <p>The Bible says, &quot;God is our refuge and strength, a very present help in trouble&quot; (Psalm 46:1). Notice that it says, &quot;present help.&quot; Not distant help. Not delayed help. Present help. Sufficient grace is that present help.</p>
+          <h3 class="subsection-heading">No Devil Can Write the Last Chapter of Your Life</h3>
+          <p>One of the strongest statements you can make in faith is this: no devil can write the last chapter of your life. Why? Because God is still writing. The Bible says, &quot;Being confident of this very thing, that He who has begun a good work in you will complete it until the day of Jesus Christ&quot; (Philippians 1:6).</p>
+          <p>Completion is God&#x27;s nature. Grace does not start and abandon a project. It finishes whatever it starts. So when you have sufficient grace, you will not end in shame. You will not end in defeat. You will not end in confusion. You will rise again.</p>
+          <p>The Bible says, &quot;And God is able to make all grace abound toward you, that you, always having all sufficiency in all things, may have an abundance for every good work&quot; (2 Corinthians 9:8). All grace. All sufficiency. All things. Every good work. That is the language of a God who does not give small help.</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="chapter-5">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter 5</div>
+          <h2 class="chapter-title">Receiving Grace Through Christ And Walking In It</h2>
+          <div class="chapter-rule"></div>
+        </div>
+        <div class="chapter-body">
+          <p><span class="dropcap">K</span>enny did not grow up with many advantages. He was not from a famous family. He did not have rich uncles. He did not have a smooth road to travel in life. Yet he had something else, a deep hunger to see God help him.</p>
+          <p>One night, after another disappointing week, he sat alone and whispered, &quot;Lord Jesus, I need You. I cannot keep carrying this life by myself.&quot; Nothing dramatic happened in that room. But something settled in his heart. It felt like a gentle assurance, like a hand placed on his shoulder. He slept that night with a calm he had not felt in months.</p>
+          <p>In the days that followed, doors started opening without begging. Favor began to find him. Wisdom came when he needed it. He later said, &quot;I cannot explain it, but I know God began to help me.&quot; That is how grace often enters. It comes through Christ, and it changes how you walk through life.</p>
+          <h3 class="subsection-heading">Grace Is Available, but Connection Matters</h3>
+          <p>Grace is not a rumor. It is not reserved for a few special people. Grace is available, but it flows strongest in the life of a person who is connected to God. This is why it is important to know Jesus Christ. He is not only a historical figure. He is the living Son of God. He is the One who brings grace to human life.</p>
+          <p>The Bible says, &quot;For the law was given through Moses, but grace and truth came through Jesus Christ&quot; (John 1:17). Grace came through a Person. When you connect with Christ, you connect with the fountain.</p>
+          <p>The Bible says, &quot;And of His fullness we have all received, and grace for grace&quot; (John 1:16). That means His supply does not finish. You receive grace, then you receive more grace. One layer of help is followed by another layer of help. This is why it is dangerous to live without grace. It is like trying to travel far with an empty fuel tank.</p>
+          <h3 class="subsection-heading">Walking in Grace, Not Visiting Grace</h3>
+          <p>Many believers visit grace when they are in trouble. They pray only when the pain becomes loud. Grace works best when you walk with God daily. Walking in grace means you live with Jesus in view. You talk to Him. You listen. You obey. You repent quickly when you fall. You keep your heart soft. You stay in the Word.</p>
+          <p>The Bible says, &quot;Let us therefore come boldly to the throne of grace, that we may obtain mercy and find grace to help in time of need&quot; (Hebrews 4:16). You do not come once. You come again and again. Grace is not a one-time touch. It is a lifestyle of staying close to the throne.</p>
+          <p>When grace comes upon a life, destiny becomes protected. Grace can protect your star, your marriage, your family, your ministry, your calling, and your career. People may look down on you today, but grace can lift you in a way that silences mockery. The Bible says, &quot;When a man&#x27;s ways please the Lord, He makes even his enemies to be at peace with him&quot; (Proverbs 16:7).</p>
+          <h3 class="subsection-heading">Why Destiny Cannot Be Fulfilled Without Grace</h3>
+          <p>Destiny is bigger than talent. Destiny is bigger than intelligence. Destiny is bigger than effort. That is why many gifted people still struggle. They are active, but they are not effective. Grace is the difference.</p>
+          <p>The Bible says, &quot;Not that we are sufficient of ourselves to think of anything as being from ourselves, but our sufficiency is from God&quot; (2 Corinthians 3:5). Destiny is not fulfilled by self-confidence alone. It is fulfilled by dependence on God&#x27;s grace. When grace comes, you begin to do well without stress that destroys the body. You begin to rise without pride that destroys the soul. You begin to succeed without losing your peace.</p>
+          <p>Beginning from today, may your grace multiply. May your grace increase. May your grace frustrate every plan of the enemy. May your grace open doors. May your grace heal you. May your grace make a way for you. May the grace of God connect you to your destiny helpers. May the grace of God make you a great person on the earth. It will surely come to pass, in the name of Jesus.</p>
+        </div>
+      </section>
+
+
+    <section class="prayer-section">
+      <div class="section-eyebrow">Prayers &amp; Declarations</div>
+
+        <div class="prayer-group">
+          <h3 class="prayer-group-title">Prayer Points</h3>
+          <ol class="prayer-list" start="1">
+          <li><span class="prayer-num">1</span><span class="prayer-text">Father, in the name of Jesus, let Your grace speak for me in every area of my life, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">2</span><span class="prayer-text">O Lord, let Your grace distinguish me among my peers, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">3</span><span class="prayer-text">My grace must speak in places where my qualifications cannot speak, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">4</span><span class="prayer-text">Father, let grace open doors that no man can shut, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">5</span><span class="prayer-text">I receive uncommon favor that will announce me for good, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">6</span><span class="prayer-text">O God, let Your grace silence every accusation against me, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">7</span><span class="prayer-text">My grace must speak in my career, ministry, and family, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">8</span><span class="prayer-text">Father, let grace position me for divine opportunities, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">9</span><span class="prayer-text">I reject struggle; I embrace the ease of divine grace, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">10</span><span class="prayer-text">O Lord, let Your grace override every judgment working against me, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">11</span><span class="prayer-text">My grace must speak before kings and decision-makers, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">12</span><span class="prayer-text">Father, let Your grace bring restoration to every lost opportunity, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">13</span><span class="prayer-text">I receive grace to excel beyond limitations, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">14</span><span class="prayer-text">O God, let grace fight battles I cannot fight, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">15</span><span class="prayer-text">My grace must speak in times of weakness and trial, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">16</span><span class="prayer-text">Father, crown my efforts with extraordinary results by grace, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">17</span><span class="prayer-text">I receive grace for speed and supernatural advancement, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">18</span><span class="prayer-text">O Lord, let Your grace attract helpers to my destiny, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">19</span><span class="prayer-text">My grace must speak where others are rejected, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">20</span><span class="prayer-text">Father, let grace rewrite every negative report about me, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">21</span><span class="prayer-text">I receive grace to overcome every obstacle before me, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">22</span><span class="prayer-text">O God, let Your grace give me divine remembrance, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">23</span><span class="prayer-text">My grace must speak for mercy instead of judgment, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">24</span><span class="prayer-text">Father, let grace lift me from obscurity to visibility, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">25</span><span class="prayer-text">I receive fresh oil of grace for daily living, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">26</span><span class="prayer-text">O Lord, let grace cause my light to shine brightly, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">27</span><span class="prayer-text">My grace must speak in interviews, meetings, and decisions concerning me, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">28</span><span class="prayer-text">Father, let grace bring divine connections into my life, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">29</span><span class="prayer-text">I receive grace to finish every assignment successfully, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">30</span><span class="prayer-text">O God, let Your grace multiply my efforts, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">31</span><span class="prayer-text">My grace must speak peace into every storm around me, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">32</span><span class="prayer-text">Father, let grace grant me favor in unfamiliar territories, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">33</span><span class="prayer-text">I receive grace that makes the impossible possible, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">34</span><span class="prayer-text">O Lord, let grace announce my testimony to the world, in Jesus Christ&#x27;s name.</span></li>
+          <li><span class="prayer-num">35</span><span class="prayer-text">Thank You, Father, because Your grace will continually speak for me and secure my victory, in Jesus Christ&#x27;s name.</span></li>
+          </ol>
+        </div>
+    </section>
+  </div>
+
+  <footer class="book-footer">
+    <div class="meta-line">Let Your Grace Speak &middot; February 2026</div>
+    <div class="isbn">ISBN 978-978-68-4633-0 · Published by Dynamic ERA Global Services (DEGS) Ltd</div>
+    <div class="meta-line" style="margin-top:20px;">© Olumide Oni 2026</div>
+    <a href="../books.html" class="return-link">Return to Library</a>
+  </footer>
+</main>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg>
+</button>
+
+<script>
+  // Mobile nav
+  const toggle = document.getElementById('navToggle');
+  const closeBtn = document.getElementById('navClose');
+  const mobileNav = document.getElementById('mobileNav');
+  const backdrop = document.getElementById('backdrop');
+  function openNav() { mobileNav.classList.add('open'); backdrop.classList.add('show'); }
+  function closeNav() { mobileNav.classList.remove('open'); backdrop.classList.remove('show'); }
+  toggle?.addEventListener('click', openNav);
+  closeBtn?.addEventListener('click', closeNav);
+  backdrop?.addEventListener('click', closeNav);
+  mobileNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+
+  // Back to top
+  const btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) btt.classList.add('show');
+    else btt.classList.remove('show');
+  });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+
+</body>
+</html>
