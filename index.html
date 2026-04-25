@@ -1660,6 +1660,61 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
   transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
               box-shadow 0.45s ease;
 }
+.sermon-feature-frame--live iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.sermon-feature-live-tag {
+  position: absolute;
+  top: 14px; left: 14px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  background: rgba(10,9,7,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,59,59,0.35);
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  pointer-events: none;
+}
+.sermon-feature-live-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #ff3b3b;
+  box-shadow: 0 0 8px #ff3b3b;
+  animation: pulseDot 1.6s ease-in-out infinite;
+}
+.sermon-feature-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--sans);
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: linear-gradient(135deg, #1a1510 0%, #0a0907 100%);
+  z-index: 3;
+}
+.sermon-feature-fallback::before {
+  content: '\25B6';
+  display: block;
+  font-size: 28px;
+  margin-bottom: 12px;
+  text-align: center;
+  width: 100%;
+}
 .sermon-feature-frame:hover {
   transform: translateY(-3px);
   box-shadow:
@@ -2670,26 +2725,30 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
 <section class="sermon-feature">
   <div class="container">
     <div class="sermon-feature-grid reveal">
-      <a id="featuredSermonFrame" class="sermon-feature-frame" href="https://www.youtube.com/@PastorOlumideOni" target="_blank" rel="noopener" aria-label="Watch latest sermon">
-        <img id="featuredSermonImg" src="" alt="" loading="lazy" onerror="this.style.display='none'" />
-        <div class="sermon-feature-play">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <div id="featuredSermonFrame" class="sermon-feature-frame sermon-feature-frame--live">
+        <div class="sermon-feature-live-tag">
+          <span class="sermon-feature-live-dot"></span>
+          Latest Video
         </div>
-        <div class="sermon-feature-meta">
-          <div class="sermon-feature-tag">Now Playing</div>
-          <h3 id="featuredSermonTitle" class="sermon-feature-title">Loading the latest sermon&hellip;</h3>
-        </div>
-      </a>
+        <iframe
+          id="featuredSermonIframe"
+          src="about:blank"
+          title="Latest video — Pastor Olumide Oni"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"></iframe>
+      </div>
 
       <div class="sermon-feature-side">
-        <div class="sermon-feature-kicker">The Word · From the Pulpit</div>
-        <h2 class="sermon-feature-h2">A fresh word, <em>weekly.</em></h2>
+        <div class="sermon-feature-kicker">The Word · Live from the Pulpit</div>
+        <h2 class="sermon-feature-h2">A fresh word, <em>live.</em></h2>
         <p id="featuredSermonDesc" class="sermon-feature-desc">
-          Tap in to the latest message from Pastor Olumide Oni &mdash; prophetic charges, teaching, and intercession to fuel your walk with God.
+          Tap in to the latest live broadcast from Pastor Olumide Oni &mdash; prophetic charges, teaching, and intercession streamed straight from the pulpit.
         </p>
         <div class="sermon-feature-actions">
-          <a id="featuredSermonWatch" href="https://www.youtube.com/@PastorOlumideOni" target="_blank" rel="noopener" class="btn btn-primary">
-            Watch Sermon
+          <a id="featuredSermonWatch" href="https://www.youtube.com/@PastorOlumideOni/streams" target="_blank" rel="noopener" class="btn btn-primary">
+            Watch on YouTube
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
           <a href="sermons.html" class="btn btn-ghost">All Sermons</a>
@@ -2926,130 +2985,6 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
 </section>
 
 <!-- =====================================================
-     WORLD MAP — REACH OF THE BOOKS
-     ===================================================== -->
-<section class="map-section">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-kicker">Where the Word is Going</div>
-      <h2 class="section-title">A reach without <em>borders</em></h2>
-      <p class="section-sub">
-        Books from this ministry have been distributed across these regions &mdash; and the harvest is still growing.
-      </p>
-    </div>
-
-    <div class="map-frame reveal">
-      <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" aria-label="Global reach map">
-        <!-- Stylised continent outlines (simplified) -->
-        <g class="map-bg">
-          <!-- North America -->
-          <path class="map-bg-path" d="M 80 110 Q 130 90 195 110 Q 250 100 285 130 Q 305 165 280 200 Q 260 235 220 250 Q 180 240 145 215 Q 100 180 85 145 Z" />
-          <!-- South America -->
-          <path class="map-bg-path" d="M 240 270 Q 280 265 305 290 Q 320 340 305 390 Q 290 425 270 425 Q 250 405 240 360 Q 230 320 235 290 Z" />
-          <!-- Europe -->
-          <path class="map-bg-path" d="M 460 110 Q 500 100 540 115 Q 575 130 590 155 Q 580 180 545 185 Q 510 180 475 165 Q 455 145 460 120 Z" />
-          <!-- Africa -->
-          <path class="map-bg-path" d="M 480 200 Q 530 190 575 210 Q 615 240 615 295 Q 605 340 580 370 Q 550 385 520 380 Q 490 370 475 340 Q 470 295 475 250 Q 477 220 480 205 Z" />
-          <!-- Asia -->
-          <path class="map-bg-path" d="M 600 110 Q 670 95 760 110 Q 840 125 880 165 Q 870 215 815 230 Q 760 240 700 235 Q 650 225 615 195 Q 595 165 600 125 Z" />
-          <!-- Australia -->
-          <path class="map-bg-path" d="M 770 350 Q 820 340 860 360 Q 880 385 860 405 Q 825 415 790 405 Q 765 390 770 365 Z" />
-        </g>
-
-        <!-- Pin: USA -->
-        <g>
-          <circle class="map-dot" cx="190" cy="170" r="6" />
-          <circle cx="190" cy="170" r="3" fill="#0a0907" />
-          <text class="map-pin-label" x="200" y="174">United States</text>
-        </g>
-        <!-- Pin: Canada -->
-        <g>
-          <circle class="map-dot" cx="180" cy="125" r="6" style="animation-delay:-0.4s" />
-          <circle cx="180" cy="125" r="3" fill="#0a0907" />
-          <text class="map-pin-label" x="190" y="129">Canada</text>
-        </g>
-        <!-- Pin: UK -->
-        <g>
-          <circle class="map-dot" cx="478" cy="135" r="6" style="animation-delay:-0.8s" />
-          <circle cx="478" cy="135" r="3" fill="#0a0907" />
-          <text class="map-pin-label" x="488" y="132">United Kingdom</text>
-        </g>
-        <!-- Pin: Europe -->
-        <g>
-          <circle class="map-dot" cx="525" cy="150" r="6" style="animation-delay:-1.2s" />
-          <circle cx="525" cy="150" r="3" fill="#0a0907" />
-          <text class="map-pin-label" x="535" y="148">Europe</text>
-        </g>
-        <!-- Pin: Nigeria -->
-        <g>
-          <circle class="map-dot" cx="525" cy="285" r="7" style="animation-delay:-1.6s" />
-          <circle cx="525" cy="285" r="3.5" fill="#0a0907" />
-          <text class="map-pin-label" x="535" y="289" font-weight="600">Nigeria</text>
-        </g>
-        <!-- Pin: Other Africa -->
-        <g>
-          <circle class="map-dot" cx="565" cy="345" r="6" style="animation-delay:-2.0s" />
-          <circle cx="565" cy="345" r="3" fill="#0a0907" />
-          <text class="map-pin-label" x="575" y="349">Africa</text>
-        </g>
-
-        <!-- Subtle connecting arcs -->
-        <g stroke="rgba(212,168,83,0.18)" stroke-width="0.8" fill="none" stroke-dasharray="2,3">
-          <path d="M 525 285 Q 350 200 190 170" />
-          <path d="M 525 285 Q 500 220 478 135" />
-          <path d="M 525 285 Q 545 320 565 345" />
-          <path d="M 525 285 Q 350 180 180 125" />
-        </g>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<!-- =====================================================
-     TESTIMONIES
-     ===================================================== -->
-<section class="testimonies-section">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-kicker">The Word at Work</div>
-      <h2 class="section-title">Lives <em>changed</em></h2>
-      <p class="section-sub">
-        Voices of those whose lives have been touched by the ministry &mdash; from the pulpit, the books, the daily word.
-      </p>
-    </div>
-
-    <div class="testimony-grid">
-      <div class="testimony-card reveal">
-        <div class="testimony-quote-mark">&ldquo;</div>
-        <p class="testimony-text">The day I stumbled on Pastor Olumide&rsquo;s sermon online, something broke in my spirit. The fire of God came down on my situation, and I have not been the same since.</p>
-        <div class="testimony-author">
-          A Believer
-          <div class="testimony-location">Lagos, Nigeria</div>
-        </div>
-      </div>
-
-      <div class="testimony-card reveal">
-        <div class="testimony-quote-mark">&ldquo;</div>
-        <p class="testimony-text">I received <em>Your Delay Is Over</em> as a free copy at a meeting. By the time I finished reading it, the prayer of years was answered. God of Elijah, indeed, still answers by fire.</p>
-        <div class="testimony-author">
-          Sister T.
-          <div class="testimony-location">Houston, Texas</div>
-        </div>
-      </div>
-
-      <div class="testimony-card reveal">
-        <div class="testimony-quote-mark">&ldquo;</div>
-        <p class="testimony-text">Pastor&rsquo;s daily word held me through the darkest season. I wake up and the first thing I want is the Word he ministers. It is fire and it is fresh.</p>
-        <div class="testimony-author">
-          Brother K.
-          <div class="testimony-location">London, United Kingdom</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =====================================================
      FINAL YOUTUBE CTA
      ===================================================== -->
 <section class="final-cta">
@@ -3190,34 +3125,73 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
   }
 
   function renderFeaturedSermon(item) {
-    const watch = item.link || YT_CHANNEL_URL;
-    const thumb = thumbUrl(item);
-    const excerpt = cleanExcerpt(item.description, 220);
-    const titleEl = document.getElementById('featuredSermonTitle');
-    const imgEl   = document.getElementById('featuredSermonImg');
-    const descEl  = document.getElementById('featuredSermonDesc');
-    const frame   = document.getElementById('featuredSermonFrame');
-    const watchEl = document.getElementById('featuredSermonWatch');
-    if (titleEl) titleEl.textContent = item.title || 'Latest Sermon';
-    if (imgEl && thumb) {
-      imgEl.src = thumb;
-      imgEl.alt = item.title || '';
-      imgEl.style.display = '';
+    /* Populate the latest video into the cinematic iframe. */
+    const iframe = document.getElementById('featuredSermonIframe');
+    if (!iframe) return;
+    const vid = item && item.videoId ? item.videoId : extractVideoId(item && item.link);
+    if (vid) {
+      iframe.src = `https://www.youtube.com/embed/${vid}?rel=0&modestbranding=1`;
+    } else {
+      // Last resort: link-style fallback so the frame isn't stuck
+      iframe.removeAttribute('src');
+      iframe.style.display = 'none';
+      const frame = document.getElementById('featuredSermonFrame');
+      if (frame && !frame.querySelector('.sermon-feature-fallback')) {
+        const a = document.createElement('a');
+        a.href = (item && item.link) || YT_CHANNEL_URL;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.className = 'sermon-feature-fallback';
+        a.textContent = 'Watch on YouTube';
+        frame.appendChild(a);
+      }
     }
-    if (descEl && excerpt) descEl.textContent = excerpt;
-    if (frame)   frame.href = watch;
-    if (watchEl) watchEl.href = watch;
+  }
+
+  function extractVideoId(url) {
+    if (!url) return null;
+    const m = String(url).match(/(?:v=|youtu\.be\/|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/);
+    return m ? m[1] : null;
+  }
+
+  function normalizeItem(item) {
+    /* Accept items from either Netlify function (videoId, thumbnail) or
+       rss2json (link, thumbnail or enclosure.link). Return a unified shape. */
+    const videoId = item.videoId || extractVideoId(item.link);
+    return {
+      videoId: videoId,
+      title: item.title || '',
+      link: item.link || (videoId ? `https://www.youtube.com/watch?v=${videoId}` : YT_CHANNEL_URL),
+      pubDate: item.pubDate || item.published || '',
+      description: item.description || '',
+      thumbnail: item.thumbnail || (videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : '')
+    };
+  }
+
+  function thumbFromItem(item) {
+    return item.thumbnail || (item.videoId ? `https://i.ytimg.com/vi/${item.videoId}/hqdefault.jpg` : '');
   }
 
   function renderRecentSermonsGrid(items) {
     const grid = document.getElementById('recentSermonsGrid');
-    if (!grid || !items || !items.length) return;
+    if (!grid) return;
+    if (!items || !items.length) {
+      // Visible fallback
+      grid.innerHTML = `
+        <div class="sermon-grid-card" style="grid-column:1/-1;text-align:center;padding:40px 24px;">
+          <div class="sermon-grid-body">
+            <div class="sermon-grid-date">Live Feed Currently Unavailable</div>
+            <div class="sermon-grid-title" style="margin-bottom:18px;">Watch the latest sermons directly on YouTube.</div>
+            <a href="${YT_CHANNEL_URL}" target="_blank" rel="noopener" class="btn btn-ghost">Open YouTube Channel</a>
+          </div>
+        </div>`;
+      return;
+    }
     grid.innerHTML = items.map(function(item) {
-      const watch = item.link || YT_CHANNEL_URL;
-      const thumb = thumbUrl(item);
       const dateStr = formatDate(item.pubDate);
+      const thumb = thumbFromItem(item);
       return `
-        <a class="sermon-grid-card reveal in-view" href="${escapeHtml(watch)}" target="_blank" rel="noopener">
+        <a class="sermon-grid-card" href="${escapeHtml(item.link)}" target="_blank" rel="noopener">
           <div class="sermon-grid-thumb">
             ${thumb ? `<img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" />` : ''}
             <div class="sermon-grid-thumb-play">
@@ -3235,14 +3209,25 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
 
   function renderShortsRail(items) {
     const rail = document.getElementById('shortsRail');
-    if (!rail || !items || !items.length) return;
+    if (!rail) return;
+    if (!items || !items.length) {
+      rail.innerHTML = `
+        <a class="short-card" href="https://www.youtube.com/@PastorOlumideOni/shorts" target="_blank" rel="noopener" style="width:auto;flex:1;aspect-ratio:auto;padding:40px 24px;display:flex;align-items:center;justify-content:center;text-align:center;">
+          <div>
+            <div style="color:var(--gold);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:10px;">Shorts</div>
+            <div style="color:var(--cream);font-size:14px;font-family:var(--serif);font-style:italic;">View the latest Reels on YouTube &rarr;</div>
+          </div>
+        </a>`;
+      return;
+    }
     rail.innerHTML = items.map(function(item) {
-      const watch = item.link || YT_CHANNEL_URL;
-      const thumb = thumbUrl(item);
       const titleShort = (item.title || '').length > 60 ? item.title.slice(0, 57) + '…' : (item.title || '');
+      const thumb = thumbFromItem(item);
+      const fallback = item.thumbnailFallback || (item.videoId ? `https://i.ytimg.com/vi/${item.videoId}/hqdefault.jpg` : '');
+      const onerror = fallback ? `this.onerror=null;this.src='${fallback}';` : `this.style.display='none';`;
       return `
-        <a class="short-card" href="${escapeHtml(watch)}" target="_blank" rel="noopener">
-          ${thumb ? `<img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" />` : '<div style="width:100%;height:100%;background:linear-gradient(135deg, var(--bg-2), var(--bg-panel));"></div>'}
+        <a class="short-card" href="${escapeHtml(item.link)}" target="_blank" rel="noopener">
+          ${thumb ? `<img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="${onerror}" />` : '<div style="width:100%;height:100%;background:linear-gradient(135deg, var(--bg-2), var(--bg-panel));"></div>'}
           <div class="short-card-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="short-card-label">${escapeHtml(titleShort)}</div>
         </a>
@@ -3250,40 +3235,90 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
     }).join('');
   }
 
-  async function loadHomeSermon() {
-    if (isPreview()) {
-      showPreviewBanner();
-      renderFeaturedSermon(DEMO_LATEST);
-      // Build a synthetic set of demo items for grid + shorts
-      const demoItems = [
-        { title: "Standing in the Power of His Resurrection", pubDate: "2026-04-07 10:30:00", link: YT_CHANNEL_URL, description: "" },
-        { title: "Receive Your Double Portion", pubDate: "2026-03-31 10:30:00", link: YT_CHANNEL_URL, description: "" },
-        { title: "When Heaven Answers by Fire", pubDate: "2026-03-24 10:30:00", link: YT_CHANNEL_URL, description: "" },
-        { title: "Type AMEN if you receive this", pubDate: "2026-04-15", link: YT_CHANNEL_URL, description: "" },
-        { title: "Backfire — short prayer", pubDate: "2026-04-12", link: YT_CHANNEL_URL, description: "" },
-        { title: "The mantle still falls", pubDate: "2026-04-10", link: YT_CHANNEL_URL, description: "" },
-        { title: "Speak it now", pubDate: "2026-04-08", link: YT_CHANNEL_URL, description: "" },
-        { title: "Fire goes back to sender", pubDate: "2026-04-05", link: YT_CHANNEL_URL, description: "" }
-      ];
-      renderRecentSermonsGrid(demoItems.slice(0, 3));
-      renderShortsRail(demoItems.slice(3, 8));
-      return;
+  async function fetchVideoFeed() {
+    /* Primary: our Netlify function. Fallback: rss2json. */
+    try {
+      const r = await fetch('/.netlify/functions/youtube-feed');
+      if (r.ok) {
+        const d = await r.json();
+        if (d && d.status === 'ok' && Array.isArray(d.items) && d.items.length) {
+          return d.items.map(normalizeItem);
+        }
+      }
+    } catch (e) {
+      console.warn('[home] netlify feed failed, trying rss2json:', e);
     }
     try {
       const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YT_CHANNEL_ID}`;
       const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}&count=15`;
-      const res = await fetch(apiUrl);
-      if (!res.ok) throw new Error('Network');
-      const data = await res.json();
-      if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('No items');
-      renderFeaturedSermon(data.items[0]);
-      // Next 3 for the grid
-      if (data.items.length > 1) renderRecentSermonsGrid(data.items.slice(1, 4));
-      // Following items for shorts rail
-      if (data.items.length > 4) renderShortsRail(data.items.slice(4, 9));
-    } catch (err) {
-      console.error('[home] sermon fetch failed:', err);
-      renderFeaturedSermon(DEMO_LATEST);
+      const r = await fetch(apiUrl);
+      if (r.ok) {
+        const d = await r.json();
+        if (d && d.status === 'ok' && Array.isArray(d.items) && d.items.length) {
+          return d.items.map(normalizeItem);
+        }
+      }
+    } catch (e) {
+      console.warn('[home] rss2json fallback failed:', e);
+    }
+    return [];
+  }
+
+  async function fetchShorts() {
+    /* Real Shorts only — queries the channel's Shorts tab via Netlify fn. */
+    try {
+      const r = await fetch('/.netlify/functions/youtube-shorts');
+      if (r.ok) {
+        const d = await r.json();
+        if (d && d.status === 'ok' && Array.isArray(d.shorts) && d.shorts.length) {
+          return d.shorts;
+        }
+      }
+    } catch (e) {
+      console.warn('[home] shorts fetch failed:', e);
+    }
+    return [];
+  }
+
+  async function loadHomeSermon() {
+    if (isPreview()) {
+      showPreviewBanner();
+      const demo = normalizeItem(DEMO_LATEST);
+      renderFeaturedSermon(demo);
+      const demoItems = [
+        { title: "Standing in the Power of His Resurrection", pubDate: "2026-04-07 10:30:00", link: YT_CHANNEL_URL },
+        { title: "Receive Your Double Portion", pubDate: "2026-03-31 10:30:00", link: YT_CHANNEL_URL },
+        { title: "When Heaven Answers by Fire", pubDate: "2026-03-24 10:30:00", link: YT_CHANNEL_URL },
+        { title: "Type AMEN if you receive this", pubDate: "2026-04-15", link: YT_CHANNEL_URL },
+        { title: "Backfire — short prayer", pubDate: "2026-04-12", link: YT_CHANNEL_URL },
+        { title: "The mantle still falls", pubDate: "2026-04-10", link: YT_CHANNEL_URL },
+        { title: "Speak it now", pubDate: "2026-04-08", link: YT_CHANNEL_URL },
+        { title: "Fire goes back to sender", pubDate: "2026-04-05", link: YT_CHANNEL_URL }
+      ].map(normalizeItem);
+      renderRecentSermonsGrid(demoItems.slice(0, 3));
+      renderShortsRail(demoItems.slice(3, 8));
+      return;
+    }
+
+    // Fetch videos and shorts in parallel — separate sources
+    const [items, shorts] = await Promise.all([fetchVideoFeed(), fetchShorts()]);
+
+    if (!items.length) {
+      console.error('[home] all video sources failed');
+      renderFeaturedSermon({ link: YT_CHANNEL_URL });
+      renderRecentSermonsGrid([]);
+    } else {
+      renderFeaturedSermon(items[0]);
+      renderRecentSermonsGrid(items.slice(1, 4));
+    }
+
+    if (shorts.length) {
+      // True Shorts from the dedicated tab
+      renderShortsRail(shorts.slice(0, 6));
+    } else {
+      // Fall back to feed items so the rail isn't empty
+      const fallback = items.length > 4 ? items.slice(4, 9) : [];
+      renderShortsRail(fallback);
     }
   }
 
