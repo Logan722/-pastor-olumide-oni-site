@@ -2561,19 +2561,12 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
   }
 }
 
-/* On mobile/touch, swap to manual scroll instead of auto-marquee */
+/* On mobile, keep auto-scroll but adjust card sizes; slower speed */
 @media (max-width: 900px) {
   .scenes-marquee-track {
-    animation: none;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
-  .scenes-marquee-wrap {
-    overflow-x: auto;
+    animation-duration: 100s;
   }
   .scene-card {
-    scroll-snap-align: start;
     height: 280px;
   }
   .scene-card-w-l { width: 320px; }
@@ -2814,101 +2807,223 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
 
 @media (max-width: 900px) {
   .shorts-marquee-track {
-    animation: none;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    animation-duration: 80s;
   }
-  .shorts-marquee-wrap { overflow-x: auto; }
 }
 
-/* ---------- Read the Word (refined) ---------- */
+/* ---------- Read the Word — editorial featured + auto-scroll rail ---------- */
 .read-word-section {
   background: var(--bg-2);
   padding: 100px 0;
   position: relative;
   z-index: 2;
 }
-.read-word-grid {
+
+/* Featured spread label */
+.featured-spread-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 1100px;
+  margin: 60px auto 30px;
+  padding: 0 24px;
+}
+.featured-spread-label-text {
+  flex: 0 0 auto;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.featured-spread-label-line {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* Featured spread layout */
+.featured-spread {
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 60px;
-  max-width: 1200px;
-  margin: 50px auto 0;
+  max-width: 1100px;
+  margin: 0 auto;
   padding: 0 24px;
-  align-items: start;
+  align-items: center;
 }
-.featured-book {
-  position: relative;
-}
-.featured-book-cover {
+.featured-spread-cover {
+  display: block;
   aspect-ratio: 2 / 3;
   background: var(--bg);
   border: 1px solid var(--gold-dim);
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 26px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,168,83,0.16);
-  position: relative;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.featured-book-cover:hover { transform: translateY(-4px); }
-.featured-book-cover img { width: 100%; height: 100%; object-fit: cover; }
-.featured-book-cover::before {
-  content: 'Featured · This Month';
-  position: absolute;
-  top: 12px; left: 12px;
-  z-index: 2;
-  font-family: var(--sans);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  background: rgba(10,9,7,0.85);
-  padding: 5px 10px;
-  border-radius: 2px;
-  border: 1px solid rgba(212,168,83,0.3);
-}
-.featured-book-title {
-  margin-top: 18px;
-  font-family: var(--serif);
-  font-weight: 400;
-  font-style: italic;
-  font-size: 17px;
-  line-height: 1.3;
-  color: var(--cream);
-  text-align: center;
-}
-
-.book-grid-side { padding-left: 6px; }
-.book-grid-rail {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  gap: 18px;
-  margin-bottom: 40px;
-}
-.book-grid-rail .book-rail-cover {
-  aspect-ratio: 2 / 3;
-  border-radius: 3px;
-  overflow: hidden;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.5);
-  transition: transform 0.4s ease;
-}
-.book-grid-rail a:hover .book-rail-cover {
-  transform: translateY(-4px);
-}
-.book-grid-rail .book-rail-cover img {
+.featured-spread-cover:hover { transform: translateY(-6px); }
+.featured-spread-cover img {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
 }
 
+.featured-spread-text {
+  padding-left: 8px;
+}
+.featured-spread-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 44px;
+  line-height: 1.05;
+  color: var(--cream);
+  margin: 0 0 28px;
+}
+.featured-spread-title em {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.featured-spread-quote {
+  position: relative;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--cream);
+  margin: 0 0 24px;
+  padding: 4px 0 0 36px;
+  border-left: 1px solid var(--gold-dim);
+  padding-left: 24px;
+}
+.featured-spread-quote-mark {
+  position: absolute;
+  left: -8px; top: -10px;
+  font-family: var(--serif);
+  font-size: 50px;
+  font-style: italic;
+  color: var(--gold);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+.featured-spread-desc {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0 0 30px;
+}
+
+.featured-spread-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Books rail label */
+.rail-label-wrap {
+  margin: 70px auto 0;
+}
+.rail-label-wrap .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Auto-scrolling books marquee */
+.books-marquee-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 30px 0 6px;
+}
+.books-marquee-wrap::before,
+.books-marquee-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 3;
+  pointer-events: none;
+}
+.books-marquee-wrap::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-2) 0%, transparent 100%);
+}
+.books-marquee-wrap::after {
+  right: 0;
+  background: linear-gradient(90deg, transparent 0%, var(--bg-2) 100%);
+}
+
+.books-marquee-track {
+  display: flex;
+  gap: 22px;
+  width: max-content;
+  animation: booksMarquee 70s linear infinite;
+  padding: 12px 11px;
+}
+.books-marquee-wrap:hover .books-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes booksMarquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.book-marquee-card {
+  flex: 0 0 auto;
+  width: 140px;
+  display: block;
+}
+.book-marquee-cover {
+  aspect-ratio: 2 / 3;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: 0 18px 38px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,168,83,0.12);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+}
+.book-marquee-card:hover .book-marquee-cover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,168,83,0.3);
+}
+.book-marquee-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .books-marquee-track { animation: none; }
+}
+
+/* Stats + CTA bottom band */
+.read-word-bottom-band {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 60px auto 0;
+  padding: 36px 24px 0;
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+}
 .read-word-stats {
   display: flex;
   gap: 50px;
   align-items: baseline;
-  margin-top: 28px;
   flex-wrap: wrap;
+}
+.read-word-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
 }
 .read-word-stat-num {
   font-family: var(--serif);
@@ -2923,10 +3038,15 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-left: 8px;
 }
-.read-word-cta-wrap {
-  margin-top: 32px;
+.read-word-bottom-divider {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  min-width: 30px;
+}
+.read-word-explore-cta {
+  flex: 0 0 auto;
 }
 
 /* Mobile breakpoints */
@@ -2938,19 +3058,45 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
     gap: 40px;
     padding: 50px 24px 20px;
   }
-  .read-word-grid {
+  .featured-spread {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 36px;
+    text-align: center;
   }
-  .featured-book {
+  .featured-spread-cover {
     max-width: 220px;
     margin: 0 auto;
   }
+  .featured-spread-text {
+    padding-left: 0;
+  }
+  .featured-spread-title { font-size: 32px; }
+  .featured-spread-quote {
+    font-size: 17px;
+    text-align: left;
+    max-width: 480px;
+    margin: 0 auto 22px;
+  }
+  .featured-spread-actions {
+    justify-content: center;
+  }
+  .read-word-bottom-band {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 28px;
+  }
   .read-word-stats {
     justify-content: center;
-    gap: 36px;
+    gap: 32px;
+  }
+  .read-word-bottom-divider {
+    width: 60px;
+    flex: 0 0 auto;
   }
   .watch-subhead-label { font-size: 10px; }
+  .book-marquee-card { width: 120px; }
+  .books-marquee-track { animation-duration: 90s; }
 }
 @media (max-width: 540px) {
   .about-onis-banner { height: 260px; }
@@ -2958,6 +3104,11 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
   .about-onis-portrait { flex: 0 0 64px; width: 64px; height: 64px; }
   .about-onis-bio-name { font-size: 18px; }
   .scenes-section, .watch-word-section, .read-word-section { padding: 70px 0; }
+  .featured-spread-title { font-size: 26px; }
+  .featured-spread-quote { font-size: 15px; }
+  .read-word-stat-num { font-size: 36px; }
+  .read-word-stats { gap: 24px; }
+  .book-marquee-card { width: 100px; }
 }
 
 </style>
@@ -3586,7 +3737,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
 </section>
 
 <!-- =====================================================
-     READ THE WORD — refined book ministry
+     READ THE WORD — editorial featured + auto-scroll rail
      ===================================================== -->
 <section class="read-word-section">
   <div class="container">
@@ -3596,39 +3747,118 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
       <p class="section-sub">Spirit-filled books, freely distributed worldwide. Every title carries the &ldquo;Not For Sale&rdquo; stamp &mdash; the Word of God, placed into the hands of believers at no cost.</p>
     </div>
 
-    <div class="read-word-grid">
-      <div class="featured-book reveal">
-        <a href="books/your-destiny-is-unstoppable.html" class="featured-book-cover">
-          <img src="img/covers/your-destiny-is-unstoppable.png" alt="Your Destiny Is Unstoppable" loading="lazy" />
-        </a>
-        <div class="featured-book-title">Your Destiny<br/>Is Unstoppable</div>
-      </div>
+    <!-- Featured book editorial spread -->
+    <div class="featured-spread-label reveal">
+      <div class="featured-spread-label-text">Featured · This Month</div>
+      <div class="featured-spread-label-line"></div>
+    </div>
 
-      <div class="book-grid-side reveal">
-        <div class="book-grid-rail">
-          <a href="books/peace-in-the-midst-of-storms.html"><div class="book-rail-cover"><img src="img/covers/peace-in-the-midst-of-storms.png" alt="Peace in the Midst of Storms" loading="lazy" /></div></a>
-          <a href="books/positioned-by-god.html"><div class="book-rail-cover"><img src="img/covers/positioned-by-god.png" alt="Positioned by God" loading="lazy" /></div></a>
-          <a href="books/your-delay-is-over.html"><div class="book-rail-cover"><img src="img/covers/your-delay-is-over.png" alt="Your Delay Is Over" loading="lazy" /></div></a>
-          <a href="books/let-your-grace-speak.html"><div class="book-rail-cover"><img src="img/covers/let-your-grace-speak.png" alt="Let Your Grace Speak" loading="lazy" /></div></a>
-          <a href="books/you-will-rejoice-again.html"><div class="book-rail-cover"><img src="img/covers/you-will-rejoice-again.png" alt="You Will Rejoice Again" loading="lazy" /></div></a>
-          <a href="books/your-season-of-lifting-is-here.html"><div class="book-rail-cover"><img src="img/covers/your-season-of-lifting-is-here.png" alt="Your Season of Lifting Is Here" loading="lazy" /></div></a>
-          <a href="books/a-living-sacrifice.html"><div class="book-rail-cover"><img src="img/covers/a-living-sacrifice.png" alt="A Living Sacrifice" loading="lazy" /></div></a>
-          <a href="books/life-and-impact-of-my-spiritual-mother.html"><div class="book-rail-cover"><img src="img/covers/life-and-impact-of-my-spiritual-mother.png" alt="Life and Impact of My Spiritual Mother" loading="lazy" /></div></a>
+    <div class="featured-spread reveal">
+      <a href="books/your-destiny-is-unstoppable.html" class="featured-spread-cover">
+        <img src="img/covers/your-destiny-is-unstoppable.png" alt="Your Destiny Is Unstoppable" loading="lazy" />
+      </a>
+
+      <div class="featured-spread-text">
+        <h3 class="featured-spread-title">Your Destiny<br/><em>Is Unstoppable</em></h3>
+
+        <div class="featured-spread-quote">
+          <span class="featured-spread-quote-mark">&ldquo;</span>
+          Heaven has set a course for your life that no man, no demon, and no devil can stop.
         </div>
 
-        <div class="read-word-stats">
-          <div><span class="read-word-stat-num">107+</span><span class="read-word-stat-label">Titles</span></div>
-          <div><span class="read-word-stat-num">6</span><span class="read-word-stat-label">Continents</span></div>
-          <div><span class="read-word-stat-num">$0</span><span class="read-word-stat-label">Always Free</span></div>
-        </div>
+        <p class="featured-spread-desc">
+          A prophetic call to walk in the unstoppable purpose God has placed in you. Free download. Always.
+        </p>
 
-        <div class="read-word-cta-wrap">
-          <a href="books.html" class="btn btn-ghost">
-            Explore the Full Library
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <div class="featured-spread-actions">
+          <a href="books/your-destiny-is-unstoppable.html" class="btn btn-primary">
+            Read Now
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
+          <a href="books/your-destiny-is-unstoppable.html" class="btn btn-ghost">Download PDF</a>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Auto-scroll rail of all books -->
+  <div class="rail-label-wrap reveal">
+    <div class="container">
+      <div class="watch-subhead">
+        <div class="watch-subhead-label">More Titles &middot; 107+</div>
+        <div class="watch-subhead-line"></div>
+      </div>
+    </div>
+  </div>
+  <div class="books-marquee-wrap" aria-label="Book ministry library">
+    <div class="books-marquee-track" id="booksTrack">
+      <!-- Single set; CSS animation duplicates visually via second pass -->
+      <a class="book-marquee-card" href="books/peace-in-the-midst-of-storms.html">
+        <div class="book-marquee-cover"><img src="img/covers/peace-in-the-midst-of-storms.png" alt="Peace in the Midst of Storms" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/positioned-by-god.html">
+        <div class="book-marquee-cover"><img src="img/covers/positioned-by-god.png" alt="Positioned by God" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/your-delay-is-over.html">
+        <div class="book-marquee-cover"><img src="img/covers/your-delay-is-over.png" alt="Your Delay Is Over" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/let-your-grace-speak.html">
+        <div class="book-marquee-cover"><img src="img/covers/let-your-grace-speak.png" alt="Let Your Grace Speak" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/you-will-rejoice-again.html">
+        <div class="book-marquee-cover"><img src="img/covers/you-will-rejoice-again.png" alt="You Will Rejoice Again" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/your-season-of-lifting-is-here.html">
+        <div class="book-marquee-cover"><img src="img/covers/your-season-of-lifting-is-here.png" alt="Your Season of Lifting Is Here" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/a-living-sacrifice.html">
+        <div class="book-marquee-cover"><img src="img/covers/a-living-sacrifice.png" alt="A Living Sacrifice" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/life-and-impact-of-my-spiritual-mother.html">
+        <div class="book-marquee-cover"><img src="img/covers/life-and-impact-of-my-spiritual-mother.png" alt="Life and Impact of My Spiritual Mother" loading="lazy" /></div>
+      </a>
+
+      <!-- Duplicate set for seamless loop -->
+      <a class="book-marquee-card" href="books/peace-in-the-midst-of-storms.html" aria-hidden="true" tabindex="-1">
+        <div class="book-marquee-cover"><img src="img/covers/peace-in-the-midst-of-storms.png" alt="" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/positioned-by-god.html" aria-hidden="true" tabindex="-1">
+        <div class="book-marquee-cover"><img src="img/covers/positioned-by-god.png" alt="" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/your-delay-is-over.html" aria-hidden="true" tabindex="-1">
+        <div class="book-marquee-cover"><img src="img/covers/your-delay-is-over.png" alt="" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/let-your-grace-speak.html" aria-hidden="true" tabindex="-1">
+        <div class="book-marquee-cover"><img src="img/covers/let-your-grace-speak.png" alt="" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/you-will-rejoice-again.html" aria-hidden="true" tabindex="-1">
+        <div class="book-marquee-cover"><img src="img/covers/you-will-rejoice-again.png" alt="" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/your-season-of-lifting-is-here.html" aria-hidden="true" tabindex="-1">
+        <div class="book-marquee-cover"><img src="img/covers/your-season-of-lifting-is-here.png" alt="" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/a-living-sacrifice.html" aria-hidden="true" tabindex="-1">
+        <div class="book-marquee-cover"><img src="img/covers/a-living-sacrifice.png" alt="" loading="lazy" /></div>
+      </a>
+      <a class="book-marquee-card" href="books/life-and-impact-of-my-spiritual-mother.html" aria-hidden="true" tabindex="-1">
+        <div class="book-marquee-cover"><img src="img/covers/life-and-impact-of-my-spiritual-mother.png" alt="" loading="lazy" /></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Stats + CTA in single horizontal band -->
+  <div class="container">
+    <div class="read-word-bottom-band reveal">
+      <div class="read-word-stats">
+        <div class="read-word-stat"><span class="read-word-stat-num">107+</span><span class="read-word-stat-label">Titles</span></div>
+        <div class="read-word-stat"><span class="read-word-stat-num">6</span><span class="read-word-stat-label">Continents</span></div>
+        <div class="read-word-stat"><span class="read-word-stat-num">$0</span><span class="read-word-stat-label">Always Free</span></div>
+      </div>
+      <div class="read-word-bottom-divider"></div>
+      <a href="books.html" class="btn btn-ghost read-word-explore-cta">
+        Explore the Full Library
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
 </section>
