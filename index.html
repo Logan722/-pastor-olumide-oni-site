@@ -1660,6 +1660,40 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
   transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
               box-shadow 0.45s ease;
 }
+.sermon-feature-frame--live iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.sermon-feature-live-tag {
+  position: absolute;
+  top: 14px; left: 14px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  background: rgba(10,9,7,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,59,59,0.35);
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  pointer-events: none;
+}
+.sermon-feature-live-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #ff3b3b;
+  box-shadow: 0 0 8px #ff3b3b;
+  animation: pulseDot 1.6s ease-in-out infinite;
+}
 .sermon-feature-frame:hover {
   transform: translateY(-3px);
   box-shadow:
@@ -2431,26 +2465,29 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
 <section class="sermon-feature">
   <div class="container">
     <div class="sermon-feature-grid reveal">
-      <a id="featuredSermonFrame" class="sermon-feature-frame" href="https://www.youtube.com/@PastorOlumideOni" target="_blank" rel="noopener" aria-label="Watch latest sermon">
-        <img id="featuredSermonImg" src="" alt="" loading="lazy" onerror="this.style.display='none'" />
-        <div class="sermon-feature-play">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <div id="featuredSermonFrame" class="sermon-feature-frame sermon-feature-frame--live">
+        <div class="sermon-feature-live-tag">
+          <span class="sermon-feature-live-dot"></span>
+          Latest Live
         </div>
-        <div class="sermon-feature-meta">
-          <div class="sermon-feature-tag">Now Playing</div>
-          <h3 id="featuredSermonTitle" class="sermon-feature-title">Loading the latest sermon&hellip;</h3>
-        </div>
-      </a>
+        <iframe
+          src="https://www.youtube.com/embed/live_stream?channel=UCoVS2R6n3ewcIvSb_OzLLQg&autoplay=0&rel=0&modestbranding=1"
+          title="Latest live broadcast — Pastor Olumide Oni"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"></iframe>
+      </div>
 
       <div class="sermon-feature-side">
-        <div class="sermon-feature-kicker">The Word · From the Pulpit</div>
-        <h2 class="sermon-feature-h2">A fresh word, <em>weekly.</em></h2>
+        <div class="sermon-feature-kicker">The Word · Live from the Pulpit</div>
+        <h2 class="sermon-feature-h2">A fresh word, <em>live.</em></h2>
         <p id="featuredSermonDesc" class="sermon-feature-desc">
-          Tap in to the latest message from Pastor Olumide Oni &mdash; prophetic charges, teaching, and intercession to fuel your walk with God.
+          Tap in to the latest live broadcast from Pastor Olumide Oni &mdash; prophetic charges, teaching, and intercession streamed straight from the pulpit.
         </p>
         <div class="sermon-feature-actions">
-          <a id="featuredSermonWatch" href="https://www.youtube.com/@PastorOlumideOni" target="_blank" rel="noopener" class="btn btn-primary">
-            Watch Sermon
+          <a id="featuredSermonWatch" href="https://www.youtube.com/@PastorOlumideOni/streams" target="_blank" rel="noopener" class="btn btn-primary">
+            Watch on YouTube
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
           <a href="sermons.html" class="btn btn-ghost">All Sermons</a>
@@ -2950,23 +2987,9 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
   }
 
   function renderFeaturedSermon(item) {
-    const watch = item.link || YT_CHANNEL_URL;
-    const thumb = thumbUrl(item);
-    const excerpt = cleanExcerpt(item.description, 220);
-    const titleEl = document.getElementById('featuredSermonTitle');
-    const imgEl   = document.getElementById('featuredSermonImg');
-    const descEl  = document.getElementById('featuredSermonDesc');
-    const frame   = document.getElementById('featuredSermonFrame');
-    const watchEl = document.getElementById('featuredSermonWatch');
-    if (titleEl) titleEl.textContent = item.title || 'Latest Sermon';
-    if (imgEl && thumb) {
-      imgEl.src = thumb;
-      imgEl.alt = item.title || '';
-      imgEl.style.display = '';
-    }
-    if (descEl && excerpt) descEl.textContent = excerpt;
-    if (frame)   frame.href = watch;
-    if (watchEl) watchEl.href = watch;
+    /* Featured frame is a live_stream iframe — no thumb/title injection needed.
+       Kept for compatibility with the load flow. */
+    return;
   }
 
   function renderRecentSermonsGrid(items) {
