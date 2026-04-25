@@ -1085,7 +1085,7 @@ main { position: relative; z-index: 10; }
 
 <style>
 /* =========================================================================
-   LIVE INTEGRATIONS — YouTube RSS sermon + Daily Word preview
+   LIVE INTEGRATIONS — YouTube RSS sermon + devotional rotation
    ========================================================================= */
 @keyframes homeShimmer {
   0% { background-position: -200% 0; }
@@ -2313,6 +2313,653 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
 
 /* CSS_EOF marker */
 
+
+/* ================================================================
+   HOMEPAGE OVERHAUL v2 — Apr 2026
+   New: About the Onis (banner+dual bios), Scenes from the Pulpit
+   (auto-marquee), Watch the Word (combined: series + topics +
+   recent + shorts), Read the Word (refined)
+   ================================================================ */
+
+/* ---------- About the Onis ---------- */
+.about-onis {
+  background: var(--bg);
+  position: relative;
+  z-index: 2;
+}
+.about-onis-banner {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  background: var(--bg-panel);
+}
+.about-onis-banner-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  animation: heroPan 24s ease-in-out infinite alternate;
+}
+.about-onis-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10,9,7,0) 0%, rgba(10,9,7,0.2) 50%, rgba(10,9,7,0.85) 100%);
+  pointer-events: none;
+}
+.about-onis-banner-content {
+  position: absolute;
+  bottom: 38px;
+  left: 0; right: 0;
+  text-align: center;
+  z-index: 2;
+  padding: 0 24px;
+}
+.about-onis-banner-line {
+  display: inline-block;
+  width: 38px; height: 1px;
+  background: var(--gold);
+  vertical-align: middle;
+  margin: 0 14px 6px;
+}
+.about-onis-banner-kicker {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  vertical-align: middle;
+}
+.about-onis-banner-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 38px;
+  line-height: 1.15;
+  color: var(--cream);
+  margin: 14px 0 0;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.7);
+}
+.about-onis-banner-title em {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.about-onis-bios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 70px 24px 30px;
+  align-items: start;
+}
+.about-onis-bio {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+}
+.about-onis-portrait {
+  flex: 0 0 88px;
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg-panel);
+  border: 1px solid var(--gold-dim);
+  box-shadow: 0 0 0 4px var(--bg), 0 14px 30px rgba(0,0,0,0.5);
+}
+.about-onis-portrait img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.about-onis-bio-text { flex: 1; padding-top: 4px; }
+.about-onis-bio-name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--cream);
+  margin: 0 0 10px;
+}
+.about-onis-bio-desc {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.about-onis-cta-wrap {
+  text-align: center;
+  padding: 0 24px 80px;
+}
+.about-onis-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.about-onis-cta:hover {
+  background: var(--gold);
+  color: #0a0907;
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(212,168,83,0.22);
+}
+
+/* ---------- Scenes from the Pulpit ---------- */
+.scenes-section {
+  background: var(--bg-2);
+  padding: 90px 0 100px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+.scenes-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 50px;
+  padding: 0 24px;
+}
+.scenes-marquee-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.scenes-marquee-wrap::before,
+.scenes-marquee-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 3;
+  pointer-events: none;
+}
+.scenes-marquee-wrap::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-2) 0%, transparent 100%);
+}
+.scenes-marquee-wrap::after {
+  right: 0;
+  background: linear-gradient(90deg, transparent 0%, var(--bg-2) 100%);
+}
+
+.scenes-marquee-track {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+  animation: scenesMarquee 80s linear infinite;
+  padding: 0 9px;
+}
+.scenes-marquee-wrap:hover .scenes-marquee-track {
+  animation-play-state: paused;
+}
+.scenes-marquee-track:focus-within {
+  animation-play-state: paused;
+}
+
+@keyframes scenesMarquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.scene-card {
+  flex: 0 0 auto;
+  position: relative;
+  height: 380px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 42px rgba(0,0,0,0.5);
+}
+.scene-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.scene-card:hover img {
+  transform: scale(1.04);
+}
+.scene-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+}
+/* Vary widths for editorial film-strip feel */
+.scene-card-w-l { width: 480px; }
+.scene-card-w-m { width: 380px; }
+.scene-card-w-s { width: 300px; }
+.scene-card-w-p { width: 260px; } /* portrait orientation */
+
+@media (prefers-reduced-motion: reduce) {
+  .scenes-marquee-track {
+    animation: none;
+  }
+  .scenes-marquee-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* On mobile/touch, swap to manual scroll instead of auto-marquee */
+@media (max-width: 900px) {
+  .scenes-marquee-track {
+    animation: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .scenes-marquee-wrap {
+    overflow-x: auto;
+  }
+  .scene-card {
+    scroll-snap-align: start;
+    height: 280px;
+  }
+  .scene-card-w-l { width: 320px; }
+  .scene-card-w-m { width: 260px; }
+  .scene-card-w-s { width: 220px; }
+  .scene-card-w-p { width: 180px; }
+}
+
+/* ---------- Watch the Word (combined) ---------- */
+.watch-word-section {
+  background: var(--bg);
+  padding: 100px 0 90px;
+  position: relative;
+  z-index: 2;
+}
+.watch-word-section .section-head {
+  margin-bottom: 70px;
+}
+
+.watch-subhead {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 50px 0 24px;
+  padding: 0 24px;
+}
+.watch-subhead-label {
+  flex: 0 0 auto;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.watch-subhead-line {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* Sermon Series cards */
+.series-rail {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 12px 24px 24px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-dim) transparent;
+}
+.series-rail::-webkit-scrollbar { height: 6px; }
+.series-rail::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+
+.series-card {
+  flex: 0 0 auto;
+  width: 260px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  transition: transform 0.4s ease, border-color 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+.series-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--line-strong);
+}
+.series-card-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-2);
+  overflow: hidden;
+}
+.series-card-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.series-card:hover .series-card-thumb img {
+  transform: scale(1.06);
+}
+.series-card-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 50%);
+}
+.series-card-badge {
+  position: absolute;
+  bottom: 10px; left: 12px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream);
+  z-index: 2;
+  padding: 4px 10px;
+  background: rgba(10,9,7,0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 999px;
+}
+.series-card-body {
+  padding: 18px 18px 20px;
+  flex: 1;
+}
+.series-card-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--cream);
+  margin: 0 0 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.series-card-meta {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+/* Topic chips */
+.topic-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 24px 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.topic-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 18px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--cream);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+.topic-chip:hover {
+  border-color: var(--line-strong);
+  color: var(--gold);
+}
+.topic-chip.is-active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #0a0907;
+}
+
+/* Chip filter results panel */
+.topic-results {
+  max-width: 1200px;
+  margin: 24px auto 0;
+  padding: 0 24px;
+}
+.topic-results-empty {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+  padding: 30px 0;
+}
+
+/* Recent sermons reuse the existing .sermon-grid-3up styles */
+.recent-sermons-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Shorts marquee (tighter, smaller version) */
+.shorts-marquee-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 12px 0 6px;
+}
+.shorts-marquee-wrap::before,
+.shorts-marquee-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 60px;
+  z-index: 3;
+  pointer-events: none;
+}
+.shorts-marquee-wrap::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, transparent 100%);
+}
+.shorts-marquee-wrap::after {
+  right: 0;
+  background: linear-gradient(90deg, transparent 0%, var(--bg) 100%);
+}
+.shorts-marquee-track {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  animation: shortsMarquee 60s linear infinite;
+  padding: 0 7px;
+}
+.shorts-marquee-wrap:hover .shorts-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes shortsMarquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.shorts-marquee-wrap .short-card {
+  width: 130px;
+  height: 230px;
+  flex-shrink: 0;
+}
+.shorts-marquee-wrap .short-card-label {
+  font-size: 11px;
+  bottom: 8px; left: 8px; right: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shorts-marquee-track { animation: none; }
+}
+
+@media (max-width: 900px) {
+  .shorts-marquee-track {
+    animation: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .shorts-marquee-wrap { overflow-x: auto; }
+}
+
+/* ---------- Read the Word (refined) ---------- */
+.read-word-section {
+  background: var(--bg-2);
+  padding: 100px 0;
+  position: relative;
+  z-index: 2;
+}
+.read-word-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 50px auto 0;
+  padding: 0 24px;
+  align-items: start;
+}
+.featured-book {
+  position: relative;
+}
+.featured-book-cover {
+  aspect-ratio: 2 / 3;
+  background: var(--bg);
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 26px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,168,83,0.16);
+  position: relative;
+  transition: transform 0.4s ease;
+}
+.featured-book-cover:hover { transform: translateY(-4px); }
+.featured-book-cover img { width: 100%; height: 100%; object-fit: cover; }
+.featured-book-cover::before {
+  content: 'Featured · This Month';
+  position: absolute;
+  top: 12px; left: 12px;
+  z-index: 2;
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(10,9,7,0.85);
+  padding: 5px 10px;
+  border-radius: 2px;
+  border: 1px solid rgba(212,168,83,0.3);
+}
+.featured-book-title {
+  margin-top: 18px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--cream);
+  text-align: center;
+}
+
+.book-grid-side { padding-left: 6px; }
+.book-grid-rail {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 18px;
+  margin-bottom: 40px;
+}
+.book-grid-rail .book-rail-cover {
+  aspect-ratio: 2 / 3;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+  transition: transform 0.4s ease;
+}
+.book-grid-rail a:hover .book-rail-cover {
+  transform: translateY(-4px);
+}
+.book-grid-rail .book-rail-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.read-word-stats {
+  display: flex;
+  gap: 50px;
+  align-items: baseline;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.read-word-stat-num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 44px;
+  color: var(--gold);
+  line-height: 1;
+}
+.read-word-stat-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-left: 8px;
+}
+.read-word-cta-wrap {
+  margin-top: 32px;
+}
+
+/* Mobile breakpoints */
+@media (max-width: 900px) {
+  .about-onis-banner { height: 320px; }
+  .about-onis-banner-title { font-size: 28px; }
+  .about-onis-bios {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 50px 24px 20px;
+  }
+  .read-word-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .featured-book {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+  .read-word-stats {
+    justify-content: center;
+    gap: 36px;
+  }
+  .watch-subhead-label { font-size: 10px; }
+}
+@media (max-width: 540px) {
+  .about-onis-banner { height: 260px; }
+  .about-onis-banner-title { font-size: 22px; }
+  .about-onis-portrait { flex: 0 0 64px; width: 64px; height: 64px; }
+  .about-onis-bio-name { font-size: 18px; }
+  .scenes-section, .watch-word-section, .read-word-section { padding: 70px 0; }
+}
+
 </style>
 
 <!-- SEO -->
@@ -2346,234 +2993,6 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
   }
 }
 </script>
-<style id="media-dropdown-styles">
-/* =====================================================
-   MEDIA DROPDOWN — desktop (.nav-dropdown) + mobile (.mobile-nav-dropdown)
-   Added when the "Daily Word" nav item was upgraded into a "Media" dropdown
-   that houses Daily Word + Library.
-   ===================================================== */
-
-/* ---------- Desktop dropdown ---------- */
-.nav-dropdown { position: relative; }
-
-.nav-dropdown-trigger {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: inherit;
-  font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--text-muted);
-  background: none; border: 0; padding: 4px 0;
-  cursor: pointer;
-  position: relative;
-  transition: color 0.3s ease;
-}
-.nav-dropdown-trigger:hover,
-.nav-dropdown-trigger:focus-visible,
-.nav-dropdown-trigger[aria-expanded="true"] {
-  color: var(--cream);
-  outline: none;
-}
-.nav-dropdown-trigger.active { color: var(--gold); }
-.nav-dropdown-trigger.active::after {
-  content: '';
-  position: absolute; left: 0; right: 16px; bottom: -4px;
-  height: 1px; background: var(--gold);
-}
-
-.nav-dropdown-chevron {
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-  margin-top: 1px;
-  color: var(--gold-dim);
-}
-.nav-dropdown-trigger:hover .nav-dropdown-chevron,
-.nav-dropdown-trigger.active .nav-dropdown-chevron,
-.nav-dropdown-trigger[aria-expanded="true"] .nav-dropdown-chevron {
-  color: var(--gold);
-}
-.nav-dropdown-trigger[aria-expanded="true"] .nav-dropdown-chevron {
-  transform: rotate(180deg);
-}
-
-.nav-dropdown-menu {
-  position: absolute;
-  top: calc(100% + 14px);
-  left: 50%;
-  transform: translateX(-50%) translateY(-6px);
-  min-width: 200px;
-  background: var(--bg-panel);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 8px;
-  display: flex; flex-direction: column;
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  box-shadow: 0 16px 44px -14px rgba(0,0,0,0.65);
-  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0.22s;
-  z-index: 110;
-}
-/* Bridge to keep hover from breaking when crossing the gap */
-.nav-dropdown-menu::before {
-  content: '';
-  position: absolute;
-  top: -14px; left: 0; right: 0;
-  height: 14px;
-}
-/* Tip arrow */
-.nav-dropdown-menu::after {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0; height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid var(--bg-panel);
-  filter: drop-shadow(0 -1px 0 var(--line));
-}
-
-.nav-dropdown.open .nav-dropdown-menu,
-.nav-dropdown:hover .nav-dropdown-menu,
-.nav-dropdown:focus-within .nav-dropdown-menu {
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0s;
-}
-
-.nav-dropdown-menu a {
-  display: block;
-  padding: 10px 14px;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  text-decoration: none;
-  border-radius: 2px;
-  transition: color 0.25s ease, background 0.25s ease;
-}
-.nav-dropdown-menu a:hover,
-.nav-dropdown-menu a:focus-visible {
-  color: var(--gold);
-  background: rgba(212, 168, 83, 0.06);
-  outline: none;
-}
-.nav-dropdown-menu a.active { color: var(--gold); }
-
-/* On mobile breakpoints the desktop dropdown is hidden along with .nav-links */
-@media (max-width: 900px) {
-  .nav-dropdown-menu { display: none; }
-}
-
-/* Light mode adjustments — match how the rest of the nav handles light mode */
-html.light-mode .nav-dropdown-menu {
-  background: #fbf6e9;
-  border-color: rgba(139, 111, 51, 0.3);
-  box-shadow: 0 16px 44px -14px rgba(60, 40, 10, 0.18);
-}
-html.light-mode .nav-dropdown-menu::after {
-  border-bottom-color: #fbf6e9;
-}
-html.light-mode .nav-dropdown-menu a { color: #5a4f3d; }
-html.light-mode .nav-dropdown-menu a:hover,
-html.light-mode .nav-dropdown-menu a:focus-visible,
-html.light-mode .nav-dropdown-menu a.active {
-  color: #8b6f33;
-  background: rgba(139, 111, 51, 0.07);
-}
-html.light-mode .nav-dropdown-trigger { color: #5a4f3d; }
-html.light-mode .nav-dropdown-trigger:hover,
-html.light-mode .nav-dropdown-trigger[aria-expanded="true"] { color: #2d2825; }
-html.light-mode .nav-dropdown-trigger.active { color: #8b6f33; }
-html.light-mode .nav-dropdown-trigger.active::after { background: #8b6f33; }
-
-/* ---------- Mobile drawer dropdown ---------- */
-.mobile-nav-dropdown {
-  /* List item on the mobile drawer; mirrors .mobile-nav-links li spacing */
-  list-style: none;
-}
-
-.mobile-nav-dropdown-trigger {
-  /* Same typographic feel as .mobile-nav-links a */
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%;
-  padding: 14px 0;
-  font-family: var(--serif), Georgia, serif;
-  font-size: 22px; letter-spacing: -0.005em;
-  color: var(--text);
-  background: none; border: 0;
-  text-align: left;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-.mobile-nav-dropdown-trigger:hover,
-.mobile-nav-dropdown-trigger:focus-visible {
-  color: var(--gold);
-  outline: none;
-}
-.mobile-nav-dropdown-trigger.active { color: var(--gold); }
-
-.mobile-nav-dropdown-chevron {
-  display: inline-flex;
-  align-items: center; justify-content: center;
-  transition: transform 0.3s ease;
-  color: var(--gold-dim);
-}
-.mobile-nav-dropdown-trigger[aria-expanded="true"] .mobile-nav-dropdown-chevron {
-  transform: rotate(180deg);
-  color: var(--gold);
-}
-
-.mobile-nav-dropdown-submenu {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.35s ease;
-  padding-left: 18px;
-  border-left: 1px solid var(--line);
-  margin-bottom: 4px;
-}
-.mobile-nav-dropdown.open .mobile-nav-dropdown-submenu {
-  max-height: 240px;
-}
-.mobile-nav-dropdown-submenu a {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 0;
-  font-family: var(--serif), Georgia, serif;
-  font-size: 18px;
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-.mobile-nav-dropdown-submenu a:hover,
-.mobile-nav-dropdown-submenu a:focus-visible {
-  color: var(--gold);
-  outline: none;
-}
-.mobile-nav-dropdown-submenu a.active { color: var(--gold); }
-.mobile-nav-dropdown-submenu a span.arrow {
-  font-style: italic;
-  color: var(--gold-dim);
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-.mobile-nav-dropdown-submenu a:hover span.arrow,
-.mobile-nav-dropdown-submenu a:focus-visible span.arrow,
-.mobile-nav-dropdown-submenu a.active span.arrow {
-  transform: translateX(4px);
-  color: var(--gold);
-}
-
-html.light-mode .mobile-nav-dropdown-trigger { color: #2d2825; }
-html.light-mode .mobile-nav-dropdown-trigger:hover,
-html.light-mode .mobile-nav-dropdown-trigger:focus-visible,
-html.light-mode .mobile-nav-dropdown-trigger.active { color: #8b6f33; }
-html.light-mode .mobile-nav-dropdown-submenu a { color: #5a4f3d; }
-html.light-mode .mobile-nav-dropdown-submenu a:hover,
-html.light-mode .mobile-nav-dropdown-submenu a:focus-visible,
-html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
-
-</style>
 </head>
 <body>
 
@@ -2596,18 +3015,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
         <li><a href="about.html">About</a></li>
         <li><a href="sermons.html">Sermons</a></li>
         <li><a href="books.html">Books</a></li>
-        <li class="nav-dropdown">
-          <button type="button" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="navMediaMenu">
-            Media
-            <svg class="nav-dropdown-chevron" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="2 4 6 8 10 4"/>
-            </svg>
-          </button>
-          <div class="nav-dropdown-menu" id="navMediaMenu" role="menu" aria-label="Media submenu">
-            <a href="daily-word.html" role="menuitem">Daily Word</a>
-            <a href="library.html" role="menuitem">Library</a>
-          </div>
-        </li>
+        <li><a href="daily-word.html">Daily Word</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
 
@@ -2773,213 +3181,215 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
 </section>
 
 <!-- =====================================================
-     ABOUT TEASER
+     ABOUT THE ONIS — banner + dual bios
      ===================================================== -->
-<section class="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-image-frame reveal">
-        <div class="about-image">
-          <img src="img/photos/couple-gold.jpg" alt="Pastor Olumide &amp; Pastor (Mrs.) Oluwatoyin Oni" />
-          <div class="about-image-badge">
-            <div class="about-image-badge-kicker">The Ministry</div>
-            <div class="about-image-badge-title">Pastor Olumide &amp; Pastor (Mrs.) Oluwatoyin Oni</div>
-          </div>
-        </div>
-        <div class="about-image-bl-corner"></div>
+<section class="about-onis">
+  <div class="about-onis-banner">
+    <img class="about-onis-banner-img" src="img/photos/couple-outdoor-banner.jpg" alt="Pastor Olumide &amp; Pastor (Mrs.) Oluwatoyin Oni" />
+    <div class="about-onis-banner-content">
+      <div>
+        <span class="about-onis-banner-line"></span>
+        <span class="about-onis-banner-kicker">From the Onis</span>
+        <span class="about-onis-banner-line"></span>
       </div>
+      <h2 class="about-onis-banner-title">A voice, a mantle, <em>a partnership.</em></h2>
+    </div>
+  </div>
 
-      <div class="about-content reveal">
-        <div class="about-kicker">Before Whom He Stands</div>
-        <h2 class="about-title">A voice. A mantle.<br/>A fire that <em>never dies.</em></h2>
-        <p class="about-body">
-          Pastor Olumide Oni carries a prophetic mandate for this generation — to raise a people who stand before the Lord, know His voice, and walk in the fullness of His Spirit.
-        </p>
-        <p class="about-body">
-          Alongside his wife, Pastor (Mrs.) Oluwatoyin Oni, he ministers the unchanging Word of God with conviction, compassion, and power — seeing lives transformed through the eternal truth of the Gospel.
-        </p>
-        <a href="about.html" class="btn btn-ghost">
-          Read Their Story
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M13 6l6 6-6 6"/>
-          </svg>
-        </a>
+  <div class="about-onis-bios">
+    <div class="about-onis-bio reveal">
+      <div class="about-onis-portrait">
+        <img src="img/pastor-portrait.jpg" alt="Pastor Olumide Oni" />
       </div>
+      <div class="about-onis-bio-text">
+        <h3 class="about-onis-bio-name">Pastor Olumide Oni</h3>
+        <p class="about-onis-bio-desc">A prophetic voice for this generation &mdash; preaching the unchanging Word with fire, faith, and conviction. He carries a mandate to raise a people who stand before the Lord, know His voice, and walk in the fullness of His Spirit.</p>
+      </div>
+    </div>
+
+    <div class="about-onis-bio reveal">
+      <div class="about-onis-portrait">
+        <img src="img/scenes/02-mrs-oni-preaching.jpg" alt="Pastor (Mrs.) Oluwatoyin Oni" />
+      </div>
+      <div class="about-onis-bio-text">
+        <h3 class="about-onis-bio-name">Pastor (Mrs.) Oluwatoyin Oni</h3>
+        <p class="about-onis-bio-desc">Co-laborer in ministry &mdash; a voice of grace, wisdom, and the Word for women, families, and the next generation. Together with Pastor Olumide, she ministers with compassion and power, seeing lives transformed through the Gospel.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-onis-cta-wrap reveal">
+    <a href="about.html" class="about-onis-cta">
+      Read More
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- =====================================================
+     SCENES FROM THE PULPIT — auto-marquee photo gallery
+     ===================================================== -->
+<section class="scenes-section">
+  <div class="scenes-head reveal">
+    <div class="section-kicker">Scenes from the Pulpit</div>
+    <h2 class="section-title">A life in <em>ministry.</em></h2>
+    <p class="section-sub">Glimpses from services, intercession, and the moments where the Word goes forth.</p>
+  </div>
+
+  <div class="scenes-marquee-wrap" aria-label="Photo gallery">
+    <div class="scenes-marquee-track" id="scenesTrack">
+      <!-- 6 photos, then duplicated for seamless loop -->
+      <div class="scene-card scene-card-w-p"><img src="img/scenes/01-pastor-preaching.jpg" alt="Pastor Olumide Oni preaching" loading="lazy" /></div>
+      <div class="scene-card scene-card-w-l"><img src="img/scenes/06-aerial-congregation.jpg" alt="Aerial view of congregation" loading="lazy" /></div>
+      <div class="scene-card scene-card-w-m"><img src="img/scenes/04-hands-raised.jpg" alt="Worshippers with hands raised" loading="lazy" /></div>
+      <div class="scene-card scene-card-w-s"><img src="img/scenes/02-mrs-oni-preaching.jpg" alt="Pastor (Mrs.) Oluwatoyin Oni preaching" loading="lazy" /></div>
+      <div class="scene-card scene-card-w-l"><img src="img/scenes/05-worship-mural.jpg" alt="Wide view of worship service" loading="lazy" /></div>
+      <div class="scene-card scene-card-w-m"><img src="img/scenes/03-couple-dancing.jpg" alt="Pastor and Pastor (Mrs.) Oni in worship" loading="lazy" /></div>
+
+      <!-- duplicate set for seamless loop -->
+      <div class="scene-card scene-card-w-p" aria-hidden="true"><img src="img/scenes/01-pastor-preaching.jpg" alt="" loading="lazy" /></div>
+      <div class="scene-card scene-card-w-l" aria-hidden="true"><img src="img/scenes/06-aerial-congregation.jpg" alt="" loading="lazy" /></div>
+      <div class="scene-card scene-card-w-m" aria-hidden="true"><img src="img/scenes/04-hands-raised.jpg" alt="" loading="lazy" /></div>
+      <div class="scene-card scene-card-w-s" aria-hidden="true"><img src="img/scenes/02-mrs-oni-preaching.jpg" alt="" loading="lazy" /></div>
+      <div class="scene-card scene-card-w-l" aria-hidden="true"><img src="img/scenes/05-worship-mural.jpg" alt="" loading="lazy" /></div>
+      <div class="scene-card scene-card-w-m" aria-hidden="true"><img src="img/scenes/03-couple-dancing.jpg" alt="" loading="lazy" /></div>
     </div>
   </div>
 </section>
 
 <!-- =====================================================
-     RECENT SERMONS — 3-UP GRID
+     WATCH THE WORD — combined: series + topics + recent + shorts
      ===================================================== -->
-<section class="sermon-grid-section">
+<section class="watch-word-section">
   <div class="container">
     <div class="section-head reveal">
-      <div class="section-kicker">More from the Pulpit</div>
-      <h2 class="section-title">Recent <em>messages</em></h2>
-      <p class="section-sub">
-        Three of the most recent sermons &mdash; Spirit-filled teaching, prophetic charge, and intercession.
-      </p>
+      <div class="section-kicker">Watch the Word</div>
+      <h2 class="section-title">Every fresh word, <em>in one place.</em></h2>
+      <p class="section-sub">Sermon series, topical messages, the latest from the pulpit, and tap-sized clips for the scroll.</p>
     </div>
-    <div id="recentSermonsGrid" class="sermon-grid-3up reveal">
+  </div>
+
+  <!-- Sermon Series -->
+  <div class="watch-subhead reveal">
+    <div class="watch-subhead-label">Sermon Series &middot; Collections</div>
+    <div class="watch-subhead-line"></div>
+  </div>
+  <div class="series-rail reveal" id="seriesRail">
+    <!-- Skeleton cards while loading -->
+    <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
+    <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
+    <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
+    <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
+  </div>
+
+  <!-- Watch by Topic -->
+  <div class="watch-subhead reveal">
+    <div class="watch-subhead-label">Watch by Topic</div>
+    <div class="watch-subhead-line"></div>
+  </div>
+  <div class="topic-chips reveal" id="topicChips">
+    <button class="topic-chip is-active" data-topic="all">All</button>
+    <button class="topic-chip" data-topic="breakthrough">Breakthrough</button>
+    <button class="topic-chip" data-topic="healing">Healing</button>
+    <button class="topic-chip" data-topic="marriage">Marriage</button>
+    <button class="topic-chip" data-topic="faith">Faith</button>
+    <button class="topic-chip" data-topic="finance">Finances</button>
+    <button class="topic-chip" data-topic="identity">Identity</button>
+    <button class="topic-chip" data-topic="deliverance">Deliverance</button>
+    <button class="topic-chip" data-topic="prayer">Prayer</button>
+  </div>
+
+  <!-- Recent Messages -->
+  <div class="watch-subhead reveal">
+    <div class="watch-subhead-label">Recent Messages</div>
+    <div class="watch-subhead-line"></div>
+  </div>
+  <div class="recent-sermons-wrap">
+    <div class="sermon-grid-3up reveal" id="recentSermonsGrid">
       <div class="sermon-grid-card"><div class="sermon-grid-thumb" style="background: linear-gradient(110deg, var(--bg-2) 30%, rgba(212,168,83,0.04) 50%, var(--bg-2) 70%); background-size: 200% 100%; animation: homeShimmer 1.8s ease-in-out infinite;"></div><div class="sermon-grid-body"><div class="sermon-grid-date">Loading&hellip;</div><div class="sermon-grid-title">&nbsp;</div></div></div>
       <div class="sermon-grid-card"><div class="sermon-grid-thumb" style="background: linear-gradient(110deg, var(--bg-2) 30%, rgba(212,168,83,0.04) 50%, var(--bg-2) 70%); background-size: 200% 100%; animation: homeShimmer 1.8s ease-in-out infinite;"></div><div class="sermon-grid-body"><div class="sermon-grid-date">Loading&hellip;</div><div class="sermon-grid-title">&nbsp;</div></div></div>
       <div class="sermon-grid-card"><div class="sermon-grid-thumb" style="background: linear-gradient(110deg, var(--bg-2) 30%, rgba(212,168,83,0.04) 50%, var(--bg-2) 70%); background-size: 200% 100%; animation: homeShimmer 1.8s ease-in-out infinite;"></div><div class="sermon-grid-body"><div class="sermon-grid-date">Loading&hellip;</div><div class="sermon-grid-title">&nbsp;</div></div></div>
     </div>
-    <div class="sermon-viewall reveal">
+    <div class="sermon-viewall reveal" style="text-align: center; margin-top: 30px;">
       <a href="sermons.html">
         View All Sermons
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
   </div>
-</section>
 
-<!-- =====================================================
-     SHORTS / REELS RAIL
-     ===================================================== -->
-<section class="shorts-section">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-kicker">Tap-Sized Word</div>
-      <h2 class="section-title">Shorts &amp; <em>Reels</em></h2>
-      <p class="section-sub">
-        Quick-fire clips &mdash; declarations, prophetic moments, teaching highlights. Perfect for the scroll.
-      </p>
-    </div>
-    <div id="shortsRail" class="shorts-rail reveal">
+  <!-- Shorts marquee -->
+  <div class="watch-subhead reveal">
+    <div class="watch-subhead-label">Shorts &amp; Reels &middot; Tap-Sized Word</div>
+    <div class="watch-subhead-line"></div>
+  </div>
+  <div class="shorts-marquee-wrap">
+    <div class="shorts-marquee-track" id="shortsTrack">
+      <!-- Populated by JS, with skeleton placeholders -->
       <a class="short-card" href="https://www.youtube.com/@PastorOlumideOni/shorts" target="_blank" rel="noopener">
         <div style="width:100%;height:100%;background:linear-gradient(135deg, var(--bg-2), var(--bg-panel));"></div>
         <div class="short-card-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="short-card-label">Loading&hellip;</div>
       </a>
       <a class="short-card" href="https://www.youtube.com/@PastorOlumideOni/shorts" target="_blank" rel="noopener">
         <div style="width:100%;height:100%;background:linear-gradient(135deg, var(--bg-2), var(--bg-panel));"></div>
         <div class="short-card-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="short-card-label">Loading&hellip;</div>
       </a>
       <a class="short-card" href="https://www.youtube.com/@PastorOlumideOni/shorts" target="_blank" rel="noopener">
         <div style="width:100%;height:100%;background:linear-gradient(135deg, var(--bg-2), var(--bg-panel));"></div>
         <div class="short-card-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="short-card-label">Loading&hellip;</div>
       </a>
       <a class="short-card" href="https://www.youtube.com/@PastorOlumideOni/shorts" target="_blank" rel="noopener">
         <div style="width:100%;height:100%;background:linear-gradient(135deg, var(--bg-2), var(--bg-panel));"></div>
         <div class="short-card-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="short-card-label">Loading&hellip;</div>
-      </a>
-      <a class="short-card" href="https://www.youtube.com/@PastorOlumideOni/shorts" target="_blank" rel="noopener">
-        <div style="width:100%;height:100%;background:linear-gradient(135deg, var(--bg-2), var(--bg-panel));"></div>
-        <div class="short-card-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="short-card-label">Loading&hellip;</div>
       </a>
     </div>
   </div>
 </section>
 
 <!-- =====================================================
-     DAILY WORD PREVIEW
+     READ THE WORD — refined book ministry
      ===================================================== -->
-<section class="devotionals">
+<section class="read-word-section">
   <div class="container">
     <div class="section-head reveal">
-      <div class="section-kicker">Feed Your Spirit</div>
-      <h2 class="section-title">Daily <em>Word</em></h2>
-      <p class="section-sub">
-        Prophetic declarations, teachings, and words of encouragement — delivered to build your faith and fuel your walk.
-      </p>
+      <div class="section-kicker">Read the Word</div>
+      <h2 class="section-title">The book <em>ministry.</em></h2>
+      <p class="section-sub">Spirit-filled books, freely distributed worldwide. Every title carries the &ldquo;Not For Sale&rdquo; stamp &mdash; the Word of God, placed into the hands of believers at no cost.</p>
     </div>
 
-    <div class="dev-grid" id="homeDevGrid">
-      <!-- Populated by JS from YouTube community posts -->
-      <div class="dev-card" style="min-height:280px;background:linear-gradient(110deg, var(--bg-2) 30%, rgba(212,168,83,0.04) 50%, var(--bg-2) 70%);background-size:200% 100%;animation:homeShimmer 1.8s ease-in-out infinite;"></div>
-      <div class="dev-card" style="min-height:280px;background:linear-gradient(110deg, var(--bg-2) 30%, rgba(212,168,83,0.04) 50%, var(--bg-2) 70%);background-size:200% 100%;animation:homeShimmer 1.8s ease-in-out infinite;"></div>
-      <div class="dev-card" style="min-height:280px;background:linear-gradient(110deg, var(--bg-2) 30%, rgba(212,168,83,0.04) 50%, var(--bg-2) 70%);background-size:200% 100%;animation:homeShimmer 1.8s ease-in-out infinite;"></div>
-    </div>
-
-    <div class="dev-viewall reveal">
-      <a href="daily-word.html" class="btn btn-ghost">
-        View All
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- =====================================================
-     BOOK MINISTRY — COVER RAIL
-     ===================================================== -->
-<section class="books-rail-section">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-kicker">The Written Word</div>
-      <h2 class="section-title">The Book <em>Ministry</em></h2>
-      <p class="section-sub">
-        Spirit-filled books, freely distributed worldwide. Every title carries the &ldquo;Not For Sale&rdquo; stamp &mdash; the Word of God placed into the hands of believers, at no cost.
-      </p>
-    </div>
-
-    <div class="books-rail reveal">
-      <a class="book-rail-card" href="books/your-destiny-is-unstoppable.html">
-        <div class="book-rail-cover"><img src="img/covers/your-destiny-is-unstoppable.png" alt="Your Destiny Is Unstoppable" loading="lazy" /></div>
-        <div class="book-rail-title">Your Destiny Is Unstoppable</div>
-      </a>
-      <a class="book-rail-card" href="books/peace-in-the-midst-of-storms.html">
-        <div class="book-rail-cover"><img src="img/covers/peace-in-the-midst-of-storms.png" alt="Peace in the Midst of Storms" loading="lazy" /></div>
-        <div class="book-rail-title">Peace in the Midst of Storms</div>
-      </a>
-      <a class="book-rail-card" href="books/positioned-by-god.html">
-        <div class="book-rail-cover"><img src="img/covers/positioned-by-god.png" alt="Positioned by God" loading="lazy" /></div>
-        <div class="book-rail-title">Positioned by God</div>
-      </a>
-      <a class="book-rail-card" href="books/your-delay-is-over.html">
-        <div class="book-rail-cover"><img src="img/covers/your-delay-is-over.png" alt="Your Delay Is Over" loading="lazy" /></div>
-        <div class="book-rail-title">Your Delay Is Over</div>
-      </a>
-      <a class="book-rail-card" href="books/let-your-grace-speak.html">
-        <div class="book-rail-cover"><img src="img/covers/let-your-grace-speak.png" alt="Let Your Grace Speak" loading="lazy" /></div>
-        <div class="book-rail-title">Let Your Grace Speak</div>
-      </a>
-      <a class="book-rail-card" href="books/you-will-rejoice-again.html">
-        <div class="book-rail-cover"><img src="img/covers/you-will-rejoice-again.png" alt="You Will Rejoice Again" loading="lazy" /></div>
-        <div class="book-rail-title">You Will Rejoice Again</div>
-      </a>
-      <a class="book-rail-card" href="books/your-season-of-lifting-is-here.html">
-        <div class="book-rail-cover"><img src="img/covers/your-season-of-lifting-is-here.png" alt="Your Season of Lifting Is Here" loading="lazy" /></div>
-        <div class="book-rail-title">Your Season of Lifting Is Here</div>
-      </a>
-      <a class="book-rail-card" href="books/a-living-sacrifice.html">
-        <div class="book-rail-cover"><img src="img/covers/a-living-sacrifice.png" alt="A Living Sacrifice" loading="lazy" /></div>
-        <div class="book-rail-title">A Living Sacrifice</div>
-      </a>
-      <a class="book-rail-card" href="books/life-and-impact-of-my-spiritual-mother.html">
-        <div class="book-rail-cover"><img src="img/covers/life-and-impact-of-my-spiritual-mother.png" alt="Life and Impact of My Spiritual Mother" loading="lazy" /></div>
-        <div class="book-rail-title">Life and Impact of My Spiritual Mother</div>
-      </a>
-    </div>
-
-    <div class="book-stats reveal">
-      <div class="book-stat">
-        <div class="book-stat-num">107+</div>
-        <div class="book-stat-label">Titles Published</div>
+    <div class="read-word-grid">
+      <div class="featured-book reveal">
+        <a href="books/your-destiny-is-unstoppable.html" class="featured-book-cover">
+          <img src="img/covers/your-destiny-is-unstoppable.png" alt="Your Destiny Is Unstoppable" loading="lazy" />
+        </a>
+        <div class="featured-book-title">Your Destiny<br/>Is Unstoppable</div>
       </div>
-      <div class="book-stat">
-        <div class="book-stat-num">6</div>
-        <div class="book-stat-label">Continents Reached</div>
-      </div>
-      <div class="book-stat">
-        <div class="book-stat-num">$0</div>
-        <div class="book-stat-label">Always Free</div>
-      </div>
-    </div>
 
-    <div class="dev-viewall reveal" style="margin-top: 50px;">
-      <a href="books.html" class="btn btn-ghost">
-        Explore the Full Library
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+      <div class="book-grid-side reveal">
+        <div class="book-grid-rail">
+          <a href="books/peace-in-the-midst-of-storms.html"><div class="book-rail-cover"><img src="img/covers/peace-in-the-midst-of-storms.png" alt="Peace in the Midst of Storms" loading="lazy" /></div></a>
+          <a href="books/positioned-by-god.html"><div class="book-rail-cover"><img src="img/covers/positioned-by-god.png" alt="Positioned by God" loading="lazy" /></div></a>
+          <a href="books/your-delay-is-over.html"><div class="book-rail-cover"><img src="img/covers/your-delay-is-over.png" alt="Your Delay Is Over" loading="lazy" /></div></a>
+          <a href="books/let-your-grace-speak.html"><div class="book-rail-cover"><img src="img/covers/let-your-grace-speak.png" alt="Let Your Grace Speak" loading="lazy" /></div></a>
+          <a href="books/you-will-rejoice-again.html"><div class="book-rail-cover"><img src="img/covers/you-will-rejoice-again.png" alt="You Will Rejoice Again" loading="lazy" /></div></a>
+          <a href="books/your-season-of-lifting-is-here.html"><div class="book-rail-cover"><img src="img/covers/your-season-of-lifting-is-here.png" alt="Your Season of Lifting Is Here" loading="lazy" /></div></a>
+          <a href="books/a-living-sacrifice.html"><div class="book-rail-cover"><img src="img/covers/a-living-sacrifice.png" alt="A Living Sacrifice" loading="lazy" /></div></a>
+          <a href="books/life-and-impact-of-my-spiritual-mother.html"><div class="book-rail-cover"><img src="img/covers/life-and-impact-of-my-spiritual-mother.png" alt="Life and Impact of My Spiritual Mother" loading="lazy" /></div></a>
+        </div>
+
+        <div class="read-word-stats">
+          <div><span class="read-word-stat-num">107+</span><span class="read-word-stat-label">Titles</span></div>
+          <div><span class="read-word-stat-num">6</span><span class="read-word-stat-label">Continents</span></div>
+          <div><span class="read-word-stat-num">$0</span><span class="read-word-stat-label">Always Free</span></div>
+        </div>
+
+        <div class="read-word-cta-wrap">
+          <a href="books.html" class="btn btn-ghost">
+            Explore the Full Library
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -3025,7 +3435,6 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
           <li><a href="sermons.html">Sermons</a></li>
           <li><a href="books.html">Books</a></li>
           <li><a href="daily-word.html">Daily Word</a></li>
-          <li><a href="library.html">Library</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -3208,7 +3617,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
   }
 
   function renderShortsRail(items) {
-    const rail = document.getElementById('shortsRail');
+    const rail = document.getElementById('shortsTrack');
     if (!rail) return;
     if (!items || !items.length) {
       rail.innerHTML = `
@@ -3220,7 +3629,8 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
         </a>`;
       return;
     }
-    rail.innerHTML = items.map(function(item) {
+    // Build single set of cards
+    const cards = items.map(function(item) {
       const titleShort = (item.title || '').length > 60 ? item.title.slice(0, 57) + '…' : (item.title || '');
       const thumb = thumbFromItem(item);
       const fallback = item.thumbnailFallback || (item.videoId ? `https://i.ytimg.com/vi/${item.videoId}/hqdefault.jpg` : '');
@@ -3233,6 +3643,98 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
         </a>
       `;
     }).join('');
+    // Duplicate for seamless marquee loop
+    rail.innerHTML = cards + cards;
+  }
+
+  /* ---------- Sermon Series (playlists) ---------- */
+  function renderSermonSeries(playlists) {
+    const rail = document.getElementById('seriesRail');
+    if (!rail) return;
+    if (!playlists || !playlists.length) {
+      rail.innerHTML = `<div style="padding:40px 24px;color:var(--text-muted);font-style:italic;">Loading sermon series&hellip;</div>`;
+      return;
+    }
+    rail.innerHTML = playlists.map(function(pl) {
+      const thumb = pl.thumbnail || `https://i.ytimg.com/vi/${pl.playlistId}/hqdefault.jpg`;
+      const count = pl.videoCount || '';
+      return `
+        <a class="series-card" href="${escapeHtml(pl.link)}" target="_blank" rel="noopener">
+          <div class="series-card-thumb">
+            <img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" />
+            ${count ? `<div class="series-card-badge">${escapeHtml(count)}</div>` : ''}
+          </div>
+          <div class="series-card-body">
+            <div class="series-card-title">${escapeHtml(pl.title)}</div>
+            <div class="series-card-meta">View Series &rarr;</div>
+          </div>
+        </a>
+      `;
+    }).join('');
+  }
+
+  async function fetchPlaylists() {
+    try {
+      const r = await fetch('/.netlify/functions/youtube-playlists');
+      if (r.ok) {
+        const d = await r.json();
+        if (d && d.status === 'ok' && Array.isArray(d.playlists) && d.playlists.length) {
+          return d.playlists;
+        }
+      }
+    } catch (e) {
+      console.warn('[home] playlists fetch failed:', e);
+    }
+    return [];
+  }
+
+  /* ---------- Topic Chips ---------- */
+  // Topic keyword map — match against video titles
+  const TOPIC_KEYWORDS = {
+    'all': null,
+    'breakthrough': ['breakthrough', 'unstoppable', 'success', 'open heaven', 'open now'],
+    'healing': ['healing', 'health', 'heal', 'physician', 'wellness', 'sickness'],
+    'marriage': ['marriage', 'marital', 'spouse', 'wife', 'husband', 'family', 'singles'],
+    'faith': ['faith', 'believe', 'trust', 'word of god', 'god\'s word'],
+    'finance': ['financial', 'finances', 'money', 'wealth', 'prosper', 'lifting', 'season of lifting'],
+    'identity': ['identity', 'destiny', 'purpose', 'who you are', 'discover', 'positioned'],
+    'deliverance': ['deliverance', 'backfire', 'limitation', 'arrow', 'spiritual', 'witchcraft', 'crusade'],
+    'prayer': ['prayer', 'pray', 'declaration', 'declare', 'intercession', 'altar', 'fire']
+  };
+
+  let _allVideos = [];
+
+  function filterByTopic(topic) {
+    if (topic === 'all' || !TOPIC_KEYWORDS[topic]) return _allVideos.slice(0, 3);
+    const keywords = TOPIC_KEYWORDS[topic];
+    const matches = _allVideos.filter(function(item) {
+      const t = (item.title || '').toLowerCase();
+      return keywords.some(k => t.includes(k));
+    });
+    return matches.slice(0, 3);
+  }
+
+  function setupTopicChips() {
+    const chipContainer = document.getElementById('topicChips');
+    if (!chipContainer) return;
+    chipContainer.addEventListener('click', function(e) {
+      const chip = e.target.closest('.topic-chip');
+      if (!chip) return;
+      const topic = chip.dataset.topic;
+      // Update active state
+      chipContainer.querySelectorAll('.topic-chip').forEach(c => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      // Filter and re-render the recent sermons grid
+      const filtered = filterByTopic(topic);
+      if (filtered.length) {
+        renderRecentSermonsGrid(filtered);
+      } else {
+        const grid = document.getElementById('recentSermonsGrid');
+        if (grid) {
+          grid.innerHTML = `<div style="grid-column:1/-1;padding:40px 24px;text-align:center;color:var(--text-muted);font-style:italic;">No recent messages match &ldquo;${escapeHtml(chip.textContent)}&rdquo;. Browse the full library on YouTube.</div>`;
+        }
+      }
+    });
   }
 
   async function fetchVideoFeed() {
@@ -3295,31 +3797,46 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
         { title: "Speak it now", pubDate: "2026-04-08", link: YT_CHANNEL_URL },
         { title: "Fire goes back to sender", pubDate: "2026-04-05", link: YT_CHANNEL_URL }
       ].map(normalizeItem);
+      _allVideos = demoItems;
       renderRecentSermonsGrid(demoItems.slice(0, 3));
       renderShortsRail(demoItems.slice(3, 8));
+      renderSermonSeries([
+        { playlistId: 'demo1', title: 'Open Heaven Encounter', thumbnail: '', videoCount: '12 videos', link: YT_CHANNEL_URL },
+        { playlistId: 'demo2', title: 'Healing & Deliverance Hour', thumbnail: '', videoCount: 'weekly', link: YT_CHANNEL_URL },
+        { playlistId: 'demo3', title: 'Command the Year', thumbnail: '', videoCount: '8 videos', link: YT_CHANNEL_URL },
+        { playlistId: 'demo4', title: 'Sunday Services', thumbnail: '', videoCount: 'ongoing', link: YT_CHANNEL_URL }
+      ]);
+      setupTopicChips();
       return;
     }
 
-    // Fetch videos and shorts in parallel — separate sources
-    const [items, shorts] = await Promise.all([fetchVideoFeed(), fetchShorts()]);
+    // Fetch videos, shorts, and playlists in parallel — separate sources
+    const [items, shorts, playlists] = await Promise.all([
+      fetchVideoFeed(),
+      fetchShorts(),
+      fetchPlaylists()
+    ]);
 
     if (!items.length) {
       console.error('[home] all video sources failed');
       renderFeaturedSermon({ link: YT_CHANNEL_URL });
       renderRecentSermonsGrid([]);
     } else {
+      _allVideos = items;
       renderFeaturedSermon(items[0]);
+      // Use items 1-3 for recent (skip the featured one)
       renderRecentSermonsGrid(items.slice(1, 4));
     }
 
     if (shorts.length) {
-      // True Shorts from the dedicated tab
-      renderShortsRail(shorts.slice(0, 6));
+      renderShortsRail(shorts.slice(0, 8));
     } else {
-      // Fall back to feed items so the rail isn't empty
       const fallback = items.length > 4 ? items.slice(4, 9) : [];
       renderShortsRail(fallback);
     }
+
+    renderSermonSeries(playlists);
+    setupTopicChips();
   }
 
   /* ---------- Hero verse rotator ---------- */
@@ -3444,20 +3961,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
     <li><a href="about.html">About <span class="arrow">&rarr;</span></a></li>
     <li><a href="sermons.html">Sermons <span class="arrow">&rarr;</span></a></li>
     <li><a href="books.html">Books <span class="arrow">&rarr;</span></a></li>
-    <li class="mobile-nav-dropdown">
-      <button type="button" class="mobile-nav-dropdown-trigger" aria-expanded="false" aria-controls="mobileMediaSubmenu">
-        Media
-        <span class="mobile-nav-dropdown-chevron" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-        </span>
-      </button>
-      <div class="mobile-nav-dropdown-submenu" id="mobileMediaSubmenu">
-        <a href="daily-word.html">Daily Word <span class="arrow">&rarr;</span></a>
-        <a href="library.html">Library <span class="arrow">&rarr;</span></a>
-      </div>
-    </li>
+    <li><a href="daily-word.html">Daily Word <span class="arrow">&rarr;</span></a></li>
     <li><a href="contact.html">Contact <span class="arrow">&rarr;</span></a></li>
   </ul>
 
@@ -3588,107 +4092,6 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
     }
   }
 })();
-</script>
-<script id="media-dropdown-js">
-/* Media dropdown — desktop click/hover + keyboard a11y, mobile expand/collapse */
-(function () {
-  'use strict';
-
-  /* ---------- Desktop dropdown ---------- */
-  document.querySelectorAll('.nav-dropdown').forEach(function (dd) {
-    var trigger = dd.querySelector('.nav-dropdown-trigger');
-    var menu = dd.querySelector('.nav-dropdown-menu');
-    if (!trigger || !menu) return;
-
-    var items = Array.prototype.slice.call(menu.querySelectorAll('a'));
-    var hoverTimer = null;
-
-    function open() {
-      dd.classList.add('open');
-      trigger.setAttribute('aria-expanded', 'true');
-    }
-    function close() {
-      dd.classList.remove('open');
-      trigger.setAttribute('aria-expanded', 'false');
-    }
-
-    trigger.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (dd.classList.contains('open')) close();
-      else open();
-    });
-
-    /* Hover open with a small grace period so cursor can travel to menu */
-    dd.addEventListener('mouseenter', function () {
-      if (hoverTimer) clearTimeout(hoverTimer);
-      open();
-    });
-    dd.addEventListener('mouseleave', function () {
-      if (hoverTimer) clearTimeout(hoverTimer);
-      hoverTimer = setTimeout(close, 120);
-    });
-
-    /* Click outside closes */
-    document.addEventListener('click', function (e) {
-      if (!dd.contains(e.target)) close();
-    });
-
-    /* Esc closes from anywhere within the dropdown */
-    dd.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        close();
-        trigger.focus();
-      }
-    });
-
-    /* Keyboard nav on the trigger */
-    trigger.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        open();
-        if (items[0]) items[0].focus();
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        open();
-        if (items.length) items[items.length - 1].focus();
-      }
-    });
-
-    /* Arrow keys move between menu items */
-    items.forEach(function (item, idx) {
-      item.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          (items[idx + 1] || items[0]).focus();
-        } else if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          (items[idx - 1] || items[items.length - 1]).focus();
-        } else if (e.key === 'Home') {
-          e.preventDefault();
-          if (items[0]) items[0].focus();
-        } else if (e.key === 'End') {
-          e.preventDefault();
-          if (items.length) items[items.length - 1].focus();
-        } else if (e.key === 'Tab') {
-          /* Let Tab close the menu naturally so focus order continues */
-          close();
-        }
-      });
-    });
-  });
-
-  /* ---------- Mobile drawer dropdown ---------- */
-  document.querySelectorAll('.mobile-nav-dropdown').forEach(function (dd) {
-    var trigger = dd.querySelector('.mobile-nav-dropdown-trigger');
-    if (!trigger) return;
-    trigger.addEventListener('click', function () {
-      var isOpen = dd.classList.toggle('open');
-      trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-  });
-})();
-
 </script>
 </body>
 </html>
