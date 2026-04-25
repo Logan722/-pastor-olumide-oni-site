@@ -231,7 +231,13 @@ main { position: relative; z-index: 10; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
+  /* Honor iOS safe areas so the nav doesn't clip under the dynamic island
+     and so the side gutters extend past the rounded corners on landscape.
+     Falls back gracefully on non-iOS. */
   padding: 18px 0;
+  padding-top: max(18px, env(safe-area-inset-top));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   transition: background 0.5s ease, padding 0.5s ease, border 0.5s ease;
   border-bottom: 1px solid transparent;
 }
@@ -239,7 +245,8 @@ main { position: relative; z-index: 10; }
   background: rgba(var(--bg-rgb), 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  padding: 12px 0;
+  padding-top: max(12px, env(safe-area-inset-top));
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
 }
 /* (Light-mode override removed — the rgba above auto-flips via --bg-rgb.) */
@@ -324,8 +331,10 @@ main { position: relative; z-index: 10; }
 
 .nav-toggle {
   display: none;
-  width: 28px; height: 28px;
+  width: 44px; height: 44px;   /* iOS-recommended touch target */
   color: var(--cream);
+  align-items: center;
+  justify-content: center;
 }
 
 /* =========================================================================
@@ -433,6 +442,8 @@ main { position: relative; z-index: 10; }
   border-top: 1px solid var(--line);
   margin-top: 120px;
   padding: 80px 0 40px;
+  /* Bottom safe-area inset for iPhone home indicator. */
+  padding-bottom: max(40px, calc(40px + env(safe-area-inset-bottom)));
 }
 
 .footer-grid {
@@ -528,6 +539,17 @@ main { position: relative; z-index: 10; }
 }
 
 /* =========================================================================
+   Mobile slide-out menu — safe-area handling
+   The .mobile-nav element itself is defined per-page; this rule just
+   ensures no page's mobile menu clips under the iPhone dynamic island
+   or home indicator.
+   ========================================================================= */
+.mobile-nav {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* =========================================================================
    Theme toggle button (the moon/sun in nav). Lives in the global stylesheet
    so every page gets it for free instead of redefining the CSS per-page.
    ========================================================================= */
@@ -546,6 +568,10 @@ main { position: relative; z-index: 10; }
   margin-right: 8px;
   padding: 0;
   flex-shrink: 0;
+}
+/* On touch devices the button needs to hit the iOS 44pt minimum. */
+@media (max-width: 960px) {
+  .theme-mode-toggle { width: 44px; height: 44px; }
 }
 .theme-mode-toggle:hover {
   border-color: var(--gold);
