@@ -50,6 +50,11 @@
   --shadow-soft:    0 4px 30px rgba(0, 0, 0, 0.30);
   --vignette:       rgba(0, 0, 0, 0.45);
 
+  /* RGB triplets (no alpha) so translucent surfaces can use rgba(var(--bg-rgb), .85)
+     and still flip with the theme. */
+  --bg-rgb: 10, 9, 7;
+  --cream-rgb: 242, 232, 213;
+
   /* ----- Spacing ----- */
   --gutter: 24px;
   --section-y: 120px;
@@ -102,6 +107,10 @@ html.light-mode {
   --shadow-deep:    0 30px 80px rgba(50, 30, 10, 0.15);
   --shadow-soft:    0 4px 30px rgba(50, 30, 10, 0.10);
   --vignette:       rgba(50, 30, 10, 0.12);
+
+  /* RGB triplets follow surface */
+  --bg-rgb: 250, 247, 242;
+  --cream-rgb: 26, 23, 20;
 
   /* Footer tokens DO NOT change — footer stays dark. */
 }
@@ -227,15 +236,13 @@ main { position: relative; z-index: 10; }
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
-  background: rgba(10, 9, 7, 0.85);
+  background: rgba(var(--bg-rgb), 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   padding: 12px 0;
   border-bottom: 1px solid var(--line);
 }
-html.light-mode .nav.scrolled {
-  background: rgba(250, 247, 242, 0.92);
-}
+/* (Light-mode override removed — the rgba above auto-flips via --bg-rgb.) */
 
 .nav-inner {
   display: flex;

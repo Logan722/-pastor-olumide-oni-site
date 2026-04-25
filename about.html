@@ -6,7 +6,7 @@
 </script>
 <meta charset="UTF-8" />
 <meta name="google-site-verification" content="NPse1AO64P3fFEgi6Nwu48y2UfOz0UIIuYY2Cut0Zxc" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>About Pastor Olumide Oni — Prophet, Evangelist, Teacher & Pastor</title>
 <meta name="description" content="Learn about Pastor Olumide Oni — an anointed Prophet, Evangelist, Teacher and Pastor. Author of over 107 books freely distributed worldwide." />
 
@@ -122,7 +122,7 @@ main { position: relative; z-index: 10; }
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
-  background: rgba(10, 9, 7, 0.85);
+  background: rgba(var(--bg-rgb), 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   padding: 12px 0;
@@ -487,8 +487,8 @@ main { position: relative; z-index: 10; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at center, transparent 55%, rgba(10, 9, 7, 0.35) 100%),
-    linear-gradient(180deg, transparent 0%, transparent 60%, rgba(10, 9, 7, 0.35) 100%);
+    radial-gradient(ellipse at center, transparent 55%, rgba(var(--bg-rgb), 0.35) 100%),
+    linear-gradient(180deg, transparent 0%, transparent 60%, rgba(var(--bg-rgb), 0.35) 100%);
   pointer-events: none;
 }
 
@@ -619,7 +619,7 @@ main { position: relative; z-index: 10; }
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 45%, rgba(10, 9, 7, 0.5) 100%);
+  background: linear-gradient(180deg, transparent 45%, rgba(var(--bg-rgb), 0.5) 100%);
 }
 .shared-image-caption {
   position: absolute;
@@ -1152,7 +1152,7 @@ main { position: relative; z-index: 10; }
 }
 .back-to-top:hover,
 .back-to-top:focus-visible {
-  background: #f2e8d5;
+  background: var(--cream);
   transform: translateY(-3px);
   box-shadow: 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(212, 168, 83, 0.5);
   outline: none;
@@ -1171,7 +1171,7 @@ main { position: relative; z-index: 10; }
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(10, 9, 7, 0.98);
+  background: rgba(var(--bg-rgb), 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   opacity: 0;
@@ -1200,29 +1200,29 @@ body.mobile-nav-open {
   font-family: 'Fraunces', Georgia, serif;
   font-weight: 300;
   font-size: 17px;
-  color: #f2e8d5;
+  color: var(--cream);
   letter-spacing: -0.01em;
 }
 .mobile-nav-brand em {
   font-style: italic;
-  color: #d4a853;
+  color: var(--gold);
   margin-right: 2px;
 }
 .mobile-nav-brand-mark {
   width: 28px; height: 28px;
-  border: 1px solid #8b6f33;
+  border: 1px solid var(--gold-dim);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-family: 'Fraunces', Georgia, serif;
   font-style: italic;
   font-size: 14px;
-  color: #d4a853;
+  color: var(--gold);
   flex-shrink: 0;
 }
 .mobile-nav-close {
   width: 44px; height: 44px;
   display: flex; align-items: center; justify-content: center;
-  color: #f2e8d5;
+  color: var(--cream);
   background: transparent;
   border: 1px solid rgba(212, 168, 83, 0.18);
   border-radius: 2px;
@@ -1231,8 +1231,8 @@ body.mobile-nav-open {
 }
 .mobile-nav-close:hover,
 .mobile-nav-close:focus-visible {
-  border-color: #d4a853;
-  color: #d4a853;
+  border-color: var(--gold);
+  color: var(--gold);
   outline: none;
 }
 .mobile-nav-links {
@@ -1258,17 +1258,17 @@ body.mobile-nav-open {
   font-weight: 300;
   font-size: 26px;
   letter-spacing: -0.01em;
-  color: #f2e8d5;
+  color: var(--cream);
   transition: color 0.3s ease, padding 0.3s ease;
   text-decoration: none;
 }
 .mobile-nav-links a.active {
-  color: #d4a853;
+  color: var(--gold);
   font-style: italic;
 }
 .mobile-nav-links a:hover,
 .mobile-nav-links a:focus-visible {
-  color: #d4a853;
+  color: var(--gold);
   padding-left: 12px;
   outline: none;
 }
@@ -1277,7 +1277,7 @@ body.mobile-nav-open {
   font-size: 11px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #8b6f33;
+  color: var(--gold-dim);
   font-weight: 500;
 }
 .mobile-nav-footer {
@@ -1290,7 +1290,7 @@ body.mobile-nav-open {
   font-style: italic;
   font-weight: 300;
   font-size: 14px;
-  color: #8a8275;
+  color: var(--text-muted);
   margin-bottom: 8px;
   line-height: 1.5;
 }
@@ -1299,7 +1299,7 @@ body.mobile-nav-open {
   font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #8b6f33;
+  color: var(--gold-dim);
   margin-bottom: 22px;
 }
 .mobile-nav-socials {
@@ -1311,13 +1311,13 @@ body.mobile-nav-open {
   border: 1px solid rgba(212, 168, 83, 0.18);
   border-radius: 2px;
   display: flex; align-items: center; justify-content: center;
-  color: #8b6f33;
+  color: var(--gold-dim);
   transition: all 0.3s ease;
 }
 .mobile-nav-socials a:hover,
 .mobile-nav-socials a:focus-visible {
-  border-color: #d4a853;
-  color: #d4a853;
+  border-color: var(--gold);
+  color: var(--gold);
   background: rgba(212, 168, 83, 0.06);
   outline: none;
 }
@@ -1508,14 +1508,14 @@ html.light-mode .nav-dropdown-menu a { color: #5a4f3d; }
 html.light-mode .nav-dropdown-menu a:hover,
 html.light-mode .nav-dropdown-menu a:focus-visible,
 html.light-mode .nav-dropdown-menu a.active {
-  color: #8b6f33;
+  color: var(--gold-dim);
   background: rgba(139, 111, 51, 0.07);
 }
 html.light-mode .nav-dropdown-trigger { color: #5a4f3d; }
 html.light-mode .nav-dropdown-trigger:hover,
 html.light-mode .nav-dropdown-trigger[aria-expanded="true"] { color: #2d2825; }
-html.light-mode .nav-dropdown-trigger.active { color: #8b6f33; }
-html.light-mode .nav-dropdown-trigger.active::after { background: #8b6f33; }
+html.light-mode .nav-dropdown-trigger.active { color: var(--gold-dim); }
+html.light-mode .nav-dropdown-trigger.active::after { background: var(--gold-dim); }
 
 /* ---------- Mobile drawer dropdown ---------- */
 .mobile-nav-dropdown {
@@ -1595,11 +1595,11 @@ html.light-mode .nav-dropdown-trigger.active::after { background: #8b6f33; }
 html.light-mode .mobile-nav-dropdown-trigger { color: #2d2825; }
 html.light-mode .mobile-nav-dropdown-trigger:hover,
 html.light-mode .mobile-nav-dropdown-trigger:focus-visible,
-html.light-mode .mobile-nav-dropdown-trigger.active { color: #8b6f33; }
+html.light-mode .mobile-nav-dropdown-trigger.active { color: var(--gold-dim); }
 html.light-mode .mobile-nav-dropdown-submenu a { color: #5a4f3d; }
 html.light-mode .mobile-nav-dropdown-submenu a:hover,
 html.light-mode .mobile-nav-dropdown-submenu a:focus-visible,
-html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
+html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); }
 
 </style>
 </head>
@@ -1846,14 +1846,14 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
         <svg class="word-portrait-rings" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="wordGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"  stop-color="#d4a853" stop-opacity="0.2"/>
-              <stop offset="65%" stop-color="#d4a853" stop-opacity="0.04"/>
-              <stop offset="100%" stop-color="#d4a853" stop-opacity="0"/>
+              <stop offset="0%"  stop-color="var(--gold)" stop-opacity="0.2"/>
+              <stop offset="65%" stop-color="var(--gold)" stop-opacity="0.04"/>
+              <stop offset="100%" stop-color="var(--gold)" stop-opacity="0"/>
             </radialGradient>
             <linearGradient id="wordGold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%"   stop-color="#d4a853"/>
+              <stop offset="0%"   stop-color="var(--gold)"/>
               <stop offset="50%"  stop-color="#f2d68a"/>
-              <stop offset="100%" stop-color="#8b6f33"/>
+              <stop offset="100%" stop-color="var(--gold-dim)"/>
             </linearGradient>
           </defs>
           <circle cx="250" cy="250" r="248" fill="url(#wordGlow)"/>

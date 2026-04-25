@@ -6,7 +6,7 @@
 </script>
 <meta charset="UTF-8" />
 <meta name="google-site-verification" content="NPse1AO64P3fFEgi6Nwu48y2UfOz0UIIuYY2Cut0Zxc" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Daily Word — Prophetic Declarations & Teachings | Pastor Olumide Oni</title>
 <meta name="description" content="Receive prophetic declarations, teachings, and words of encouragement from Pastor Olumide Oni. Fresh words to build your faith daily." />
 
@@ -99,7 +99,7 @@ main { position: relative; z-index: 10; }
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
-  background: rgba(10, 9, 7, 0.85);
+  background: rgba(var(--bg-rgb), 0.85);
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   padding: 12px 0; border-bottom: 1px solid var(--line);
 }
@@ -307,7 +307,7 @@ main { position: relative; z-index: 10; }
 .dw-card-overlay {
   position: absolute; bottom: 0; left: 0; right: 0;
   padding: 24px 18px 16px;
-  background: linear-gradient(0deg, rgba(10, 9, 7, 0.92) 0%, rgba(10, 9, 7, 0.6) 60%, transparent 100%);
+  background: linear-gradient(0deg, rgba(var(--bg-rgb), 0.92) 0%, rgba(var(--bg-rgb), 0.6) 60%, transparent 100%);
   pointer-events: none;
 }
 .dw-card-title {
@@ -393,12 +393,12 @@ body.lb-open { overflow: hidden; }
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   color: var(--cream);
-  background: rgba(10, 9, 7, 0.6);
+  background: rgba(var(--bg-rgb), 0.6);
   cursor: pointer; transition: all 0.3s ease;
 }
 .dw-lb-close:hover {
   border-color: var(--gold); color: var(--gold);
-  background: rgba(10, 9, 7, 0.8);
+  background: rgba(var(--bg-rgb), 0.8);
 }
 
 /* Instagram-style side-by-side layout */
@@ -465,7 +465,7 @@ body.lb-open { overflow: hidden; }
   transform: translateY(-50%);
   width: 36px; height: 36px;
   border-radius: 50%;
-  background: rgba(10, 9, 7, 0.55);
+  background: rgba(var(--bg-rgb), 0.55);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
   display: flex; align-items: center; justify-content: center;
@@ -473,7 +473,7 @@ body.lb-open { overflow: hidden; }
   z-index: 5;
 }
 .dw-carousel-btn:hover {
-  background: rgba(10, 9, 7, 0.85);
+  background: rgba(var(--bg-rgb), 0.85);
   border-color: var(--gold); color: var(--gold);
 }
 .dw-carousel-btn.prev { left: 10px; }
@@ -554,7 +554,7 @@ body.lb-open { overflow: hidden; }
   padding: 60px 40px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  background: linear-gradient(135deg, rgba(212, 168, 83, 0.03) 0%, rgba(10, 9, 7, 0.4) 100%);
+  background: linear-gradient(135deg, rgba(212, 168, 83, 0.03) 0%, rgba(var(--bg-rgb), 0.4) 100%);
 }
 .dw-cta-kicker {
   font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
@@ -598,7 +598,7 @@ body.lb-open { overflow: hidden; }
 }
 .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .back-to-top:hover, .back-to-top:focus-visible {
-  background: #f2e8d5; transform: translateY(-3px);
+  background: var(--cream); transform: translateY(-3px);
   box-shadow: 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(212, 168, 83, 0.5);
   outline: none;
 }
@@ -607,7 +607,7 @@ body.lb-open { overflow: hidden; }
 /* ---------- Mobile nav drawer ---------- */
 .mobile-nav {
   position: fixed; inset: 0; z-index: 200;
-  background: rgba(10, 9, 7, 0.98);
+  background: rgba(var(--bg-rgb), 0.98);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
   display: flex; flex-direction: column; overflow-y: auto;
@@ -621,23 +621,23 @@ body.mobile-nav-open { overflow: hidden; }
 .mobile-nav-brand {
   display: flex; align-items: center; gap: 12px;
   font-family: 'Fraunces', Georgia, serif; font-weight: 300;
-  font-size: 17px; color: #f2e8d5; letter-spacing: -0.01em;
+  font-size: 17px; color: var(--cream); letter-spacing: -0.01em;
 }
-.mobile-nav-brand em { font-style: italic; color: #d4a853; margin-right: 2px; }
+.mobile-nav-brand em { font-style: italic; color: var(--gold); margin-right: 2px; }
 .mobile-nav-brand-mark {
-  width: 28px; height: 28px; border: 1px solid #8b6f33;
+  width: 28px; height: 28px; border: 1px solid var(--gold-dim);
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
   font-family: 'Fraunces', Georgia, serif; font-style: italic;
-  font-size: 14px; color: #d4a853; flex-shrink: 0;
+  font-size: 14px; color: var(--gold); flex-shrink: 0;
 }
 .mobile-nav-close {
   width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
-  color: #f2e8d5; background: transparent;
+  color: var(--cream); background: transparent;
   border: 1px solid rgba(212, 168, 83, 0.18); border-radius: 2px;
   cursor: pointer; transition: all 0.3s ease;
 }
 .mobile-nav-close:hover, .mobile-nav-close:focus-visible {
-  border-color: #d4a853; color: #d4a853; outline: none;
+  border-color: var(--gold); color: var(--gold); outline: none;
 }
 .mobile-nav-links {
   list-style: none; margin: 0; padding: 40px 22px 32px;
@@ -648,10 +648,10 @@ body.mobile-nav-open { overflow: hidden; }
 .mobile-nav-links a {
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px 0; font-size: 18px; font-weight: 400;
-  color: #8a8275; transition: color 0.3s ease; letter-spacing: 0.02em;
+  color: var(--text-muted); transition: color 0.3s ease; letter-spacing: 0.02em;
 }
-.mobile-nav-links a.active { color: #d4a853; }
-.mobile-nav-links a:hover, .mobile-nav-links a:focus-visible { color: #f2e8d5; }
+.mobile-nav-links a.active { color: var(--gold); }
+.mobile-nav-links a:hover, .mobile-nav-links a:focus-visible { color: var(--cream); }
 .mobile-nav-links a span.arrow { color: rgba(212, 168, 83, 0.4); font-size: 14px; }
 .mobile-nav-footer {
   margin-top: auto; padding: 24px 22px 32px;
@@ -659,19 +659,19 @@ body.mobile-nav-open { overflow: hidden; }
 }
 .mobile-nav-scripture {
   font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 300;
-  font-size: 15px; color: #8a8275; margin-bottom: 6px;
+  font-size: 15px; color: var(--text-muted); margin-bottom: 6px;
 }
 .mobile-nav-scripture-ref {
-  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #8b6f33;
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim);
   margin-bottom: 20px;
 }
 .mobile-nav-socials { display: flex; gap: 12px; }
 .mobile-nav-socials a {
   width: 40px; height: 40px; border: 1px solid rgba(212, 168, 83, 0.2);
   border-radius: 2px; display: flex; align-items: center; justify-content: center;
-  color: #8b6f33; transition: all 0.3s;
+  color: var(--gold-dim); transition: all 0.3s;
 }
-.mobile-nav-socials a:hover { border-color: #d4a853; color: #d4a853; }
+.mobile-nav-socials a:hover { border-color: var(--gold); color: var(--gold); }
 
 /* =========================================================================
    LIGHT MODE — page-specific overrides only.
@@ -851,14 +851,14 @@ html.light-mode .nav-dropdown-menu a { color: #5a4f3d; }
 html.light-mode .nav-dropdown-menu a:hover,
 html.light-mode .nav-dropdown-menu a:focus-visible,
 html.light-mode .nav-dropdown-menu a.active {
-  color: #8b6f33;
+  color: var(--gold-dim);
   background: rgba(139, 111, 51, 0.07);
 }
 html.light-mode .nav-dropdown-trigger { color: #5a4f3d; }
 html.light-mode .nav-dropdown-trigger:hover,
 html.light-mode .nav-dropdown-trigger[aria-expanded="true"] { color: #2d2825; }
-html.light-mode .nav-dropdown-trigger.active { color: #8b6f33; }
-html.light-mode .nav-dropdown-trigger.active::after { background: #8b6f33; }
+html.light-mode .nav-dropdown-trigger.active { color: var(--gold-dim); }
+html.light-mode .nav-dropdown-trigger.active::after { background: var(--gold-dim); }
 
 /* ---------- Mobile drawer dropdown ---------- */
 .mobile-nav-dropdown {
@@ -938,11 +938,11 @@ html.light-mode .nav-dropdown-trigger.active::after { background: #8b6f33; }
 html.light-mode .mobile-nav-dropdown-trigger { color: #2d2825; }
 html.light-mode .mobile-nav-dropdown-trigger:hover,
 html.light-mode .mobile-nav-dropdown-trigger:focus-visible,
-html.light-mode .mobile-nav-dropdown-trigger.active { color: #8b6f33; }
+html.light-mode .mobile-nav-dropdown-trigger.active { color: var(--gold-dim); }
 html.light-mode .mobile-nav-dropdown-submenu a { color: #5a4f3d; }
 html.light-mode .mobile-nav-dropdown-submenu a:hover,
 html.light-mode .mobile-nav-dropdown-submenu a:focus-visible,
-html.light-mode .mobile-nav-dropdown-submenu a.active { color: #8b6f33; }
+html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); }
 
 </style>
 </head>
