@@ -4,26 +4,17 @@
 
 ```
 site/
-├── index.html                 Home (live sermon + daily devotional)
+├── index.html                 Home (live sermon + Daily Word preview)
 ├── about.html                 About (Pastor & Pastor Mrs. Oni)
 ├── sermons.html               Sermons (live YouTube RSS auto-refresh)
 ├── books.html                 Books (library + Drive reader modal + native HTML pages)
-├── devotionals.html           Devotionals index (daily rotation)
+├── library.html               Library (Shorts + curated playlists + recent uploads)
+├── daily-word.html            Daily Word (YouTube community posts)
 ├── contact.html               Contact form (Netlify Forms)
-├── books/                     Native HTML reading pages for Word-doc books
-│   ├── a-living-sacrifice.html
-│   ├── your-delay-is-over.html
-│   └── your-season-of-lifting-is-here.html
-└── devotionals/               9 individual devotional posts
-    ├── fire-falls-altar-ready.html
-    ├── stand-before-the-lord.html
-    ├── still-small-voice.html
-    ├── brook-dries-up.html
-    ├── double-portion-persistent.html
-    ├── prayer-that-shuts-heavens.html
-    ├── chariots-of-fire.html
-    ├── juniper-tree.html
-    └── widows-obedience.html
+└── books/                     Native HTML reading pages for Word-doc books
+    ├── a-living-sacrifice.html
+    ├── your-delay-is-over.html
+    └── your-season-of-lifting-is-here.html
 ```
 
 > **How books are served.** The four featured books wired to your Google Drive
@@ -151,11 +142,12 @@ The `BOOKS` array can be any length. To add a new book, copy an existing entry i
 - Updates automatically within 15 min to ~2 hours of a new video being published
 - No manual work needed after deploy
 
-### Devotionals — daily rotation
-- 9 devotionals cycle through the "featured" slot
-- Rotation is based on day-of-year modulo 9
-- Every day, the home page and devotional index highlight a different one
-- To add more devotionals, create a new HTML file in `/devotionals/`, then add its metadata to the `DEVOTIONALS` JavaScript array in both `index.html` and `devotionals.html`
+### Library page — Netlify function
+- Source: `netlify/functions/youtube-library.js`
+- Returns Shorts + curated playlists + recent uploads-not-in-any-curated-playlist as a single payload
+- 4-hour in-memory cache; falls back to stale cache on YouTube errors
+- All titles are scrubbed of MFM brand strings before they leave the function
+- To add / remove / reorder playlists: edit the `CURATED_PLAYLISTS` array at the top of the function file
 
 ### Contact form
 - Submissions → Netlify dashboard and your email (once configured)
@@ -180,9 +172,8 @@ Several mobile-specific improvements are built in:
 
 1. **No video duration** on sermon cards — YouTube RSS doesn't expose duration. If you need it, we'd switch to YouTube Data API v3 (needs an API key).
 2. **Sermon thumbnails** are YouTube's defaults. Whatever cover image you set on each video is what appears.
-3. **Devotional preview in file:// mode** shows demo content with a "Preview Mode" banner. Real YouTube data loads once deployed to an HTTPS URL.
-4. **Books in file:// preview** show "Preview Mode" because Google Drive embeds don't work from local files. Real PDF readers load once deployed.
-5. **Placeholder Drive IDs** show the "Preview Mode" notice with instructions when tapped. Replace each `PLACEHOLDER_ID_NN` with a real file ID to make the book readable.
+3. **Books in file:// preview** show "Preview Mode" because Google Drive embeds don't work from local files. Real PDF readers load once deployed.
+4. **Placeholder Drive IDs** show the "Preview Mode" notice with instructions when tapped. Replace each `PLACEHOLDER_ID_NN` with a real file ID to make the book readable.
 
 ---
 

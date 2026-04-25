@@ -18,17 +18,23 @@
 
 const CHANNEL_ID = "UCoVS2R6n3ewcIvSb_OzLLQg";
 
-// youtubei tab params (stable, same encoding yt-dlp uses)
-const TAB_PARAMS = {
-  shorts:    "EgZzaG9ydHPyBgUKA5oBAA%3D%3D",
-  playlists: "EglwbGF5bGlzdHPyBgQKAkIA",
-};
+// Shorts tab param (stable, same encoding yt-dlp uses)
+const SHORTS_TAB_PARAM = "EgZzaG9ydHPyBgUKA5oBAA%3D%3D";
+
+// Curated playlists, rendered on the Library page in this exact order.
+// Edit this array to add / remove / reorder playlists.
+const CURATED_PLAYLISTS = [
+  "PLJyJYslFH1GK9q5IcTj-Mek4kjYMMAAJc", // Short Series
+  "PLJyJYslFH1GLqYR2Kw9dt_LvmIcbsgurk", // The Godly Marriage Navigator
+  "PLJyJYslFH1GK5Y4jgIsk6JClLcz1batQZ", // Mountain Top Grace
+  "PLJyJYslFH1GKGuJ3gdZTEcrWsLEJ8Jljs", // Wisdom Power Series
+];
 
 // Limits (kept generous; horizontal rails handle volume gracefully)
 const SHORTS_LIMIT          = 18;
 const PLAYLIST_VIDEO_LIMIT  = 18;
 const OTHER_VIDEOS_LIMIT    = 12;
-const MIN_VIDEOS_PER_PLAYLIST = 2;  // drop singleton/abandoned playlists
+const MIN_VIDEOS_PER_PLAYLIST = 1; // curated, so don't filter aggressively
 
 const CACHE_TTL = 4 * 60 * 60 * 1000; // 4 hours
 let cache = { data: null, timestamp: 0 };
@@ -59,53 +65,50 @@ exports.handler = async function (event) {
   }
 
   try {
-    // First wave: shorts tab, playlists tab, uploads RSS — all in parallel
-    const [shortsResp, playlistsResp, uploadsXml] = await Promise.all([
-      browse(CHANNEL_ID, TAB_PARAMS.shorts).catch((e) => {
+    // Fetch shorts, all curated playlists, and uploads RSS — all in parallel.
+    // Each curated playlist call returns its own title, count, and videos.
+    const [shortsResp, uploadsXml, ...playlistResps] = await Promise.all([
+      browse(CHANNEL_ID, SHORTS_TAB_PARAM).catch((e) => {
         console.error("shorts browse failed:", e);
-        return null;
-      }),
-      browse(CHANNEL_ID, TAB_PARAMS.playlists).catch((e) => {
-        console.error("playlists browse failed:", e);
         return null;
       }),
       fetchText(`https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`).catch((e) => {
         console.error("uploads RSS failed:", e);
         return "";
       }),
+      ...CURATED_PLAYLISTS.map((id) =>
+        browse("VL" + id).catch((e) => {
+          console.error(`playlist ${id} fetch failed:`, e);
+          return null;
+        })
+      ),
     ]);
 
-    const shorts    = extractShorts(shortsResp).slice(0, SHORTS_LIMIT);
-    const playlists = extractPlaylists(playlistsResp);
-    const uploads   = parseRssUploads(uploadsXml);
+    const shorts  = extractShorts(shortsResp).slice(0, SHORTS_LIMIT);
+    const uploads = parseRssUploads(uploadsXml);
 
-    // Second wave: each playlist's contents in parallel.
-    // Skip playlists below the threshold to save fetches.
-    const playlistsToFetch = playlists.filter(
-      (p) => p.count === null || p.count >= MIN_VIDEOS_PER_PLAYLIST
-    );
+    // Build playlist objects in the curated order. Drop any that failed
+    // to load or came back below the minimum video threshold.
+    const playlists = [];
+    CURATED_PLAYLISTS.forEach((id, i) => {
+      const resp = playlistResps[i];
+      if (!resp) return;
+      const title = extractPlaylistTitle(resp);
+      const countText = extractPlaylistCountText(resp);
+      const videos = extractPlaylistVideos(resp).slice(0, PLAYLIST_VIDEO_LIMIT);
+      if (videos.length < MIN_VIDEOS_PER_PLAYLIST) return;
+      playlists.push({
+        id,
+        title: scrubBrand(title),
+        count: parseCount(countText),
+        countText: countText.trim(),
+        videos,
+      });
+    });
 
-    const playlistsWithVideos = await Promise.all(
-      playlistsToFetch.map(async (pl) => {
-        try {
-          const resp = await browse("VL" + pl.id);
-          const videos = extractPlaylistVideos(resp).slice(0, PLAYLIST_VIDEO_LIMIT);
-          return { ...pl, videos };
-        } catch (e) {
-          console.error(`playlist ${pl.id} fetch failed:`, e);
-          return { ...pl, videos: [] };
-        }
-      })
-    );
-
-    // Drop empty playlists post-fetch
-    const finalPlaylists = playlistsWithVideos.filter(
-      (p) => p.videos.length >= MIN_VIDEOS_PER_PLAYLIST
-    );
-
-    // "Other Videos" = uploads NOT present in any playlist
+    // "Other Videos" = recent uploads NOT in any of the curated playlists
     const playlistVideoIds = new Set();
-    for (const pl of finalPlaylists) {
+    for (const pl of playlists) {
       for (const v of pl.videos) playlistVideoIds.add(v.id);
     }
     const otherVideos = uploads
@@ -114,7 +117,7 @@ exports.handler = async function (event) {
 
     const payload = {
       shorts,
-      playlists: finalPlaylists,
+      playlists,
       otherVideos,
       generatedAt: new Date().toISOString(),
     };
@@ -209,75 +212,44 @@ function extractShorts(data) {
   return out;
 }
 
-function extractPlaylists(data) {
-  if (!data) return [];
-  const out = [];
+// Extract playlist title from the playlist's own browse response.
+// Tries both the modern pageHeader layout and the older playlistMetadata.
+function extractPlaylistTitle(data) {
+  if (!data) return "";
+  return (
+    data?.metadata?.playlistMetadataRenderer?.title ||
+    data?.header?.pageHeaderRenderer?.pageTitle ||
+    data?.header?.playlistHeaderRenderer?.title?.simpleText ||
+    data?.header?.playlistHeaderRenderer?.title?.runs?.map((r) => r.text || "").join("") ||
+    ""
+  ).trim();
+}
+
+// Extract a "20 episodes" / "13 videos" string from the metadata rows.
+function extractPlaylistCountText(data) {
+  if (!data) return "";
   try {
-    const content = selectedTabContent(data);
-    const sections = content?.sectionListRenderer?.contents || [];
-
-    for (const section of sections) {
-      const itemSec = section?.itemSectionRenderer?.contents?.[0];
-      if (!itemSec) continue;
-
-      const gridItems = itemSec?.gridRenderer?.items || [];
-      for (const item of gridItems) {
-        // Newest format: lockupViewModel
-        const lvm = item?.lockupViewModel;
-        if (lvm) {
-          const id = lvm?.contentId;
-          const title = lvm?.metadata?.lockupMetadataViewModel?.title?.content || "";
-          // Find the badge text like "85 videos"
-          let countText = "";
-          const overlays =
-            lvm?.contentImage?.collectionThumbnailViewModel?.primaryThumbnail?.thumbnailViewModel?.overlays || [];
-          for (const o of overlays) {
-            const txt =
-              o?.thumbnailOverlayBadgeViewModel?.thumbnailBadges?.[0]?.thumbnailBadgeViewModel?.text;
-            if (txt) {
-              countText = txt;
-              break;
-            }
-          }
-          const count = parseCount(countText);
-          if (id && title) {
-            out.push({
-              id,
-              title: scrubBrand(title),
-              count,
-              countText: countText.trim(),
-            });
-          }
-          continue;
-        }
-
-        // Older format: gridPlaylistRenderer
-        const gpl = item?.gridPlaylistRenderer;
-        if (gpl) {
-          const id = gpl?.playlistId;
-          const titleRuns = gpl?.title?.runs || [];
-          const title = titleRuns.map((r) => r.text || "").join("").trim();
-          const countText =
-            gpl?.videoCountText?.runs?.map((r) => r.text || "").join("") ||
-            gpl?.videoCountShortText?.simpleText || "";
-          if (id && title) {
-            out.push({
-              id,
-              title: scrubBrand(title),
-              count: parseCount(countText),
-              countText: countText.trim(),
-            });
-          }
+    const rows =
+      data?.header?.pageHeaderRenderer?.content?.pageHeaderViewModel?.metadata
+        ?.contentMetadataViewModel?.metadataRows || [];
+    for (const row of rows) {
+      for (const part of row?.metadataParts || []) {
+        const txt = part?.text?.content || "";
+        if (/\d+\s*(videos?|episodes?)/i.test(txt)) {
+          return txt.trim();
         }
       }
     }
+    // Older layout fallback
+    const oldText =
+      data?.header?.playlistHeaderRenderer?.numVideosText?.runs
+        ?.map((r) => r.text || "")
+        .join("") || "";
+    if (oldText) return oldText.trim();
   } catch (e) {
-    console.error("extractPlaylists:", e);
+    console.error("extractPlaylistCountText:", e);
   }
-
-  // De-duplicate by playlist ID
-  const seen = new Set();
-  return out.filter((p) => (seen.has(p.id) ? false : (seen.add(p.id), true)));
+  return "";
 }
 
 function parseCount(text) {
