@@ -1,16 +1,18 @@
 // Netlify Function: Library payload (Shorts + Playlists + Other Videos)
 // =====================================================================
 // Builds the data for /library.html in a single response by hitting
-// YouTube's public youtubei/v1/browse endpoint (no API key required) plus
-// the channel's RSS uploads feed.
+// YouTube's public youtubei/v1/browse endpoint (no API key required).
 //
 // Returns:
 //   {
-//     shorts:      [ { id, title } ],
-//     playlists:   [ { id, title, count, videos: [ { id, title } ] } ],
-//     otherVideos: [ { id, title, published } ],
+//     shorts:      [ { id, title } ],         // from Shorts tab
+//     playlists:   [ { id, title, count, countText, videos: [ { id, title } ] } ],
+//     otherVideos: [ { id, title } ],         // from Videos tab, minus anything in a curated playlist
 //     generatedAt: ISO string
 //   }
+//
+// "Other Videos" is sourced from the channel's Videos tab — regular uploads
+// only, livestream replays are excluded (those live on the Live tab).
 //
 // All titles are passed through scrubBrand() so the response is already
 // free of "MFM" / "Mountain of Fire and Miracles Ministries" references
@@ -20,6 +22,8 @@ const CHANNEL_ID = "UCoVS2R6n3ewcIvSb_OzLLQg";
 
 // Shorts tab param (stable, same encoding yt-dlp uses)
 const SHORTS_TAB_PARAM = "EgZzaG9ydHPyBgUKA5oBAA%3D%3D";
+// Videos tab param — regular uploads only, excludes livestream replays
+const VIDEOS_TAB_PARAM = "EgZ2aWRlb3PyBgQKAjoA";
 
 // Curated playlists, rendered on the Library page in this exact order.
 // Edit this array to add / remove / reorder playlists.
@@ -65,16 +69,17 @@ exports.handler = async function (event) {
   }
 
   try {
-    // Fetch shorts, all curated playlists, and uploads RSS — all in parallel.
-    // Each curated playlist call returns its own title, count, and videos.
-    const [shortsResp, uploadsXml, ...playlistResps] = await Promise.all([
+    // Fetch shorts, the Videos tab (regular uploads only — excludes livestream
+    // replays), and all curated playlists in parallel. Each curated playlist
+    // call returns its own title, count, and videos.
+    const [shortsResp, videosResp, ...playlistResps] = await Promise.all([
       browse(CHANNEL_ID, SHORTS_TAB_PARAM).catch((e) => {
         console.error("shorts browse failed:", e);
         return null;
       }),
-      fetchText(`https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`).catch((e) => {
-        console.error("uploads RSS failed:", e);
-        return "";
+      browse(CHANNEL_ID, VIDEOS_TAB_PARAM).catch((e) => {
+        console.error("videos browse failed:", e);
+        return null;
       }),
       ...CURATED_PLAYLISTS.map((id) =>
         browse("VL" + id).catch((e) => {
@@ -85,7 +90,7 @@ exports.handler = async function (event) {
     ]);
 
     const shorts  = extractShorts(shortsResp).slice(0, SHORTS_LIMIT);
-    const uploads = parseRssUploads(uploadsXml);
+    const uploads = extractChannelVideos(videosResp);
 
     // Build playlist objects in the curated order. Drop any that failed
     // to load or came back below the minimum video threshold.
@@ -167,12 +172,6 @@ async function browse(browseId, params) {
   });
   if (!res.ok) throw new Error(`browse ${browseId} -> ${res.status}`);
   return res.json();
-}
-
-async function fetchText(url) {
-  const res = await fetch(url, { headers: YT_HEADERS });
-  if (!res.ok) throw new Error(`${url} -> ${res.status}`);
-  return res.text();
 }
 
 // ========== Extractors ==========
@@ -286,33 +285,28 @@ function extractPlaylistVideos(data) {
   return out;
 }
 
-function parseRssUploads(xml) {
-  if (!xml) return [];
+// Extract videos from the channel's Videos tab response.
+// This excludes livestream replays (those live in the Live tab) and Shorts
+// (those live in the Shorts tab).
+function extractChannelVideos(data) {
+  if (!data) return [];
   const out = [];
-  const entries = xml.split("<entry>").slice(1);
-  for (const e of entries) {
-    const idM    = e.match(/<yt:videoId>([^<]+)<\/yt:videoId>/);
-    const titleM = e.match(/<title>([^<]+)<\/title>/);
-    const pubM   = e.match(/<published>([^<]+)<\/published>/);
-    if (idM && titleM) {
-      out.push({
-        id: idM[1].trim(),
-        title: scrubBrand(decodeHtmlEntities(titleM[1].trim())),
-        published: pubM ? pubM[1].trim() : "",
-      });
+  try {
+    const content = selectedTabContent(data);
+    const items = content?.richGridRenderer?.contents || [];
+    for (const item of items) {
+      const v = item?.richItemRenderer?.content?.videoRenderer;
+      if (!v?.videoId) continue;
+      const titleRuns = v?.title?.runs || [];
+      const title =
+        titleRuns.map((r) => r.text || "").join("").trim() ||
+        (v?.title?.simpleText || "").trim();
+      out.push({ id: v.videoId, title: scrubBrand(title) });
     }
+  } catch (e) {
+    console.error("extractChannelVideos:", e);
   }
   return out;
-}
-
-function decodeHtmlEntities(s) {
-  return s
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)));
 }
 
 // ========== Brand scrub ==========

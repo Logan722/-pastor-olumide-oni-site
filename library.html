@@ -1786,6 +1786,131 @@ html.light-mode .shorts-card-title,
 html.light-mode .playlist-card-title { color: #2d2825; }
 html.light-mode .library-hero-sub,
 html.light-mode .library-section-sub { color: #5a4f3d; }
+
+/* =========================================================================
+   CARD-BUTTON RESET — cards are <button> elements so the lightbox can
+   open inline; strip user-agent button chrome and align text the way the
+   <a> versions did.
+   ========================================================================= */
+.shorts-card,
+.playlist-card,
+.other-video-card {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.shorts-card:focus-visible,
+.playlist-card:focus-visible,
+.other-video-card:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* =========================================================================
+   LIGHTBOX PLAYER
+   ========================================================================= */
+.library-lightbox {
+  position: fixed; inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0s linear 0.28s;
+}
+.library-lightbox.open {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.28s ease, visibility 0s linear 0s;
+}
+.library-lightbox-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(5, 4, 2, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.library-lightbox-shell {
+  position: relative;
+  width: min(96vw, 1200px);
+  max-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(8px) scale(0.98);
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.library-lightbox.open .library-lightbox-shell {
+  transform: translateY(0) scale(1);
+}
+.library-lightbox-close {
+  position: absolute;
+  top: -52px;
+  right: 0;
+  width: 40px; height: 40px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 50%;
+  background: rgba(10, 9, 7, 0.6);
+  color: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 2;
+}
+.library-lightbox-close:hover,
+.library-lightbox-close:focus-visible {
+  background: var(--gold);
+  color: var(--bg);
+  border-color: var(--gold);
+  outline: none;
+  transform: scale(1.05);
+}
+.library-lightbox-stage {
+  position: relative;
+  width: 100%;
+  background: #000;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 28px 80px -20px rgba(0,0,0,0.7);
+}
+.library-lightbox-stage[data-aspect="video"] { aspect-ratio: 16 / 9; }
+.library-lightbox-stage[data-aspect="short"] {
+  /* 9:16 with a comfortable cap so it doesn't dominate desktop screens */
+  aspect-ratio: 9 / 16;
+  width: min(420px, 92vw, calc(100vh - 140px) * 9 / 16);
+  margin: 0 auto;
+}
+.library-lightbox-stage iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+
+/* Lock background scroll when the lightbox is open */
+body.library-lightbox-open { overflow: hidden; }
+
+/* Mobile: pull the close button inside the stage so it stays on-screen */
+@media (max-width: 720px) {
+  .library-lightbox-shell { width: 100vw; max-height: 100vh; }
+  .library-lightbox-stage { border-radius: 0; }
+  .library-lightbox-close {
+    top: 14px;
+    right: 14px;
+    background: rgba(10, 9, 7, 0.85);
+    border-color: var(--cream);
+  }
+  .library-lightbox-stage[data-aspect="short"] {
+    /* On phones, fill the viewport height-first so vertical content reads naturally */
+    width: min(100vw, calc((100vh - 30px) * 9 / 16));
+    max-height: calc(100vh - 30px);
+  }
+}
 </style>
 </head>
 <body>
@@ -1949,6 +2074,32 @@ html.light-mode .library-section-sub { color: #5a4f3d; }
   </div>
 </section>
 
+<!-- =====================================================
+     LIGHTBOX PLAYER  (inline YouTube embed)
+     Hidden by default; opens via JS when a card is clicked.
+     ===================================================== -->
+<div class="library-lightbox" id="libraryLightbox" role="dialog" aria-modal="true" aria-label="Video player" aria-hidden="true">
+  <div class="library-lightbox-backdrop" id="libraryLightboxBackdrop" aria-hidden="true"></div>
+  <div class="library-lightbox-shell">
+    <button type="button" class="library-lightbox-close" id="libraryLightboxClose" aria-label="Close video">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"/>
+        <line x1="18" y1="6" x2="6" y2="18"/>
+      </svg>
+    </button>
+    <div class="library-lightbox-stage" id="libraryLightboxStage" data-aspect="video">
+      <iframe
+        id="libraryLightboxFrame"
+        title="Video player"
+        src="about:blank"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</div>
+
 </main>
 
 <!-- =====================================================
@@ -2034,13 +2185,22 @@ html.light-mode .library-section-sub { color: #5a4f3d; }
     const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
     }[c]));
-    const watch = id => 'https://www.youtube.com/watch?v=' + encodeURIComponent(id);
-    const watchInPlaylist = (id, list) => watch(id) + '&list=' + encodeURIComponent(list);
-    const shortUrl = id => 'https://www.youtube.com/shorts/' + encodeURIComponent(id);
     const thumb = (id, q) => 'https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/' + (q || 'mqdefault') + '.jpg';
     const playlistUrl = id => 'https://www.youtube.com/playlist?list=' + encodeURIComponent(id);
 
     const playSvg = '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+
+    // Common attribute set used on every clickable card. Keeps the markup
+    // consistent so the delegated lightbox click handler picks all of them up.
+    function cardAttrs(id, type, label, list) {
+      return [
+        `type="button"`,
+        `data-video-id="${esc(id)}"`,
+        `data-video-type="${type}"`,
+        list ? `data-playlist-id="${esc(list)}"` : '',
+        `aria-label="${esc(label)}"`,
+      ].filter(Boolean).join(' ');
+    }
 
     function renderShorts(shorts) {
       if (!shortsRail) return;
@@ -2049,13 +2209,13 @@ html.light-mode .library-section-sub { color: #5a4f3d; }
         return;
       }
       shortsRail.innerHTML = shorts.map(s => `
-        <a class="shorts-card" href="${shortUrl(s.id)}" target="_blank" rel="noopener" role="listitem" aria-label="${esc(s.title) || 'Short'}">
+        <button class="shorts-card" ${cardAttrs(s.id, 'short', s.title || 'Short')}>
           <img src="${thumb(s.id, 'hqdefault')}" alt="" loading="lazy" />
           <div class="shorts-card-play" aria-hidden="true">${playSvg}</div>
           <div class="shorts-card-overlay">
             <div class="shorts-card-title">${esc(s.title)}</div>
           </div>
-        </a>
+        </button>
       `).join('');
     }
 
@@ -2076,7 +2236,7 @@ html.light-mode .library-section-sub { color: #5a4f3d; }
           </div>
           <div class="playlist-rail" role="list">
             ${pl.videos.map(v => `
-              <a class="playlist-card" href="${watchInPlaylist(v.id, pl.id)}" target="_blank" rel="noopener" role="listitem" aria-label="${esc(v.title)}">
+              <button class="playlist-card" ${cardAttrs(v.id, 'video', v.title, pl.id)}>
                 <div class="playlist-card-thumb">
                   <img src="${thumb(v.id)}" alt="" loading="lazy" />
                   <div class="playlist-card-play" aria-hidden="true">${playSvg}</div>
@@ -2084,7 +2244,7 @@ html.light-mode .library-section-sub { color: #5a4f3d; }
                 <div class="playlist-card-body">
                   <div class="playlist-card-title">${esc(v.title)}</div>
                 </div>
-              </a>
+              </button>
             `).join('')}
           </div>
         </div>
@@ -2098,7 +2258,7 @@ html.light-mode .library-section-sub { color: #5a4f3d; }
         return;
       }
       otherGrid.innerHTML = videos.map(v => `
-        <a class="other-video-card" href="${watch(v.id)}" target="_blank" rel="noopener" aria-label="${esc(v.title)}">
+        <button class="other-video-card" ${cardAttrs(v.id, 'video', v.title)}>
           <div class="playlist-card-thumb">
             <img src="${thumb(v.id)}" alt="" loading="lazy" />
             <div class="playlist-card-play" aria-hidden="true">${playSvg}</div>
@@ -2106,7 +2266,7 @@ html.light-mode .library-section-sub { color: #5a4f3d; }
           <div class="playlist-card-body">
             <div class="playlist-card-title">${esc(v.title)}</div>
           </div>
-        </a>
+        </button>
       `).join('');
       otherSection.style.display = '';
     }
@@ -2116,6 +2276,90 @@ html.light-mode .library-section-sub { color: #5a4f3d; }
       if (playlistsSection) playlistsSection.style.display = 'none';
       if (otherSection) otherSection.style.display = 'none';
       if (errorSection) errorSection.style.display = '';
+    }
+
+    /* ============================================================
+       LIGHTBOX — single-instance YouTube player overlay.
+       Opens on card click. Esc, X-button, or backdrop click closes.
+       Restores focus to the triggering card on close so keyboard
+       users don't get dumped at the top of the page.
+       ============================================================ */
+    const lightbox     = document.getElementById('libraryLightbox');
+    const lightboxStage = document.getElementById('libraryLightboxStage');
+    const lightboxFrame = document.getElementById('libraryLightboxFrame');
+    const lightboxClose = document.getElementById('libraryLightboxClose');
+    const lightboxBackdrop = document.getElementById('libraryLightboxBackdrop');
+    let lightboxOpener = null;
+
+    function buildEmbedUrl(id, type, listId) {
+      // For shorts, YouTube renders them in vertical inside the standard
+      // /embed/{id} player when loaded with the right params. We use the
+      // same /embed for both — only the stage aspect ratio differs.
+      const params = new URLSearchParams({
+        autoplay: '1',
+        rel: '0',
+        modestbranding: '1',
+        playsinline: '1',
+      });
+      if (listId) {
+        params.set('list', listId);
+      }
+      return 'https://www.youtube-nocookie.com/embed/'
+        + encodeURIComponent(id)
+        + '?' + params.toString();
+    }
+
+    function openLightbox(opener) {
+      if (!lightbox || !lightboxFrame) return;
+      const id     = opener.getAttribute('data-video-id');
+      const type   = opener.getAttribute('data-video-type');
+      const listId = opener.getAttribute('data-playlist-id') || '';
+      if (!id) return;
+
+      lightboxOpener = opener;
+      lightboxStage.setAttribute('data-aspect', type === 'short' ? 'short' : 'video');
+      lightboxFrame.setAttribute('src', buildEmbedUrl(id, type, listId));
+      lightboxFrame.setAttribute('title', opener.getAttribute('aria-label') || 'Video player');
+
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('library-lightbox-open');
+      // Move focus into the dialog
+      setTimeout(() => lightboxClose && lightboxClose.focus(), 50);
+    }
+
+    function closeLightbox() {
+      if (!lightbox || !lightboxFrame) return;
+      // Setting src to about:blank stops video playback immediately —
+      // simply removing the iframe attribute is unreliable across browsers.
+      lightboxFrame.setAttribute('src', 'about:blank');
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('library-lightbox-open');
+      if (lightboxOpener) {
+        try { lightboxOpener.focus(); } catch (e) { /* ignore */ }
+        lightboxOpener = null;
+      }
+    }
+
+    if (lightbox) {
+      // Delegated click on any card-like button anywhere in the library main
+      const main = document.querySelector('main');
+      if (main) {
+        main.addEventListener('click', function (e) {
+          const card = e.target.closest('[data-video-id]');
+          if (!card) return;
+          e.preventDefault();
+          openLightbox(card);
+        });
+      }
+      if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+      if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+          closeLightbox();
+        }
+      });
     }
 
     async function load() {
