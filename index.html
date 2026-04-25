@@ -3107,9 +3107,11 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
     rail.innerHTML = items.map(function(item) {
       const titleShort = (item.title || '').length > 60 ? item.title.slice(0, 57) + '…' : (item.title || '');
       const thumb = thumbFromItem(item);
+      const fallback = item.thumbnailFallback || (item.videoId ? `https://i.ytimg.com/vi/${item.videoId}/hqdefault.jpg` : '');
+      const onerror = fallback ? `this.onerror=null;this.src='${fallback}';` : `this.style.display='none';`;
       return `
         <a class="short-card" href="${escapeHtml(item.link)}" target="_blank" rel="noopener">
-          ${thumb ? `<img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" />` : '<div style="width:100%;height:100%;background:linear-gradient(135deg, var(--bg-2), var(--bg-panel));"></div>'}
+          ${thumb ? `<img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="${onerror}" />` : '<div style="width:100%;height:100%;background:linear-gradient(135deg, var(--bg-2), var(--bg-panel));"></div>'}
           <div class="short-card-play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="short-card-label">${escapeHtml(titleShort)}</div>
         </a>
@@ -3146,6 +3148,22 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
     return [];
   }
 
+  async function fetchShorts() {
+    /* Real Shorts only — queries the channel's Shorts tab via Netlify fn. */
+    try {
+      const r = await fetch('/.netlify/functions/youtube-shorts');
+      if (r.ok) {
+        const d = await r.json();
+        if (d && d.status === 'ok' && Array.isArray(d.shorts) && d.shorts.length) {
+          return d.shorts;
+        }
+      }
+    } catch (e) {
+      console.warn('[home] shorts fetch failed:', e);
+    }
+    return [];
+  }
+
   async function loadHomeSermon() {
     if (isPreview()) {
       showPreviewBanner();
@@ -3166,20 +3184,26 @@ body, body::before, .nav, .nav.scrolled, .mobile-nav { transition: background 0.
       return;
     }
 
-    const items = await fetchVideoFeed();
+    // Fetch videos and shorts in parallel — separate sources
+    const [items, shorts] = await Promise.all([fetchVideoFeed(), fetchShorts()]);
+
     if (!items.length) {
-      // Total fetch failure: still populate with a graceful fallback so
-      // visitors don't sit on "Loading..." forever.
-      console.error('[home] all feed sources failed');
+      console.error('[home] all video sources failed');
       renderFeaturedSermon({ link: YT_CHANNEL_URL });
       renderRecentSermonsGrid([]);
-      renderShortsRail([]);
-      return;
+    } else {
+      renderFeaturedSermon(items[0]);
+      renderRecentSermonsGrid(items.slice(1, 4));
     }
 
-    renderFeaturedSermon(items[0]);
-    renderRecentSermonsGrid(items.slice(1, 4));
-    renderShortsRail(items.length > 4 ? items.slice(4, 9) : items.slice(0, 5));
+    if (shorts.length) {
+      // True Shorts from the dedicated tab
+      renderShortsRail(shorts.slice(0, 6));
+    } else {
+      // Fall back to feed items so the rail isn't empty
+      const fallback = items.length > 4 ? items.slice(4, 9) : [];
+      renderShortsRail(fallback);
+    }
   }
 
   /* ---------- Hero verse rotator ---------- */
