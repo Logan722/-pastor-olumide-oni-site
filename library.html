@@ -1851,18 +1851,24 @@ html.light-mode .library-section-sub { color: #5a4f3d; }
 }
 .library-lightbox-close {
   position: absolute;
-  top: -52px;
-  right: 0;
+  top: 12px;
+  right: 12px;
   width: 40px; height: 40px;
-  border: 1px solid var(--gold-dim);
+  border: 1px solid rgba(212, 168, 83, 0.6);
   border-radius: 50%;
-  background: rgba(10, 9, 7, 0.6);
+  background: rgba(10, 9, 7, 0.78);
   color: var(--cream);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
-  transition: all 0.25s ease;
-  z-index: 2;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  z-index: 5;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  font: inherit;
 }
+.library-lightbox-close > svg { pointer-events: none; }
 .library-lightbox-close:hover,
 .library-lightbox-close:focus-visible {
   background: var(--gold);
@@ -1895,15 +1901,15 @@ html.light-mode .library-section-sub { color: #5a4f3d; }
 /* Lock background scroll when the lightbox is open */
 body.library-lightbox-open { overflow: hidden; }
 
-/* Mobile: pull the close button inside the stage so it stays on-screen */
+/* Mobile: full-width stage, slightly smaller close button */
 @media (max-width: 720px) {
   .library-lightbox-shell { width: 100vw; max-height: 100vh; }
   .library-lightbox-stage { border-radius: 0; }
   .library-lightbox-close {
     top: 14px;
     right: 14px;
-    background: rgba(10, 9, 7, 0.85);
-    border-color: var(--cream);
+    width: 38px;
+    height: 38px;
   }
   .library-lightbox-stage[data-aspect="short"] {
     /* On phones, fill the viewport height-first so vertical content reads naturally */
@@ -2081,12 +2087,6 @@ body.library-lightbox-open { overflow: hidden; }
 <div class="library-lightbox" id="libraryLightbox" role="dialog" aria-modal="true" aria-label="Video player" aria-hidden="true">
   <div class="library-lightbox-backdrop" id="libraryLightboxBackdrop" aria-hidden="true"></div>
   <div class="library-lightbox-shell">
-    <button type="button" class="library-lightbox-close" id="libraryLightboxClose" aria-label="Close video">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
-        <line x1="6" y1="6" x2="18" y2="18"/>
-        <line x1="18" y1="6" x2="6" y2="18"/>
-      </svg>
-    </button>
     <div class="library-lightbox-stage" id="libraryLightboxStage" data-aspect="video">
       <iframe
         id="libraryLightboxFrame"
@@ -2096,6 +2096,12 @@ body.library-lightbox-open { overflow: hidden; }
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
       ></iframe>
+      <button type="button" class="library-lightbox-close" id="libraryLightboxClose" aria-label="Close video">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <line x1="6" y1="6" x2="18" y2="18"/>
+          <line x1="18" y1="6" x2="6" y2="18"/>
+        </svg>
+      </button>
     </div>
   </div>
 </div>
@@ -2347,24 +2353,43 @@ body.library-lightbox-open { overflow: hidden; }
       const main = document.querySelector('main');
       if (main) {
         main.addEventListener('click', function (e) {
+          // If the click landed inside the lightbox itself, never treat it
+          // as a card click — the lightbox has its own handlers.
+          if (e.target.closest('#libraryLightbox')) return;
           const card = e.target.closest('[data-video-id]');
           if (!card) return;
           e.preventDefault();
           openLightbox(card);
         });
       }
-      if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-      if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+      if (lightboxClose) {
+        lightboxClose.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeLightbox();
+        });
+      }
+      if (lightboxBackdrop) {
+        lightboxBackdrop.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeLightbox();
+        });
+      }
+      // Capture-phase Esc so the YouTube iframe can't swallow it once focused
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && lightbox.classList.contains('open')) {
           closeLightbox();
         }
-      });
+      }, true);
     }
 
     async function load() {
       try {
-        const res = await fetch(API_URL, { cache: 'default' });
+        // Cache-bust the browser's local copy on every page load. The
+        // function still has its own 4-hour server cache, so this only
+        // bypasses the BROWSER cache — Netlify's CDN response is reused.
+        const res = await fetch(API_URL + '?_=' + Date.now(), { cache: 'no-cache' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
         renderShorts(data.shorts);

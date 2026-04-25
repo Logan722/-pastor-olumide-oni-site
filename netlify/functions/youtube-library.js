@@ -56,7 +56,7 @@ exports.handler = async function (event) {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, OPTIONS",
     "Content-Type": "application/json",
-    "Cache-Control": "public, max-age=3600, s-maxage=14400",
+    "Cache-Control": "public, max-age=300, s-maxage=14400",
   };
 
   if (event.httpMethod === "OPTIONS") {
