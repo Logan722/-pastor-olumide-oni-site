@@ -1454,6 +1454,15 @@ body[data-reading-mode="scroll"] .toolbar-group:first-child {
         const prefs = JSON.parse(raw);
         if (prefs.fontSize) setFontSize(prefs.fontSize);
         if (prefs.theme) setTheme(prefs.theme);
+      } else {
+        // First reader visit: inherit the site-wide theme choice so a user
+        // who toggled light mode on the homepage doesn't get jarred into
+        // dark when they open a book. They can still pick sepia/dark/light
+        // explicitly, and that choice will stick from then on.
+        const siteTheme = localStorage.getItem('site-theme');
+        const prefersLight = !siteTheme && window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (siteTheme === 'light' || prefersLight) setTheme('light');
       }
     } catch {}
   }

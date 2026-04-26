@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <script>
-(function(){var t=localStorage.getItem('site-theme');if(t==='light'){document.documentElement.classList.add('light-mode');var m=document.querySelector('meta[name=\"theme-color\"]');if(m)m.setAttribute('content','#faf7f2');}})();
+(function(){var t=localStorage.getItem('site-theme');var isLight=(t==='light')||(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches);if(isLight){document.documentElement.classList.add('light-mode');var m=document.querySelector('meta[name=\"theme-color\"]');if(m)m.setAttribute('content','#faf7f2');}})();
 </script>
 <meta charset="UTF-8" />
 <meta name="google-site-verification" content="NPse1AO64P3fFEgi6Nwu48y2UfOz0UIIuYY2Cut0Zxc" />
