@@ -21,29 +21,115 @@
    ========================================================================= */
 
 :root {
-  /* Color tokens */
-  --bg: #0a0907;
-  --bg-2: #120f0a;
-  --bg-panel: #0f0c08;
-  --gold: #d4a853;
-  --gold-soft: #c89a47;
-  --gold-dim: #8b6f33;
-  --gold-glow: rgba(212, 168, 83, 0.18);
-  --cream: #f2e8d5;
-  --text: #e8dfd0;
-  --text-muted: #8a8275;
-  --text-dim: #6a6356;
-  --line: rgba(212, 168, 83, 0.18);
-  --line-strong: rgba(212, 168, 83, 0.4);
+  /* ----- Surface tokens (page backgrounds) ----- */
+  --bg:        #0a0907;   /* primary page bg */
+  --bg-2:      #120f0a;   /* slightly elevated section */
+  --bg-3:      #08070a;   /* deeper section base */
+  --bg-deep:   #050404;   /* deepest gradient end (CTAs, vignettes) */
+  --bg-panel:  #0f0c08;   /* card/panel base */
+  --bg-elev:   #1a1510;   /* elevated card / book-poster top */
+  --bg-elev-2: #181310;   /* alternative elevated card */
 
-  /* Spacing */
+  /* Solid frame for media (image / video). Stays dark in both modes — a
+     player frame should always be black. */
+  --media-bg: #000;
+
+  /* Text color used ON gold buttons. Auto-flips for legibility in light mode. */
+  --on-gold: #0a0907;
+
+  /* Footer is intentionally dark in BOTH modes (anchor of identity).
+     Dedicated tokens so footer doesn't follow theme. */
+  --footer-bg: #1a1714;
+  --footer-text: #e8dfd0;
+  --footer-text-muted: #8a8275;
+  --footer-line: rgba(212, 168, 83, 0.18);
+
+  /* ----- Brand / accent tokens ----- */
+  --gold:      #d4a853;
+  --gold-soft: #c89a47;
+  --gold-dim:  #8b6f33;
+  --gold-glow: rgba(212, 168, 83, 0.18);
+
+  /* ----- Text tokens ----- */
+  --cream:      #f2e8d5;   /* brightest text on dark bg / darkest text on light */
+  --text:       #e8dfd0;
+  --text-muted: #8a8275;
+  --text-dim:   #6a6356;
+
+  /* ----- Lines / dividers ----- */
+  --line:        rgba(212, 168, 83, 0.18);
+  --line-strong: rgba(212, 168, 83, 0.40);
+
+  /* ----- Shadows / overlays (themable) ----- */
+  --shadow-card:    0 10px 28px rgba(0, 0, 0, 0.40);
+  --shadow-card-hi: 0 14px 36px rgba(0, 0, 0, 0.50);
+  --shadow-deep:    0 30px 80px rgba(0, 0, 0, 0.60);
+  --shadow-soft:    0 4px 30px rgba(0, 0, 0, 0.30);
+  --vignette:       rgba(0, 0, 0, 0.45);
+
+  /* RGB triplets (no alpha) so translucent surfaces can use rgba(var(--bg-rgb), .85)
+     and still flip with the theme. */
+  --bg-rgb: 10, 9, 7;
+  --cream-rgb: 242, 232, 213;
+
+  /* ----- Spacing ----- */
   --gutter: 24px;
   --section-y: 120px;
   --container-max: 1200px;
 
-  /* Type */
+  /* ----- Type ----- */
   --serif: 'Fraunces', Georgia, serif;
   --sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* =========================================================================
+   LIGHT MODE — token redefinition only
+   Every section that consumes tokens (var(--bg), var(--bg-deep), etc.)
+   adapts automatically. No per-section overrides needed.
+   ========================================================================= */
+html.light-mode {
+  --bg:        #faf7f2;
+  --bg-2:      #f0ebe3;
+  --bg-3:      #ede8de;
+  --bg-deep:   #e8e2d6;   /* deepest cream — replaces #050404 in CTAs */
+  --bg-panel:  #f5f0e8;
+  --bg-elev:   #f5f0e8;
+  --bg-elev-2: #f0ebe3;
+
+  /* Media frames stay dark (a video poster should be black-ish in both modes,
+     but ease the contrast against cream by warming the black slightly). */
+  --media-bg: #1a1714;
+
+  /* Gold gets darker in light mode for contrast → use white text on it. */
+  --on-gold: #ffffff;
+
+  /* Brand */
+  --gold:      #9e7a2c;
+  --gold-soft: #8c6d28;
+  --gold-dim:  #c4a360;
+  --gold-glow: rgba(158, 122, 44, 0.12);
+
+  /* Text inverts: brightest text becomes the darkest ink. */
+  --cream:      #1a1714;
+  --text:       #2d2825;
+  --text-muted: #6a635a;
+  --text-dim:   #8a8275;
+
+  --line:        rgba(158, 122, 44, 0.20);
+  --line-strong: rgba(158, 122, 44, 0.40);
+
+  /* Softer, warm-tinted shadows for the cream surfaces. */
+  --shadow-card:    0 10px 28px rgba(50, 30, 10, 0.10);
+  --shadow-card-hi: 0 14px 36px rgba(50, 30, 10, 0.14);
+  --shadow-deep:    0 30px 80px rgba(50, 30, 10, 0.15);
+  --shadow-soft:    0 4px 30px rgba(50, 30, 10, 0.10);
+  --vignette:       rgba(50, 30, 10, 0.12);
+
+  /* RGB triplets follow surface */
+  --bg-rgb: 250, 247, 242;
+  --cream-rgb: 26, 23, 20;
+
+  /* Footer tokens DO NOT change — footer stays dark. */
 }
 
 /* =========================================================================
@@ -83,12 +169,21 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse at 50% -10%, rgba(212, 168, 83, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% -10%, var(--gold-glow) 0%, transparent 55%),
     radial-gradient(ellipse at 15% 90%, rgba(139, 111, 51, 0.08) 0%, transparent 55%),
     radial-gradient(ellipse at 90% 40%, rgba(212, 168, 83, 0.04) 0%, transparent 45%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-3) 60%, var(--bg-deep) 100%);
   z-index: 0;
   pointer-events: none;
+}
+
+/* Light mode: subdue the second/third radial-gradients (which have hardcoded
+   warm-tints designed to glow through dark) and let the bg/bg-3/bg-deep tokens
+   carry the cream gradient. */
+html.light-mode body::before {
+  background:
+    radial-gradient(ellipse at 50% -10%, var(--gold-glow) 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-3) 60%, var(--bg-deep) 100%);
 }
 
 .light-shaft {
@@ -124,6 +219,11 @@ body::before {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
+/* The film grain and light-shaft are both designed for dark-bg compositing.
+   Hide them in light mode so the cream surface stays clean. */
+html.light-mode .light-shaft,
+html.light-mode .grain { opacity: 0; }
+
 /* =========================================================================
    Layout
    ========================================================================= */
@@ -148,7 +248,13 @@ main { position: relative; z-index: 10; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
+  /* Honor iOS safe areas so the nav doesn't clip under the dynamic island
+     and so the side gutters extend past the rounded corners on landscape.
+     Falls back gracefully on non-iOS. */
   padding: 18px 0;
+  padding-top: max(18px, env(safe-area-inset-top));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   transition: background 0.5s ease, padding 0.5s ease, border 0.5s ease;
   border-bottom: 1px solid transparent;
 }
@@ -156,9 +262,11 @@ main { position: relative; z-index: 10; }
   background: rgba(var(--bg-rgb), 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  padding: 12px 0;
+  padding-top: max(12px, env(safe-area-inset-top));
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
 }
+/* (Light-mode override removed — the rgba above auto-flips via --bg-rgb.) */
 
 .nav-inner {
   display: flex;
@@ -226,7 +334,7 @@ main { position: relative; z-index: 10; }
   font-size: 11.5px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--bg);
+  color: var(--on-gold);
   background: var(--gold);
   border-radius: 2px;
   transition: all 0.3s ease;
@@ -240,8 +348,10 @@ main { position: relative; z-index: 10; }
 
 .nav-toggle {
   display: none;
-  width: 28px; height: 28px;
+  width: 44px; height: 44px;   /* iOS-recommended touch target */
   color: var(--cream);
+  align-items: center;
+  justify-content: center;
 }
 
 /* =========================================================================
@@ -264,13 +374,13 @@ main { position: relative; z-index: 10; }
 }
 
 .btn-primary {
-  color: var(--bg);
+  color: var(--on-gold);
   background: var(--gold);
 }
 .btn-primary:hover {
   background: var(--cream);
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px -10px rgba(212, 168, 83, 0.35);
+  box-shadow: 0 14px 30px -10px var(--gold-glow);
 }
 
 .btn-ghost {
@@ -349,6 +459,8 @@ main { position: relative; z-index: 10; }
   border-top: 1px solid var(--line);
   margin-top: 120px;
   padding: 80px 0 40px;
+  /* Bottom safe-area inset for iPhone home indicator. */
+  padding-bottom: max(40px, calc(40px + env(safe-area-inset-bottom)));
 }
 
 .footer-grid {
@@ -441,6 +553,116 @@ main { position: relative; z-index: 10; }
   font-size: 12px;
   letter-spacing: 0.1em;
   color: var(--text-dim);
+}
+
+/* =========================================================================
+   Mobile slide-out menu — safe-area handling
+   The .mobile-nav element itself is defined per-page; this rule just
+   ensures no page's mobile menu clips under the iPhone dynamic island
+   or home indicator.
+   ========================================================================= */
+.mobile-nav {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* =========================================================================
+   Theme toggle button (the moon/sun in nav). Lives in the global stylesheet
+   so every page gets it for free instead of redefining the CSS per-page.
+   ========================================================================= */
+.theme-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  cursor: pointer;
+  color: var(--gold);
+  transition: all 0.3s ease;
+  margin-right: 8px;
+  padding: 0;
+  flex-shrink: 0;
+}
+/* On touch devices the button needs to hit the iOS 44pt minimum. */
+@media (max-width: 960px) {
+  .theme-mode-toggle { width: 44px; height: 44px; }
+}
+.theme-mode-toggle:hover {
+  border-color: var(--gold);
+  background: var(--gold-glow);
+}
+.theme-mode-toggle .icon-sun  { display: none; }
+.theme-mode-toggle .icon-moon { display: block; }
+html.light-mode .theme-mode-toggle .icon-sun  { display: block; }
+html.light-mode .theme-mode-toggle .icon-moon { display: none; }
+
+/* Mobile-nav variant (rendered into the slide-out menu by JS) */
+.mobile-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 0;
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.mobile-theme-toggle span {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* =========================================================================
+   FOOTER — dark in BOTH modes (anchor of brand identity).
+   The base footer rules above use --line / --gold / --text-muted which DO
+   change with theme; the override below pins the footer back to its dark
+   palette by consuming --footer-* tokens (which don't change).
+   ========================================================================= */
+html.light-mode .site-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  border-top-color: var(--footer-line);
+}
+html.light-mode .site-footer .footer-brand,
+html.light-mode .site-footer .footer-col a:hover {
+  color: var(--footer-text);
+}
+html.light-mode .site-footer .footer-scripture,
+html.light-mode .site-footer .footer-col a,
+html.light-mode .site-footer .footer-bottom p {
+  color: var(--footer-text-muted);
+}
+html.light-mode .site-footer .footer-bottom,
+html.light-mode .site-footer .footer-col-title {
+  border-color: var(--footer-line);
+}
+html.light-mode .site-footer .footer-col-title,
+html.light-mode .site-footer .footer-brand em,
+html.light-mode .site-footer .footer-scripture-ref {
+  /* Keep the warm gold accent visible against the dark footer in light mode
+     (the lighter --gold #9e7a2c would be too dim against #1a1714). */
+  color: #d4a853;
+}
+html.light-mode .site-footer .footer-social {
+  border-color: var(--footer-line);
+  color: #b58a3e;
+}
+html.light-mode .site-footer .footer-social:hover {
+  border-color: #d4a853;
+  color: #d4a853;
+  background: rgba(212, 168, 83, 0.05);
+}
+
+/* =========================================================================
+   Smooth transitions across the theme flip
+   ========================================================================= */
+html { transition: background 0.4s ease; }
+body, body::before, .nav, .nav.scrolled {
+  transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
 /* =========================================================================
@@ -853,7 +1075,7 @@ main { position: relative; z-index: 10; }
 .about-image-frame {
   position: relative;
   padding: 14px;
-  background: linear-gradient(155deg, rgba(20, 17, 12, 0.85) 0%, rgba(var(--bg-rgb), 0.95) 100%);
+  background: linear-gradient(155deg, rgba(20, 17, 12, 0.85) 0%, var(--bg) 100%);
   border: 1px solid rgba(212, 168, 83, 0.35);
   box-shadow:
     inset 0 0 0 1px rgba(var(--bg-rgb), 0.6),
@@ -1217,7 +1439,7 @@ body:has(.preview-banner) .nav { top: 42px; }
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(var(--bg-rgb), 0.98);
+  background: var(--bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   opacity: 0;
@@ -1301,7 +1523,7 @@ body.mobile-nav-open {
   justify-content: space-between;
   padding: 22px 4px;
   font-family: 'Fraunces', Georgia, serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 26px;
   letter-spacing: -0.01em;
   color: var(--cream);
@@ -2982,7 +3204,16 @@ body.mobile-nav-open {
   .featured-spread-title { font-size: 26px; }
   .featured-spread-quote { font-size: 15px; }
   .read-word-stat-num { font-size: 36px; }
-  .read-word-stats { gap: 24px; }
+  .read-word-stats {
+    /* At narrow widths the three stats can't wrap cleanly side-by-side
+       because each is itself a baseline-aligned row of number+label.
+       Stack them vertically with their own dividers. */
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .read-word-stat { gap: 8px; }
+  .read-word-bottom-divider { display: none; }
   .book-marquee-card { width: 100px; }
 }
 
@@ -4356,7 +4587,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     var isLight = document.documentElement.classList.contains('light-mode');
     localStorage.setItem('site-theme', isLight ? 'light' : 'dark');
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', isLight ? '#faf7f2' : 'var(--bg)');
+    if (meta) meta.setAttribute('content', isLight ? '#faf7f2' : '#0a0907');
   }
   btn.addEventListener('click', doToggle);
   // Mobile nav toggle
