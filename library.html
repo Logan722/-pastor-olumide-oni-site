@@ -2072,7 +2072,7 @@ body.library-lightbox-open { overflow: hidden; }
       }
       shortsRail.innerHTML = shorts.map(s => `
         <button class="shorts-card" ${cardAttrs(s.id, 'short', s.title || 'Short')}>
-          <img src="${thumb(s.id, 'hqdefault')}" alt="" loading="lazy" />
+          <img src="${thumb(s.id, 'hqdefault')}" alt="" loading="lazy" / decoding="async">
           <div class="shorts-card-play" aria-hidden="true">${playSvg}</div>
           <div class="shorts-card-overlay">
             <div class="shorts-card-title">${esc(s.title)}</div>
@@ -2100,7 +2100,7 @@ body.library-lightbox-open { overflow: hidden; }
             ${pl.videos.map(v => `
               <button class="playlist-card" ${cardAttrs(v.id, 'video', v.title, pl.id)}>
                 <div class="playlist-card-thumb">
-                  <img src="${thumb(v.id)}" alt="" loading="lazy" />
+                  <img src="${thumb(v.id)}" alt="" loading="lazy" / decoding="async">
                   <div class="playlist-card-play" aria-hidden="true">${playSvg}</div>
                 </div>
                 <div class="playlist-card-body">
@@ -2122,7 +2122,7 @@ body.library-lightbox-open { overflow: hidden; }
       otherGrid.innerHTML = videos.map(v => `
         <button class="other-video-card" ${cardAttrs(v.id, 'video', v.title)}>
           <div class="playlist-card-thumb">
-            <img src="${thumb(v.id)}" alt="" loading="lazy" />
+            <img src="${thumb(v.id)}" alt="" loading="lazy" / decoding="async">
             <div class="playlist-card-play" aria-hidden="true">${playSvg}</div>
           </div>
           <div class="playlist-card-body">

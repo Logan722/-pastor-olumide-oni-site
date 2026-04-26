@@ -1317,7 +1317,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
   <div class="container">
     <div class="author-bio-wrap reveal">
       <div class="author-bio-photo">
-        <img src="img/photos/couple-blue.jpg" alt="Pastor Olumide Oni and Pastor (Mrs.) Oluwatoyin Oni" />
+        <img src="img/photos/couple-blue.jpg" alt="Pastor Olumide Oni and Pastor (Mrs.) Oluwatoyin Oni" width="1097" height="1600" fetchpriority="high" decoding="async">
       </div>
       <div class="author-bio-text">
         <div class="author-bio-kicker">The Author</div>
@@ -1549,7 +1549,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     "category": "Consecration · Vol. 1",
     "description": "On presenting your body a living sacrifice, holy and acceptable unto God. A call to daily surrender rooted in Romans 12.",
     "readUrl": "reader.html?book=a-living-sacrifice",
-    "coverImageUrl": "img/covers/a-living-sacrifice.png",
+    "coverImageUrl": "img/covers/a-living-sacrifice.jpg",
     "driveFileId": ""
   },
   {
@@ -1559,7 +1559,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     "category": "Faith & Breakthrough",
     "description": "A prophetic word over every season of waiting. Every delay has an expiry date — God is never late.",
     "readUrl": "reader.html?book=your-delay-is-over",
-    "coverImageUrl": "img/covers/your-delay-is-over.png",
+    "coverImageUrl": "img/covers/your-delay-is-over.jpg",
     "driveFileId": ""
   },
   {
@@ -1569,7 +1569,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     "category": "Promotion & Elevation",
     "description": "When God decides it is your time, no gate stays closed. A declaration over every destiny awaiting divine lifting.",
     "readUrl": "reader.html?book=your-season-of-lifting-is-here",
-    "coverImageUrl": "img/covers/your-season-of-lifting-is-here.png",
+    "coverImageUrl": "img/covers/your-season-of-lifting-is-here.jpg",
     "driveFileId": ""
   },
   {
@@ -1579,7 +1579,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     "category": "Purpose & Positioning",
     "description": "Your life is not random. You have been positioned by God for a purpose, and that purpose includes greatness.",
     "readUrl": "reader.html?book=positioned-by-god",
-    "coverImageUrl": "img/covers/positioned-by-god.png",
+    "coverImageUrl": "img/covers/positioned-by-god.jpg",
     "driveFileId": ""
   },
   {
@@ -1589,7 +1589,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     "category": "Restoration & Joy",
     "description": "God will restore the years the locust has eaten. Your season of sorrow is over, and your season of joy has begun.",
     "readUrl": "reader.html?book=you-will-rejoice-again",
-    "coverImageUrl": "img/covers/you-will-rejoice-again.png",
+    "coverImageUrl": "img/covers/you-will-rejoice-again.jpg",
     "driveFileId": ""
   },
   {
@@ -1599,7 +1599,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     "category": "Destiny & Purpose",
     "description": "What God upholds cannot be pulled down by hell. Your destiny is not your idea — it is tied to God's counsel, and it cannot be stopped.",
     "readUrl": "reader.html?book=your-destiny-is-unstoppable",
-    "coverImageUrl": "img/covers/your-destiny-is-unstoppable.png",
+    "coverImageUrl": "img/covers/your-destiny-is-unstoppable.jpg",
     "driveFileId": ""
   },
   {
@@ -1609,7 +1609,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     "category": "Peace & Spiritual Warfare",
     "description": "God not only calms storms around you. He also calms storms within you. Peace is not the absence of battle — it is the presence of Christ.",
     "readUrl": "reader.html?book=peace-in-the-midst-of-storms",
-    "coverImageUrl": "img/covers/peace-in-the-midst-of-storms.png",
+    "coverImageUrl": "img/covers/peace-in-the-midst-of-storms.jpg",
     "driveFileId": ""
   },
   {
@@ -1619,7 +1619,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     "category": "Legacy & Tribute",
     "description": "A tribute to Prophetess Ajadi Hannah — her commitment, prayer life, prophetic grace, intercession, and wisdom as a spiritual guide.",
     "readUrl": "reader.html?book=life-and-impact-of-my-spiritual-mother",
-    "coverImageUrl": "img/covers/life-and-impact-of-my-spiritual-mother.png",
+    "coverImageUrl": "img/covers/life-and-impact-of-my-spiritual-mother.jpg",
     "driveFileId": ""
   },
   {
@@ -1629,7 +1629,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     "category": "Grace & Divine Help",
     "description": "Grace is not only what God gives us to be saved. Grace is what God releases to help us live, grow, endure, and finish well.",
     "readUrl": "reader.html?book=let-your-grace-speak",
-    "coverImageUrl": "img/covers/let-your-grace-speak.png",
+    "coverImageUrl": "img/covers/let-your-grace-speak.jpg",
     "driveFileId": ""
   }
 ];
@@ -1654,7 +1654,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
       const hasCover = !!book.coverImageUrl;
 
       const poster = hasCover
-        ? `<img class="book-cover-img" src="${escapeAttr(book.coverImageUrl)}" alt="${titleAttr}" loading="lazy" />`
+        ? `<img class="book-cover-img" src="${escapeAttr(book.coverImageUrl)}" alt="${titleAttr}" loading="lazy" / decoding="async">`
         : `
           <div class="book-poster t-${tone}">
             <span class="book-poster-corner tl"></span>

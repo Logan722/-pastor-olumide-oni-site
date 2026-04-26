@@ -1633,7 +1633,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
         <span class="featured-label">Latest</span>
 
         <a href="${escapeHtml(watchUrl)}" target="_blank" rel="noopener" class="featured-thumb" aria-label="Watch latest sermon">
-          ${thumb ? `<img class="thumb-img" src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" />` : ''}
+          ${thumb ? `<img class="thumb-img" src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" / decoding="async">` : ''}
           <div class="thumb-overlay"></div>
           <div class="thumb-play" aria-hidden="true">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
@@ -1673,7 +1673,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
       <a href="${escapeHtml(watchUrl)}" target="_blank" rel="noopener" class="sermon-card reveal in-view">
         <div class="sermon-card-thumb">
           ${isNew ? '<span class="sermon-card-new">New</span>' : ''}
-          ${thumb ? `<img class="thumb-img" src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" />` : ''}
+          ${thumb ? `<img class="thumb-img" src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" / decoding="async">` : ''}
           <div class="thumb-overlay"></div>
           <div class="thumb-play" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
