@@ -2706,19 +2706,51 @@ body.mobile-nav-open {
   background: var(--line);
 }
 
-/* Sermon Series cards */
+/* Sermon Series cards — auto-scrolling marquee */
+.series-marquee-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.series-marquee-wrap::before,
+.series-marquee-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 3;
+  pointer-events: none;
+}
+.series-marquee-wrap::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, transparent 100%);
+}
+.series-marquee-wrap::after {
+  right: 0;
+  background: linear-gradient(90deg, transparent 0%, var(--bg) 100%);
+}
 .series-rail {
   display: flex;
   gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 12px 24px 24px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--gold-dim) transparent;
+  width: max-content;
+  padding: 12px 10px 24px;
+  animation: seriesMarquee 90s linear infinite;
 }
-.series-rail::-webkit-scrollbar { height: 6px; }
-.series-rail::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+.series-marquee-wrap:hover .series-rail {
+  animation-play-state: paused;
+}
+@keyframes seriesMarquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .series-rail { animation: none; overflow-x: auto; scroll-snap-type: x mandatory; }
+}
+@media (max-width: 900px) {
+  .series-rail {
+    animation-duration: 120s;
+  }
+}
 
 .series-card {
   flex: 0 0 auto;
@@ -3769,12 +3801,14 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     <div class="watch-subhead-label">Sermon Series &middot; Collections</div>
     <div class="watch-subhead-line"></div>
   </div>
-  <div class="series-rail reveal" id="seriesRail">
-    <!-- Skeleton cards while loading -->
-    <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
-    <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
-    <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
-    <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
+  <div class="series-marquee-wrap" aria-label="Sermon series collections">
+    <div class="series-rail reveal" id="seriesRail">
+      <!-- Skeleton cards while loading -->
+      <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
+      <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
+      <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
+      <div class="series-card"><div class="series-card-thumb"></div><div class="series-card-body"><div class="series-card-title">Loading&hellip;</div></div></div>
+    </div>
   </div>
 
   <!-- Watch by Topic -->
@@ -3859,19 +3893,19 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     </div>
 
     <div class="featured-spread reveal">
-      <a href="books/your-destiny-is-unstoppable.html" class="featured-spread-cover">
-        <img src="img/covers/your-destiny-is-unstoppable.jpg" alt="Your Destiny Is Unstoppable" loading="lazy" width="800" height="1200" decoding="async">
+      <a id="featuredBookLink" href="books/your-destiny-is-unstoppable.html" class="featured-spread-cover">
+        <img id="featuredBookCover" src="img/covers/your-destiny-is-unstoppable.jpg" alt="Your Destiny Is Unstoppable" loading="lazy" width="800" height="1200" decoding="async">
       </a>
 
       <div class="featured-spread-text">
-        <h3 class="featured-spread-title">Your Destiny<br/><em>Is Unstoppable</em></h3>
+        <h3 id="featuredBookTitle" class="featured-spread-title">Your Destiny<br/><em>Is Unstoppable</em></h3>
 
-        <p class="featured-spread-desc">
+        <p id="featuredBookDesc" class="featured-spread-desc">
           A prophetic call to walk in the unstoppable purpose God has placed in you. 144 pages &middot; Free download. Always.
         </p>
 
         <div class="featured-spread-actions">
-          <a href="books/your-destiny-is-unstoppable.html" class="btn btn-primary">
+          <a id="featuredBookCta" href="books/your-destiny-is-unstoppable.html" class="btn btn-primary">
             Read the Book
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
@@ -4159,13 +4193,13 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
       rail.innerHTML = `<div style="padding:40px 24px;color:var(--text-muted);font-style:italic;">Loading sermon series&hellip;</div>`;
       return;
     }
-    rail.innerHTML = playlists.map(function(pl) {
+    const cards = playlists.map(function(pl) {
       const thumb = pl.thumbnail || `https://i.ytimg.com/vi/${pl.playlistId}/hqdefault.jpg`;
       const count = pl.videoCount || '';
       return `
         <a class="series-card" href="${escapeHtml(pl.link)}" target="_blank" rel="noopener">
           <div class="series-card-thumb">
-            <img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" / decoding="async">
+            <img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.style.display='none'" decoding="async">
             ${count ? `<div class="series-card-badge">${escapeHtml(count)}</div>` : ''}
           </div>
           <div class="series-card-body">
@@ -4175,6 +4209,8 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
         </a>
       `;
     }).join('');
+    // Duplicate for seamless marquee loop
+    rail.innerHTML = cards + cards;
   }
 
   async function fetchPlaylists() {
@@ -4404,6 +4440,88 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     });
 
   loadHomeSermon();
+
+  /* ---------- Featured Book of the Month ----------
+     Rotates monthly — the book shown is determined by the current
+     calendar month. The same book is shown to every visitor for a given
+     month. To change the rotation, edit the FEATURED_BOOKS array below.
+     Index 0 = January, 1 = February, ..., 11 = December.
+     ----------------------------------------------- */
+  const FEATURED_BOOKS = [
+    // 0 — January
+    { slug: 'your-destiny-is-unstoppable', cover: 'img/covers/your-destiny-is-unstoppable.jpg',
+      titleHtml: 'Your Destiny<br/><em>Is Unstoppable</em>',
+      desc: 'A prophetic call to walk in the unstoppable purpose God has placed in you. Free download. Always.' },
+    // 1 — February
+    { slug: 'positioned-by-god', cover: 'img/covers/positioned-by-god.jpg',
+      titleHtml: 'Positioned <em>by God</em>',
+      desc: 'Discover what it means to live in the place God has prepared for you — where favor, power, and breakthrough align. Free download. Always.' },
+    // 2 — March
+    { slug: 'your-delay-is-over', cover: 'img/covers/your-delay-is-over.jpg',
+      titleHtml: 'Your Delay <em>Is Over</em>',
+      desc: 'When God takes the case, delay ends and answers come swiftly. A word for everyone tired of waiting. Free download. Always.' },
+    // 3 — April
+    { slug: 'peace-in-the-midst-of-storms', cover: 'img/covers/peace-in-the-midst-of-storms.jpg',
+      titleHtml: 'Peace <em>in the Midst of Storms</em>',
+      desc: 'Find unshakeable peace at the very center of life\u2019s storms. The Lord is in this place. Free download. Always.' },
+    // 4 — May
+    { slug: 'let-your-grace-speak', cover: 'img/covers/let-your-grace-speak.jpg',
+      titleHtml: 'Let Your <em>Grace Speak</em>',
+      desc: 'A prayer book and prophetic charge for those crying out for divine intervention. Free download. Always.' },
+    // 5 — June
+    { slug: 'your-season-of-lifting-is-here', cover: 'img/covers/your-season-of-lifting-is-here.jpg',
+      titleHtml: 'Your Season of <em>Lifting Is Here</em>',
+      desc: 'The God who lifts men is calling you out of every season of stagnation into the place of elevation. Free download. Always.' },
+    // 6 — July
+    { slug: 'you-will-rejoice-again', cover: 'img/covers/you-will-rejoice-again.jpg',
+      titleHtml: 'You Will <em>Rejoice Again</em>',
+      desc: 'Divine transformation is on the way. A word of comfort for everyone who has wept long enough. Free download. Always.' },
+    // 7 — August
+    { slug: 'connecting-to-your-next-miracle', cover: 'img/covers/connecting-to-your-next-miracle.png',
+      titleHtml: 'Connecting <em>to Your Next Miracle</em>',
+      desc: 'Position yourself for the supernatural. Heaven is preparing your next testimony. Free download. Always.' },
+    // 8 — September
+    { slug: 'preparation-for-manifestation', cover: 'img/covers/preparation-for-manifestation.png',
+      titleHtml: 'Preparation <em>for Manifestation</em>',
+      desc: 'Before God shows you to the world, He works in secret. A word for those in their hidden season. Free download. Always.' },
+    // 9 — October
+    { slug: 'when-your-peace-is-under-attack', cover: 'img/covers/when-your-peace-is-under-attack.png',
+      titleHtml: 'When Your Peace <em>Is Under Attack</em>',
+      desc: 'How to stand, how to fight, how to win — when the enemy targets your peace. Free download. Always.' },
+    // 10 — November
+    { slug: 'a-living-sacrifice', cover: 'img/covers/a-living-sacrifice.jpg',
+      titleHtml: 'A <em>Living Sacrifice</em>',
+      desc: 'A call to total surrender, holy living, and the kind of devotion that moves heaven. Free download. Always.' },
+    // 11 — December
+    { slug: 'positioned-by-god-for-greatness', cover: 'img/covers/positioned-by-god-for-greatness.png',
+      titleHtml: 'Positioned <em>by God for Greatness</em>',
+      desc: 'God has positioned you for greatness — not by your effort, but by His sovereign hand. Free download. Always.' }
+  ];
+
+  function rotateFeaturedBook() {
+    const month = new Date().getMonth(); // 0–11
+    const book = FEATURED_BOOKS[month % FEATURED_BOOKS.length];
+    if (!book) return;
+
+    const link = document.getElementById('featuredBookLink');
+    const cover = document.getElementById('featuredBookCover');
+    const title = document.getElementById('featuredBookTitle');
+    const desc = document.getElementById('featuredBookDesc');
+    const cta = document.getElementById('featuredBookCta');
+
+    if (!link || !cover || !title || !desc || !cta) return;
+
+    const href = `books/${book.slug}.html`;
+    link.href = href;
+    cta.href = href;
+    cover.src = book.cover;
+    title.innerHTML = book.titleHtml;
+    desc.textContent = book.desc;
+    // Set alt AFTER updating innerHTML so textContent reflects the new title
+    cover.alt = title.textContent.trim();
+  }
+
+  rotateFeaturedBook();
 </script>
 
 <script>
