@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main pages -->
   <url>
     <loc>https://pastorolumideoni.com/</loc>
     <changefreq>weekly</changefreq>
@@ -18,7 +20,7 @@
   <url>
     <loc>https://pastorolumideoni.com/books.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pastorolumideoni.com/daily-word.html</loc>
@@ -26,17 +28,59 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://pastorolumideoni.com/library.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://pastorolumideoni.com/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+
+  <!-- Books library -->
   <url>
     <loc>https://pastorolumideoni.com/books/a-living-sacrifice.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://pastorolumideoni.com/books/connecting-to-your-next-miracle.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pastorolumideoni.com/books/let-your-grace-speak.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pastorolumideoni.com/books/life-and-impact-of-my-spiritual-mother.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pastorolumideoni.com/books/peace-in-the-midst-of-storms.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pastorolumideoni.com/books/positioned-by-god-for-greatness.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://pastorolumideoni.com/books/positioned-by-god.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pastorolumideoni.com/books/preparation-for-manifestation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pastorolumideoni.com/books/when-your-peace-is-under-attack.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -51,8 +95,14 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://pastorolumideoni.com/books/your-destiny-is-unstoppable.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://pastorolumideoni.com/books/your-season-of-lifting-is-here.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+
 </urlset>
