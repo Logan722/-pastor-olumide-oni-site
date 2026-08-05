@@ -457,17 +457,17 @@ main { position: relative; z-index: 10; }
   position: relative;
   z-index: 10;
   border-top: 1px solid var(--line);
-  margin-top: 120px;
-  padding: 80px 0 40px;
+  margin-top: 72px;
+  padding: 52px 0 32px;
   /* Bottom safe-area inset for iPhone home indicator. */
-  padding-bottom: max(40px, calc(40px + env(safe-area-inset-bottom)));
+  padding-bottom: max(32px, calc(32px + env(safe-area-inset-bottom)));
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr;
-  gap: 56px;
-  margin-bottom: 64px;
+  gap: 44px;
+  margin-bottom: 40px;
 }
 
 .footer-brand {
@@ -477,7 +477,7 @@ main { position: relative; z-index: 10; }
   line-height: 1.15;
   color: var(--cream);
   letter-spacing: -0.02em;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 .footer-brand em { font-style: italic; color: var(--gold); }
 
@@ -507,11 +507,11 @@ main { position: relative; z-index: 10; }
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   font-weight: 500;
 }
 .footer-col ul { list-style: none; }
-.footer-col li { margin-bottom: 10px; }
+.footer-col li { margin-bottom: 7px; }
 .footer-col a {
   font-size: 14px;
   color: var(--text-muted);
@@ -541,7 +541,7 @@ main { position: relative; z-index: 10; }
 }
 
 .footer-bottom {
-  padding-top: 32px;
+  padding-top: 22px;
   border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
@@ -1809,14 +1809,15 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 28px 20px 24px;
-  background: var(--bg-panel);
+  gap: 16px;
+  padding: 38px 22px 32px;
+  background: linear-gradient(135deg, rgba(212, 168, 83, 0.18) 0%, rgba(212, 168, 83, 0.06) 35%, rgba(10, 9, 7, 0.95) 100%);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 12px;
   text-decoration: none;
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 /* Colored top edge, brand-specific */
@@ -1831,12 +1832,13 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
 .links-card:hover {
   transform: translateY(-4px);
   border-color: var(--line-strong);
-  background: var(--bg-2);
+  background: linear-gradient(135deg, rgba(212, 168, 83, 0.28) 0%, rgba(212, 168, 83, 0.10) 35%, rgba(10, 9, 7, 0.95) 100%);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(212, 168, 83, 0.18);
 }
 
 .links-card-icon {
-  width: 54px;
-  height: 54px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1844,12 +1846,17 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
   color: #fff;
   background: var(--card-accent, var(--gold));
   flex: 0 0 auto;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+.links-card-icon svg {
+  width: 34px;
+  height: 34px;
 }
 
 .links-card-title {
   font-family: var(--sans);
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--cream);
   text-align: center;
   letter-spacing: 0.01em;
@@ -1857,11 +1864,16 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
 
 .links-card-sub {
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-muted);
   text-align: center;
   letter-spacing: 0.02em;
-  margin-top: -6px;
+  margin-top: -8px;
+}
+
+/* Full-width card spans both columns in the 2-col grid */
+.links-card.card-full {
+  grid-column: 1 / -1;
 }
 
 /* Per-card accents */
@@ -1875,12 +1887,6 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
 .links-card.card-books .links-card-icon {
   background: var(--gold);
   color: #0a0907;
-}
-.links-card.card-library { --card-accent: var(--gold); }
-.links-card.card-library .links-card-icon {
-  background: transparent;
-  border: 1.5px solid var(--gold);
-  color: var(--gold);
 }
 
 /* ---------- Mobile: single column, centered brand ---------- */
@@ -1923,17 +1929,21 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
   .links-featured-title { font-size: 16px; }
   .links-featured-sub { font-size: 12px; }
   .links-card {
-    padding: 22px 14px 18px;
+    padding: 30px 16px 24px;
   }
   .links-card-icon {
-    width: 46px;
-    height: 46px;
+    width: 62px;
+    height: 62px;
+  }
+  .links-card-icon svg {
+    width: 28px;
+    height: 28px;
   }
   .links-card-title {
-    font-size: 14px;
+    font-size: 17px;
   }
   .links-card-sub {
-    font-size: 11px;
+    font-size: 12px;
   }
   .links-identity-heading {
     font-size: 44px;
@@ -2084,7 +2094,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
           <div class="links-card-sub">Follow along</div>
         </a>
 
-        <a href="books.html" class="links-card card-books">
+        <a href="books.html" class="links-card card-books card-full">
           <div class="links-card-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
@@ -2093,20 +2103,6 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
           </div>
           <div class="links-card-title">Read Books</div>
           <div class="links-card-sub">Free &middot; always</div>
-        </a>
-
-        <a href="library.html" class="links-card card-library">
-          <div class="links-card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 4v16h16"/>
-              <path d="M8 4v16"/>
-              <path d="M12 4v16"/>
-              <path d="M16 4v16"/>
-              <path d="M20 4v16"/>
-            </svg>
-          </div>
-          <div class="links-card-title">Library</div>
-          <div class="links-card-sub">All media, one place</div>
         </a>
 
       </div>
@@ -2138,6 +2134,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
           <li><a href="daily-word.html">Daily Word</a></li>
           <li><a href="library.html">Library</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="links.html">Connect With Me</a></li>
         </ul>
       </div>
       <div class="footer-col">
