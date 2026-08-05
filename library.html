@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<script>
+(function(){
+  document.documentElement.classList.remove('light-mode');
+  try { localStorage.setItem('site-theme', 'dark'); } catch(e){}
+})();
+</script>
 <script>
 (function(){var t=localStorage.getItem('site-theme');var isLight=(t==='light')||(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches);if(isLight){document.documentElement.classList.add('light-mode');var m=document.querySelector('meta[name=\"theme-color\"]');if(m)m.setAttribute('content','#faf7f2');}})();
 </script>
@@ -716,6 +723,15 @@ body, body::before, .nav, .nav.scrolled {
   :root { --gutter: 18px; --section-y: 72px; }
 }
 
+
+/* --- FORCE DARK MODE ONLY: hide toggle, remove light-mode --- */
+.theme-mode-toggle,
+.mobile-theme-toggle,
+#siteThemeToggle,
+button[aria-label*="light/dark" i],
+button[aria-label*="theme" i] {
+  display: none !important;
+}
 </style>
 
 <style>
