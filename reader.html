@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<script>
+(function(){
+  document.documentElement.classList.remove('light-mode');
+  try { localStorage.setItem('site-theme', 'dark'); } catch(e){}
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -828,6 +835,15 @@ body[data-reading-mode="scroll"] .toolbar-group:first-child {
   background: rgba(212,168,83,0.12);
 }
 
+
+/* --- FORCE DARK MODE ONLY: hide toggle, remove light-mode --- */
+.theme-mode-toggle,
+.mobile-theme-toggle,
+#siteThemeToggle,
+button[aria-label*="light/dark" i],
+button[aria-label*="theme" i] {
+  display: none !important;
+}
 </style>
   <script type="application/ld+json">
 {
