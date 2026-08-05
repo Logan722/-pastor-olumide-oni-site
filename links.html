@@ -176,10 +176,25 @@ body::before {
   position: fixed;
   inset: 0;
   background:
+    /* Big warm gold glow in top-left corner */
+    radial-gradient(ellipse 1400px 1000px at 15% 10%,
+      rgba(212, 168, 83, 0.28) 0%,
+      rgba(212, 168, 83, 0.14) 30%,
+      rgba(212, 168, 83, 0.04) 55%,
+      transparent 75%),
+    /* Secondary warm glow in bottom-right */
+    radial-gradient(ellipse 1200px 900px at 90% 85%,
+      rgba(212, 168, 83, 0.20) 0%,
+      rgba(212, 168, 83, 0.08) 40%,
+      transparent 70%),
+    /* Existing top gold glow (kept for continuity with hero) */
     radial-gradient(ellipse at 50% -10%, var(--gold-glow) 0%, transparent 55%),
-    radial-gradient(ellipse at 15% 90%, rgba(139, 111, 51, 0.08) 0%, transparent 55%),
-    radial-gradient(ellipse at 90% 40%, rgba(212, 168, 83, 0.04) 0%, transparent 45%),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg-3) 60%, var(--bg-deep) 100%);
+    /* Warm-tinted vertical base */
+    linear-gradient(180deg,
+      #1a1408 0%,
+      #14100a 40%,
+      #100c07 75%,
+      #0a0806 100%);
   z-index: 0;
   pointer-events: none;
 }
