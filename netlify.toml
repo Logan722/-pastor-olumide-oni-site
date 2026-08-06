@@ -1,3 +1,13 @@
+# Netlify configuration
+#
+# Contact form (contact.html):
+#   The form is submitted via AJAX and handled by Netlify Forms.
+#   It is auto-detected at deploy time because it carries the
+#   data-netlify="true" attribute plus a hidden "form-name" input.
+#   Spam is filtered via the data-netlify-honeypot "bot-field".
+#   No build command or extra config is required for form handling —
+#   Netlify's post-processing bot scans the static HTML on each deploy.
+
 [build]
   functions = "netlify/functions"
 
