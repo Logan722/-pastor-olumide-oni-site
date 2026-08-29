@@ -266,17 +266,33 @@ function extractPlaylistVideos(data) {
     const sections = tabContent?.sectionListRenderer?.contents || [];
 
     for (const section of sections) {
-      const items = section?.itemSectionRenderer?.contents?.[0];
-      if (!items?.playlistVideoListRenderer) continue;
-      const vids = items.playlistVideoListRenderer.contents || [];
-      for (const v of vids) {
-        const r = v?.playlistVideoRenderer;
-        if (!r?.videoId) continue;
-        const titleRuns = r?.title?.runs || [];
-        const title =
-          titleRuns.map((x) => x.text || "").join("").trim() ||
-          (r?.title?.simpleText || "").trim();
-        out.push({ id: r.videoId, title: scrubBrand(title) });
+      const items = section?.itemSectionRenderer?.contents || [];
+      for (const inner of items) {
+        // Newer format: lockupViewModel directly (or nested inside a playlist container)
+        const lvm = inner?.lockupViewModel;
+        if (lvm) {
+          const id = lvm.contentId;
+          if (!id) continue;
+          const title =
+            lvm?.metadata?.lockupMetadataViewModel?.title?.content || "";
+          out.push({ id, title: scrubBrand(title) });
+          continue;
+        }
+
+        // Older format: playlistVideoListRenderer with playlistVideoRenderer items
+        const listRenderer = inner?.playlistVideoListRenderer;
+        if (listRenderer) {
+          const vids = listRenderer.contents || [];
+          for (const v of vids) {
+            const r = v?.playlistVideoRenderer;
+            if (!r?.videoId) continue;
+            const titleRuns = r?.title?.runs || [];
+            const title =
+              titleRuns.map((x) => x.text || "").join("").trim() ||
+              (r?.title?.simpleText || "").trim();
+            out.push({ id: r.videoId, title: scrubBrand(title) });
+          }
+        }
       }
     }
   } catch (e) {
@@ -288,6 +304,8 @@ function extractPlaylistVideos(data) {
 // Extract videos from the channel's Videos tab response.
 // This excludes livestream replays (those live in the Live tab) and Shorts
 // (those live in the Shorts tab).
+// Handles both YouTube's newer lockupViewModel format and older videoRenderer
+// format so this keeps working across YouTube UI shape changes.
 function extractChannelVideos(data) {
   if (!data) return [];
   const out = [];
@@ -295,7 +313,21 @@ function extractChannelVideos(data) {
     const content = selectedTabContent(data);
     const items = content?.richGridRenderer?.contents || [];
     for (const item of items) {
-      const v = item?.richItemRenderer?.content?.videoRenderer;
+      const inner = item?.richItemRenderer?.content || {};
+
+      // Newer format: lockupViewModel
+      const lvm = inner.lockupViewModel;
+      if (lvm) {
+        const id = lvm.contentId;
+        if (!id) continue;
+        const title =
+          lvm?.metadata?.lockupMetadataViewModel?.title?.content || "";
+        out.push({ id, title: scrubBrand(title) });
+        continue;
+      }
+
+      // Older format: videoRenderer
+      const v = inner.videoRenderer;
       if (!v?.videoId) continue;
       const titleRuns = v?.title?.runs || [];
       const title =
