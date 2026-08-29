@@ -2016,22 +2016,26 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
      ===================================================== -->
 <script>
   /* ======================================================================
-     YOUTUBE RSS INTEGRATION
-     Pulls latest videos from the channel's public RSS feed via a free
-     JSON proxy (rss2json.com). No API key required. Updates automatically
-     as new sermons are published — typical freshness: 15 min to ~2 hours
-     depending on caching at YouTube and the proxy.
+     YOUTUBE VIDEOS INTEGRATION
+     Pulls the latest videos from the channel by calling our own Netlify
+     function at /.netlify/functions/youtube-feed. The function queries
+     YouTube's internal browse API server-side (no CORS issues, no API key
+     required, no dependency on the flaky public RSS endpoint).
 
-     TO CHANGE THE CHANNEL: update YT_CHANNEL_ID below.
-     TO SWAP THE PROXY: update buildApiUrl() if rss2json ever stops working.
-     rss2json free tier: 10,000 requests/day — plenty for a ministry site.
+     Server-side function includes 30-min caching and stale-cache fallback,
+     so even if YouTube briefly hiccups, we keep serving the last-known-good
+     list of sermons instead of showing an error.
+
+     TO CHANGE THE CHANNEL: update CHANNEL_ID in netlify/functions/youtube-feed.js
+     TO CHANGE THE MAX ITEMS: update MAX_ITEMS in the same function
      ====================================================================== */
   const YT_CHANNEL_ID = 'UCoVS2R6n3ewcIvSb_OzLLQg';
   const YT_CHANNEL_URL = 'https://www.youtube.com/@PastorOlumideOni';
 
   function buildApiUrl(channelId) {
-    const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-    return `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+    // Uses our own Netlify function which queries YouTube's InnerTube API
+    // server-side (avoids CORS, avoids the flaky public RSS endpoint).
+    return `/.netlify/functions/youtube-feed?_=${Date.now()}`;
   }
 
   /* ---------- Helpers ---------- */
@@ -2046,16 +2050,23 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     const m = link.match(/[?&]v=([^&]+)/);
     return m ? m[1] : null;
   }
-  function formatDate(isoString) {
-    if (!isoString) return '';
-    // rss2json returns 'YYYY-MM-DD HH:MM:SS' (no timezone).
-    // Replace space with T and treat as UTC to avoid invalid-date edge cases.
-    const normalized = String(isoString).replace(' ', 'T');
-    const date = new Date(normalized + (normalized.endsWith('Z') ? '' : 'Z'));
-    if (isNaN(date)) return '';
-    return date.toLocaleDateString('en-US', {
-      day: 'numeric', month: 'long', year: 'numeric'
-    });
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
+    // Our youtube-feed function returns human-readable "published time" strings
+    // from YouTube's InnerTube API (e.g., "3 days ago", "1 week ago", "Streamed 2 days ago").
+    // These are already user-friendly, so return them as-is with light cleanup.
+    // (Fallback: if it looks like an ISO timestamp, format nicely.)
+    const s = String(dateStr).trim();
+    if (/^\d{4}-\d{2}-\d{2}/.test(s)) {
+      const normalized = s.replace(' ', 'T');
+      const date = new Date(normalized + (normalized.endsWith('Z') ? '' : 'Z'));
+      if (!isNaN(date)) {
+        return date.toLocaleDateString('en-US', {
+          day: 'numeric', month: 'long', year: 'numeric'
+        });
+      }
+    }
+    return s;
   }
   function cleanExcerpt(description, maxLen) {
     if (!description) return '';
@@ -2074,12 +2085,15 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     return t;
   }
   function bestThumbnail(item) {
-    // rss2json provides item.thumbnail; fall back to YouTube's own hqdefault URL
-    // which always exists for public videos. Returns empty string if no video
-    // ID can be found, in which case the CSS gradient fallback is shown.
-    const videoId = extractVideoId(item.link);
-    if (videoId) {
-      return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+    // Our youtube-feed function provides item.thumbnail directly and item.videoId.
+    // Prefer YouTube's own hqdefault URL (always exists for public videos) via videoId,
+    // fall back to the API-provided thumbnail URL.
+    if (item.videoId) {
+      return `https://i.ytimg.com/vi/${item.videoId}/hqdefault.jpg`;
+    }
+    const legacyId = extractVideoId(item.link);
+    if (legacyId) {
+      return `https://i.ytimg.com/vi/${legacyId}/hqdefault.jpg`;
     }
     return item.thumbnail || '';
   }
@@ -2268,9 +2282,8 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
   async function loadSermons() {
     showSkeletonGrid();
 
-    // Detect local file preview — rss2json's CORS policy blocks null origins,
-    // so live RSS won't work until deployed. Show demo content with a banner
-    // instead of a confusing error state.
+    // Local file preview — the Netlify function only exists on deployed builds.
+    // Show demo content with a banner instead of a broken fetch error.
     if (location.protocol === 'file:') {
       console.log('[sermons] Local preview detected — rendering demo content.');
       renderDemoMode();
