@@ -1,9 +1,11 @@
-// Netlify Function: Fetch YouTube Channel Video Feed
-// Pulls the channel's RSS feed server-side and returns a clean JSON list
-// of videos (no third-party dependency, no API key needed).
+// Netlify Function: Fetch YouTube Channel Videos (main videos tab)
+// Uses YouTube's internal browse API (same pattern as youtube-shorts, youtube-playlists).
+// Avoids the public RSS feed endpoint which returns 404 for some channels.
+// No API key required.
 
 const CHANNEL_ID = "UCoVS2R6n3ewcIvSb_OzLLQg";
-const FEED_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+// URL-encoded params for the channel's "Videos" tab (long-form uploads)
+const VIDEOS_PARAMS = "EgZ2aWRlb3PyBgQKAjoA";
 const MAX_ITEMS = 15;
 
 // In-memory cache (persists across warm invocations)
@@ -28,19 +30,34 @@ exports.handler = async function (event) {
   }
 
   try {
-    const response = await fetch(FEED_URL, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (compatible; PastorOlumideOniBot/1.0; +https://pastorolumideoni.com)",
-      },
-    });
+    const response = await fetch(
+      "https://www.youtube.com/youtubei/v1/browse",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          context: {
+            client: {
+              clientName: "WEB",
+              clientVersion: "2.20250401.00.00",
+            },
+          },
+          browseId: CHANNEL_ID,
+          params: VIDEOS_PARAMS,
+        }),
+      }
+    );
 
     if (!response.ok) {
-      throw new Error(`YouTube RSS returned ${response.status}`);
+      throw new Error(`YouTube API returned ${response.status}`);
     }
 
-    const xml = await response.text();
-    const items = parseEntries(xml).slice(0, MAX_ITEMS);
+    const data = await response.json();
+    const items = extractVideos(data).slice(0, MAX_ITEMS);
+
+    if (items.length === 0) {
+      throw new Error("No videos extracted from response");
+    }
 
     const result = {
       status: "ok",
@@ -70,53 +87,65 @@ exports.handler = async function (event) {
 };
 
 /**
- * Tiny XML entry parser — RSS feed is well-formed, no XML lib needed.
- * Extracts: videoId, title, link, pubDate, updated, description, thumbnail.
+ * Walk the InnerTube response and extract videos from the Videos tab.
+ * Returns each video in the shape the sermons/library UI expects.
  */
-function parseEntries(xml) {
-  const entries = [];
-  const entryRe = /<entry>([\s\S]*?)<\/entry>/g;
-  let m;
-  while ((m = entryRe.exec(xml)) !== null) {
-    const block = m[1];
-    const videoId = pick(block, /<yt:videoId>([^<]+)<\/yt:videoId>/);
-    if (!videoId) continue;
-    const title = decodeXml(pick(block, /<title>([^<]+)<\/title>/) || "");
-    const link =
-      pick(block, /<link[^>]*href="([^"]+)"[^>]*\/>/) ||
-      `https://www.youtube.com/watch?v=${videoId}`;
-    const pubDate = pick(block, /<published>([^<]+)<\/published>/) || "";
-    const updated = pick(block, /<updated>([^<]+)<\/updated>/) || "";
-    const description = decodeXml(
-      pick(block, /<media:description>([\s\S]*?)<\/media:description>/) || ""
-    );
-    const thumbnail =
-      pick(block, /<media:thumbnail[^>]*url="([^"]+)"[^>]*\/>/) ||
-      `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-    entries.push({
-      videoId,
-      title,
-      link,
-      pubDate,
-      updated,
-      description,
-      thumbnail,
-    });
-  }
-  return entries;
+function extractVideos(data) {
+  const tabs =
+    data?.contents?.twoColumnBrowseResultsRenderer?.tabs || [];
+  const videosTab = tabs.find(
+    (t) => t?.tabRenderer?.selected || t?.tabRenderer?.title === "Videos"
+  );
+  const items =
+    videosTab?.tabRenderer?.content?.richGridRenderer?.contents || [];
+  return items
+    .map((item) => extractVideo(item))
+    .filter(Boolean);
 }
 
-function pick(s, re) {
-  const m = s.match(re);
-  return m ? m[1] : null;
-}
+function extractVideo(item) {
+  // Newer format: videoRenderer inside richItemRenderer
+  const video = item?.richItemRenderer?.content?.videoRenderer;
+  if (!video) return null;
+  const videoId = video.videoId;
+  if (!videoId) return null;
 
-function decodeXml(s) {
-  return s
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&apos;/g, "'")
-    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(parseInt(n, 10)))
-    .replace(/&amp;/g, "&");
+  const title =
+    video?.title?.runs?.[0]?.text ||
+    video?.title?.simpleText ||
+    "";
+
+  const publishedText =
+    video?.publishedTimeText?.simpleText || "";
+
+  const lengthText =
+    video?.lengthText?.simpleText || "";
+
+  const viewCountText =
+    video?.viewCountText?.simpleText ||
+    video?.shortViewCountText?.simpleText ||
+    "";
+
+  // Description snippet (rarely present in list view, but capture if there)
+  const description =
+    video?.descriptionSnippet?.runs?.map((r) => r.text).join("") ||
+    "";
+
+  // Best thumbnail — highest resolution available
+  const thumbnails = video?.thumbnail?.thumbnails || [];
+  const thumbnail =
+    (thumbnails.length && thumbnails[thumbnails.length - 1].url) ||
+    `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+
+  return {
+    videoId,
+    title,
+    link: `https://www.youtube.com/watch?v=${videoId}`,
+    pubDate: publishedText, // Human-readable like "3 days ago"
+    updated: publishedText,
+    description,
+    thumbnail,
+    duration: lengthText,
+    viewCount: viewCountText,
+  };
 }
