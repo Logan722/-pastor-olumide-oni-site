@@ -1907,15 +1907,15 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
       <p class="reader-loading-body">Loading the book from Google Drive&hellip;</p>
     </div>
     <div class="reader-preview-notice" id="readerPreview">
-      <div class="reader-preview-kicker">Preview Mode</div>
+      <div class="reader-preview-kicker">Coming Soon</div>
       <p class="reader-preview-body" id="readerPreviewBody">
-        Books open with a full scrollable reader once the site is deployed to a public URL. The Google Drive reader cannot load in a local preview.
+        This book is being prepared for online reading. In the meantime, please <a href="contact.html" style="color: var(--gold);">contact us</a> and we'll send you a copy directly.
       </p>
     </div>
     <div class="reader-error" id="readerError">
-      <div class="reader-error-kicker">Book unavailable</div>
+      <div class="reader-error-kicker">One Moment</div>
       <p class="reader-error-body">
-        We couldn't load this book right now. Please try again, or get in touch and we'll send it to you directly.
+        We're having trouble opening this book right now. Please try again in a moment, or get in touch and we'll send it to you directly.
       </p>
       <a href="contact.html" class="btn btn-ghost">
         Contact Us
@@ -2378,7 +2378,7 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     if (isPlaceholder) {
       previewEl.classList.add('show');
       if (previewBodyEl) {
-        previewBodyEl.innerHTML = 'This is a placeholder entry. To enable reading, open <code style="color: var(--gold); font-family: monospace; font-size: 14px;">books.html</code> and replace the <code style="color: var(--gold); font-family: monospace; font-size: 14px;">PLACEHOLDER_ID</code> on this book with the real Google Drive file ID. Step-by-step instructions are in the comments at the top of the JavaScript block.';
+        previewBodyEl.innerHTML = 'This book is being prepared for online reading. In the meantime, please <a href="contact.html" style="color: var(--gold);">contact us</a> and we\'ll send you a copy directly.';
       }
       return;
     }
