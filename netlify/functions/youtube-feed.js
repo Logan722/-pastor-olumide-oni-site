@@ -88,7 +88,8 @@ exports.handler = async function (event) {
 
 /**
  * Walk the InnerTube response and extract videos from the Videos tab.
- * Returns each video in the shape the sermons/library UI expects.
+ * Handles both the newer lockupViewModel format (as of 2025-2026) and the
+ * older videoRenderer format for resilience.
  */
 function extractVideos(data) {
   const tabs =
@@ -104,48 +105,105 @@ function extractVideos(data) {
 }
 
 function extractVideo(item) {
-  // Newer format: videoRenderer inside richItemRenderer
-  const video = item?.richItemRenderer?.content?.videoRenderer;
-  if (!video) return null;
-  const videoId = video.videoId;
-  if (!videoId) return null;
+  const content = item?.richItemRenderer?.content || {};
 
-  const title =
-    video?.title?.runs?.[0]?.text ||
-    video?.title?.simpleText ||
-    "";
+  // Newer format (lockupViewModel) — YouTube's current shape
+  const lvm = content.lockupViewModel;
+  if (lvm) {
+    const videoId = lvm.contentId;
+    if (!videoId) return null;
 
-  const publishedText =
-    video?.publishedTimeText?.simpleText || "";
+    const titleContent =
+      lvm?.metadata?.lockupMetadataViewModel?.title?.content || "";
 
-  const lengthText =
-    video?.lengthText?.simpleText || "";
+    // Metadata rows contain view count + published time
+    const metaRows =
+      lvm?.metadata?.lockupMetadataViewModel?.metadata
+        ?.contentMetadataViewModel?.metadataRows || [];
+    let viewCount = "";
+    let published = "";
+    for (const row of metaRows) {
+      const parts = row?.metadataParts || [];
+      for (const part of parts) {
+        const txt = part?.text?.content || "";
+        if (/view/i.test(txt) && !viewCount) viewCount = txt;
+        else if (/ago|streamed|premiered/i.test(txt) && !published) published = txt;
+      }
+    }
 
-  const viewCountText =
-    video?.viewCountText?.simpleText ||
-    video?.shortViewCountText?.simpleText ||
-    "";
+    // Duration from thumbnail overlay badge
+    const overlays =
+      lvm?.contentImage?.thumbnailViewModel?.overlays || [];
+    let duration = "";
+    for (const ov of overlays) {
+      const badges = ov?.thumbnailBottomOverlayViewModel?.badges || [];
+      for (const b of badges) {
+        const t = b?.thumbnailBadgeViewModel?.text;
+        if (t && /^\d/.test(t)) {
+          duration = t;
+          break;
+        }
+      }
+      if (duration) break;
+    }
 
-  // Description snippet (rarely present in list view, but capture if there)
-  const description =
-    video?.descriptionSnippet?.runs?.map((r) => r.text).join("") ||
-    "";
+    // Best thumbnail from sources (highest resolution)
+    const sources =
+      lvm?.contentImage?.thumbnailViewModel?.image?.sources || [];
+    const thumbnail =
+      (sources.length && sources[sources.length - 1].url) ||
+      `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
-  // Best thumbnail — highest resolution available
-  const thumbnails = video?.thumbnail?.thumbnails || [];
-  const thumbnail =
-    (thumbnails.length && thumbnails[thumbnails.length - 1].url) ||
-    `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+    return {
+      videoId,
+      title: titleContent,
+      link: `https://www.youtube.com/watch?v=${videoId}`,
+      pubDate: published,
+      updated: published,
+      description: "",
+      thumbnail,
+      duration,
+      viewCount,
+    };
+  }
 
-  return {
-    videoId,
-    title,
-    link: `https://www.youtube.com/watch?v=${videoId}`,
-    pubDate: publishedText, // Human-readable like "3 days ago"
-    updated: publishedText,
-    description,
-    thumbnail,
-    duration: lengthText,
-    viewCount: viewCountText,
-  };
+  // Older format (videoRenderer) — fallback if YouTube reverts
+  const video = content.videoRenderer;
+  if (video) {
+    const videoId = video.videoId;
+    if (!videoId) return null;
+
+    const title =
+      video?.title?.runs?.[0]?.text ||
+      video?.title?.simpleText ||
+      "";
+    const publishedText =
+      video?.publishedTimeText?.simpleText || "";
+    const lengthText =
+      video?.lengthText?.simpleText || "";
+    const viewCountText =
+      video?.viewCountText?.simpleText ||
+      video?.shortViewCountText?.simpleText ||
+      "";
+    const description =
+      video?.descriptionSnippet?.runs?.map((r) => r.text).join("") || "";
+    const thumbnails = video?.thumbnail?.thumbnails || [];
+    const thumbnail =
+      (thumbnails.length && thumbnails[thumbnails.length - 1].url) ||
+      `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+
+    return {
+      videoId,
+      title,
+      link: `https://www.youtube.com/watch?v=${videoId}`,
+      pubDate: publishedText,
+      updated: publishedText,
+      description,
+      thumbnail,
+      duration: lengthText,
+      viewCount: viewCountText,
+    };
+  }
+
+  return null;
 }
