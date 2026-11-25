@@ -50,7 +50,10 @@ exports.handler = async function (event) {
     }
 
     const data = await response.json();
-    const posts = extractPosts(data);
+    // Leave out "Declaration of the Week" posts (not part of Pastor's Daily Word lineup)
+    const posts = extractPosts(data).filter(
+      (p) => !/declaration of the week/i.test(p.text || "")
+    );
 
     const result = { posts: posts.slice(0, MAX_POSTS), fetchedAt: new Date().toISOString() };
 
