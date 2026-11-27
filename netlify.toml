@@ -58,3 +58,30 @@
   from = "/wa"
   to = "/links.html"
   status = 200
+
+# If a short link is typed with a trailing slash (/ig/), the page's
+# relative css/js paths resolve under it. Serve those from the site root.
+[[redirects]]
+  from = "/ig/*"
+  to = "/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/fb/*"
+  to = "/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/fbp/*"
+  to = "/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/yt/*"
+  to = "/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/wa/*"
+  to = "/:splat"
+  status = 200
