@@ -25,3 +25,36 @@
   from = "/devotionals/*"
   to = "/daily-word"
   status = 301
+
+# Per-platform short links. Each one shows the links page, and Netlify
+# Analytics counts it as its own page, so "Top pages" shows how many
+# visits each platform sends.
+#   /ig  = Instagram bio and captions
+#   /fb  = Facebook Page (Pastor Olumide Oni)
+#   /fbp = Facebook profile (Olumide Oni)
+#   /yt  = YouTube descriptions and community posts
+#   /wa  = WhatsApp shares
+[[redirects]]
+  from = "/ig"
+  to = "/links.html"
+  status = 200
+
+[[redirects]]
+  from = "/fb"
+  to = "/links.html"
+  status = 200
+
+[[redirects]]
+  from = "/fbp"
+  to = "/links.html"
+  status = 200
+
+[[redirects]]
+  from = "/yt"
+  to = "/links.html"
+  status = 200
+
+[[redirects]]
+  from = "/wa"
+  to = "/links.html"
+  status = 200
