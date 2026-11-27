@@ -41,6 +41,7 @@
   }
 
   function markPreview() {
+    if (LIVE) return; // the real site falls back quietly to the saved copy
     var n = document.getElementById('previewNote');
     if (n) n.classList.add('show');
   }
