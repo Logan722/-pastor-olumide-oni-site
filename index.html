@@ -3709,8 +3709,8 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
       </div>
 
       <div class="sermon-feature-side">
-        <div class="sermon-feature-kicker">The Word · Live from the Pulpit</div>
-        <h2 class="sermon-feature-h2">A fresh word, <em>live.</em></h2>
+        <div id="featuredSermonKicker" class="sermon-feature-kicker">The Word · Live from the Pulpit</div>
+        <h2 id="featuredSermonH2" class="sermon-feature-h2">A fresh word, <em>live.</em></h2>
         <p id="featuredSermonDesc" class="sermon-feature-desc">
           Tap in to the latest live broadcast from Pastor Olumide Oni &mdash; prophetic charges, teaching, and intercession streamed straight from the pulpit.
         </p>
@@ -4106,11 +4106,63 @@ html.light-mode .mobile-nav-dropdown-submenu a.active { color: var(--gold-dim); 
     return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : (item.thumbnail || '');
   }
 
+  /* Turn a YouTube title like "YOUR PAIN WILL BECOME YOUR PRAISE: What Happens When
+     You Praise at Midnight | Pastor Olumide Oni" into { main, sub } for the heading. */
+  function splitSermonTitle(raw) {
+    let t = String(raw || '').replace(/^[^A-Za-z0-9]*LIVE\s*\|\s*/i, '').replace(/^[^A-Za-z0-9"'“]+/, '').trim();
+    t = t.split(' | ')[0].trim();
+    let main = t, sub = '';
+    const c = t.indexOf(': ');
+    if (c > 0) { main = t.slice(0, c).trim(); sub = t.slice(c + 2).trim(); }
+    if (main && main === main.toUpperCase()) {
+      const small = ['a','an','and','as','at','but','by','for','in','of','on','or','the','to','with','is'];
+      main = main.toLowerCase().split(/\s+/).map(function (w, i) {
+        return (i > 0 && small.indexOf(w) !== -1) ? w : w.charAt(0).toUpperCase() + w.slice(1);
+      }).join(' ');
+    }
+    return { main: main, sub: sub };
+  }
+  function itemAgeDays(item) {
+    const s = String((item && (item.pubDate || item.published)) || '');
+    const m = s.match(/(\d+)\s*(minute|hour|day|week|month|year)/i);
+    if (m) {
+      const n = parseInt(m[1], 10), u = m[2].toLowerCase();
+      return u === 'minute' || u === 'hour' ? 0 : u === 'day' ? n : u === 'week' ? n * 7 : u === 'month' ? n * 30 : n * 365;
+    }
+    const d = new Date(s.replace(' ', 'T'));
+    return isNaN(d) ? null : Math.floor((Date.now() - d.getTime()) / 86400000);
+  }
+  function renderFeaturedText(item) {
+    if (!item || !item.title) return;
+    const parts = splitSermonTitle(item.title);
+    if (!parts.main) return;
+    const kicker = document.getElementById('featuredSermonKicker');
+    const h2 = document.getElementById('featuredSermonH2');
+    const desc = document.getElementById('featuredSermonDesc');
+    const watch = document.getElementById('featuredSermonWatch');
+    const age = itemAgeDays(item);
+    if (kicker) kicker.textContent = (age !== null && age <= 7) ? "This Week's Word" : 'The Latest Word';
+    if (h2) {
+      h2.textContent = '';
+      const words = parts.main.split(' ');
+      const last = words.pop();
+      if (words.length) h2.appendChild(document.createTextNode(words.join(' ') + ' '));
+      const em = document.createElement('em');
+      em.textContent = last;
+      h2.appendChild(em);
+    }
+    if (desc && parts.sub) desc.textContent = parts.sub.replace(/[.!?]?$/, '.') ;
+    if (watch && item.link) watch.href = item.link;
+    const iframe = document.getElementById('featuredSermonIframe');
+    if (iframe) iframe.title = parts.main + ' — Pastor Olumide Oni';
+  }
+
   function renderFeaturedSermon(item) {
     /* Populate the latest video into the cinematic iframe. */
     const iframe = document.getElementById('featuredSermonIframe');
     if (!iframe) return;
     const vid = item && item.videoId ? item.videoId : extractVideoId(item && item.link);
+    if (vid && item && item.title && item.title !== DEMO_LATEST.title) renderFeaturedText(item);
     if (vid) {
       iframe.src = `https://www.youtube.com/embed/${vid}?rel=0&modestbranding=1`;
     } else {
