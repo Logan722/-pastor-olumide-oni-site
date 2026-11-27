@@ -2,12 +2,6 @@
 <html lang="en">
 <head>
 
-<script>
-(function(){
-  document.documentElement.classList.remove('light-mode');
-  try { localStorage.setItem('site-theme', 'dark'); } catch(e){}
-})();
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -19,63 +13,65 @@
   <meta name="description" content="Read books online from Pastor Olumide Oni — Spirit-filled teaching, free to read." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600&family=Literata:ital,opsz,wght@0,7..72,300..700;1,7..72,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Literata:ital,opsz,wght@0,7..72,300..700;1,7..72,300..700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#1E4FD8">
 <style>
 /* ═══════════════════════════════════════════════════════════════════════
    PASTOR OLUMIDE ONI — Kindle-Style Reader Shell
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* ── Theme tokens ── */
+/* ── Theme tokens (Live and Bright: royal blue + sunflower) ── */
 :root {
-  --r-bg: #0a0907;
-  --r-bg-soft: #14110c;
-  --r-bg-card: #1a1612;
-  --r-gold: #d4a853;
-  --r-gold-dim: #9a7a3c;
-  --r-gold-glow: rgba(212, 168, 83, 0.15);
-  --r-cream: #f2e8d5;
-  --r-ink: #e8dfc9;
-  --r-muted: #8a8070;
-  --r-rule: rgba(212, 168, 83, 0.18);
-  --r-rule-strong: rgba(212, 168, 83, 0.4);
-  --r-serif: 'Fraunces', 'Times New Roman', serif;
-  --r-reading: 'Literata', 'Georgia', serif;
-  --r-sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
-  --r-font-size: 17px;
-  --r-line-height: 1.82;
+  --r-bg: #FFFFFF;
+  --r-bg-soft: #F4F6FC;
+  --r-bg-card: #FFF6D9;
+  --r-gold: #1E4FD8;
+  --r-gold-dim: #5B6684;
+  --r-gold-glow: rgba(30, 79, 216, 0.10);
+  --r-cream: #0F1B3D;
+  --r-ink: #26314F;
+  --r-muted: #5B6684;
+  --r-rule: #E3E8F5;
+  --r-rule-strong: #C9D3EE;
+  --r-display: 'Anton', Impact, 'Arial Narrow', sans-serif;
+  --r-serif: 'Literata', Georgia, serif;
+  --r-reading: 'Literata', Georgia, serif;
+  --r-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --r-font-size: 18px;
+  --r-line-height: 1.8;
   --r-max-width: 680px;
-  --r-toolbar-h: 52px;
-  --r-topbar-h: 56px;
+  --r-toolbar-h: 60px;
+  --r-topbar-h: 64px;
 }
 
-/* Sepia theme */
+/* Sepia (cream) theme */
 [data-theme="sepia"] {
-  --r-bg: #f4ead4;
-  --r-bg-soft: #ede2cb;
-  --r-bg-card: #e8d9bd;
-  --r-gold: #8b6914;
-  --r-gold-dim: #a07d2a;
-  --r-gold-glow: rgba(139, 105, 20, 0.12);
-  --r-cream: #3d2e16;
-  --r-ink: #4a3c28;
-  --r-muted: #7a6b52;
-  --r-rule: rgba(139, 105, 20, 0.2);
-  --r-rule-strong: rgba(139, 105, 20, 0.35);
+  --r-bg: #FFF6D9;
+  --r-bg-soft: #FBEFC8;
+  --r-bg-card: #FFFFFF;
+  --r-gold: #9A5B00;
+  --r-gold-dim: #7A6448;
+  --r-gold-glow: rgba(154, 91, 0, 0.12);
+  --r-cream: #2E2210;
+  --r-ink: #3D2E16;
+  --r-muted: #6E5C3F;
+  --r-rule: rgba(154, 91, 0, 0.18);
+  --r-rule-strong: rgba(154, 91, 0, 0.32);
 }
 
-/* Light theme */
-[data-theme="light"] {
-  --r-bg: #fafaf7;
-  --r-bg-soft: #f0efe9;
-  --r-bg-card: #e8e7e0;
-  --r-gold: #8b6914;
-  --r-gold-dim: #a07d2a;
-  --r-gold-glow: rgba(139, 105, 20, 0.1);
-  --r-cream: #1a1612;
-  --r-ink: #2a2520;
-  --r-muted: #6a645a;
-  --r-rule: rgba(0, 0, 0, 0.1);
-  --r-rule-strong: rgba(0, 0, 0, 0.2);
+/* Night theme */
+[data-theme="dark"] {
+  --r-bg: #0F1B3D;
+  --r-bg-soft: #16244D;
+  --r-bg-card: #1B2A55;
+  --r-gold: #FFC93C;
+  --r-gold-dim: #A9B6DA;
+  --r-gold-glow: rgba(255, 201, 60, 0.14);
+  --r-cream: #FFFFFF;
+  --r-ink: #DCE4FF;
+  --r-muted: #A9B6DA;
+  --r-rule: rgba(255, 255, 255, 0.12);
+  --r-rule-strong: rgba(255, 255, 255, 0.25);
 }
 
 /* ── Reset ── */
@@ -120,10 +116,9 @@ img, svg { display: block; max-width: 100%; }
 }
 .loader-text {
   margin-top: 20px;
-  font-size: 12px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--r-gold-dim);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--r-muted);
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -132,7 +127,7 @@ img, svg { display: block; max-width: 100%; }
   position: fixed;
   top: 0; left: 0;
   height: 3px;
-  background: var(--r-gold);
+  background: #FFC93C;
   z-index: 200;
   transition: width 0.15s ease-out;
   box-shadow: 0 0 8px var(--r-gold-glow);
@@ -143,8 +138,8 @@ img, svg { display: block; max-width: 100%; }
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--r-topbar-h);
-  background: var(--r-bg);
-  border-bottom: 1px solid var(--r-rule);
+  background: #1E4FD8;
+  color: #fff;
   display: flex;
   align-items: center;
   padding: 0 16px;
@@ -165,17 +160,19 @@ img, svg { display: block; max-width: 100%; }
   padding: 0 12px;
 }
 .topbar-title {
-  font-family: var(--r-serif);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--r-cream);
+  font-family: var(--r-display);
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .topbar-chapter {
-  font-size: 11px;
-  color: var(--r-muted);
+  font-size: 12px;
+  color: #DCE4FF;
   letter-spacing: 0.05em;
   margin-top: 1px;
   white-space: nowrap;
@@ -183,15 +180,15 @@ img, svg { display: block; max-width: 100%; }
   text-overflow: ellipsis;
 }
 .tb-btn {
-  width: 40px; height: 40px;
+  width: 44px; height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  color: var(--r-cream);
+  border-radius: 10px;
+  color: #fff;
   transition: background 0.2s, color 0.2s;
 }
-.tb-btn:hover { background: var(--r-gold-glow); color: var(--r-gold); }
+.tb-btn:hover { background: rgba(255,255,255,.16); color: #fff; }
 .tb-btn svg { width: 20px; height: 20px; }
 
 /* ── TOC Panel ── */
@@ -364,15 +361,16 @@ img, svg { display: block; max-width: 100%; }
   margin-bottom: 28px;
 }
 .reading-content .hero-title {
-  font-family: var(--r-serif);
-  font-size: clamp(32px, 7vw, 56px);
+  font-family: var(--r-display);
+  font-size: clamp(36px, 7vw, 60px);
   font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
   color: var(--r-cream);
   margin-bottom: 20px;
 }
-.reading-content .hero-title em { color: var(--r-gold); font-style: italic; }
+.reading-content .hero-title em { color: var(--r-gold); font-style: normal; }
 .reading-content .hero-subtitle {
   font-family: var(--r-serif);
   font-size: 16px;
@@ -383,22 +381,23 @@ img, svg { display: block; max-width: 100%; }
   line-height: 1.5;
 }
 .reading-content .hero-rule {
-  width: 60px; height: 1px;
-  background: var(--r-gold);
+  width: 64px; height: 4px; border-radius: 4px;
+  background: #FFC93C;
   margin: 0 auto 40px;
-  opacity: 0.5;
 }
 .reading-content .scripture-anchor {
   max-width: 520px;
   margin: 0 auto;
   padding: 28px 32px;
-  border: 1px solid var(--r-rule);
+  border-radius: 20px;
+  border: 0;
   background: var(--r-bg-card);
   position: relative;
   transition: background 0.4s;
 }
 .reading-content .scripture-anchor::before,
 .reading-content .scripture-anchor::after {
+  display: none;
   content: '';
   position: absolute;
   width: 8px; height: 8px;
@@ -440,7 +439,8 @@ img, svg { display: block; max-width: 100%; }
   margin-bottom: 24px;
 }
 .reading-content .section-title {
-  font-family: var(--r-serif);
+  font-family: var(--r-display);
+  text-transform: uppercase;
   font-size: clamp(24px, 4vw, 34px);
   font-weight: 400;
   text-align: center;
@@ -457,7 +457,7 @@ img, svg { display: block; max-width: 100%; }
 /* Drop cap */
 .reading-content .dropcap {
   float: left;
-  font-family: var(--r-serif);
+  font-family: var(--r-display);
   font-size: 60px;
   line-height: 0.85;
   color: var(--r-gold);
@@ -486,20 +486,20 @@ img, svg { display: block; max-width: 100%; }
   margin-bottom: 18px;
 }
 .reading-content .chapter-title {
-  font-family: var(--r-serif);
-  font-size: clamp(26px, 5vw, 38px);
+  font-family: var(--r-display);
+  font-size: clamp(28px, 5vw, 42px);
   font-weight: 400;
   color: var(--r-cream);
-  line-height: 1.12;
-  letter-spacing: -0.01em;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
   margin-bottom: 24px;
   transition: color 0.4s;
 }
 .reading-content .chapter-rule {
-  width: 50px; height: 1px;
-  background: var(--r-gold);
+  width: 56px; height: 4px; border-radius: 4px;
+  background: #FFC93C;
   margin: 0 auto;
-  opacity: 0.5;
 }
 
 /* Subsection */
@@ -612,7 +612,7 @@ img, svg { display: block; max-width: 100%; }
   margin: 0 6px;
 }
 .tool-btn {
-  width: 42px; height: 42px;
+  width: 44px; height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -668,7 +668,7 @@ img, svg { display: block; max-width: 100%; }
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s, transform 0.25s, background 0.4s;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  box-shadow: 0 16px 40px -12px rgba(15,27,61,0.35);
 }
 .theme-popup.open {
   opacity: 1;
@@ -693,9 +693,9 @@ img, svg { display: block; max-width: 100%; }
   border-radius: 50%;
   opacity: 0.4;
 }
-.theme-swatch[data-theme="dark"] { background: #0a0907; }
-.theme-swatch[data-theme="sepia"] { background: #f4ead4; }
-.theme-swatch[data-theme="light"] { background: #fafaf7; }
+.theme-swatch[data-theme="dark"] { background: #0F1B3D; }
+.theme-swatch[data-theme="sepia"] { background: #FFF6D9; }
+.theme-swatch[data-theme="light"] { background: #FFFFFF; }
 .theme-swatch-label {
   font-size: 9px;
   text-align: center;
@@ -745,7 +745,8 @@ img, svg { display: block; max-width: 100%; }
   margin-bottom: 24px;
 }
 .error-title {
-  font-family: var(--r-serif);
+  font-family: var(--r-display);
+  text-transform: uppercase;
   font-size: 28px;
   color: var(--r-cream);
   margin-bottom: 12px;
@@ -758,20 +759,15 @@ img, svg { display: block; max-width: 100%; }
 }
 .error-link {
   display: inline-block;
-  padding: 12px 28px;
-  border: 1px solid var(--r-rule-strong);
-  color: var(--r-cream);
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 500;
+  padding: 14px 24px;
+  border-radius: 12px;
+  background: #1E4FD8;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
   transition: all 0.3s;
 }
-.error-link:hover {
-  background: var(--r-gold);
-  color: var(--r-bg);
-  border-color: var(--r-gold);
-}
+.error-link:hover { background: #173fb0; }
 
 /* ── Responsive ── */
 @media (max-width: 620px) {
@@ -832,18 +828,10 @@ body[data-reading-mode="scroll"] .toolbar-group:first-child {
 /* Toggle button active state */
 .tool-btn.scroll-active {
   color: var(--r-gold) !important;
-  background: rgba(212,168,83,0.12);
+  background: var(--r-gold-glow);
 }
 
 
-/* --- FORCE DARK MODE ONLY: hide toggle, remove light-mode --- */
-.theme-mode-toggle,
-.mobile-theme-toggle,
-#siteThemeToggle,
-button[aria-label*="light/dark" i],
-button[aria-label*="theme" i] {
-  display: none !important;
-}
 </style>
   <script type="application/ld+json">
 {
@@ -862,12 +850,12 @@ button[aria-label*="theme" i] {
 }
 </script>
 </head>
-<body data-theme="dark">
+<body data-theme="light">
 
 <!-- Loading -->
 <div class="loader" id="loader">
   <div class="loader-icon"></div>
-  <div class="loader-text">Opening book</div>
+  <div class="loader-text">Opening your book…</div>
 </div>
 
 <!-- Error state -->
@@ -877,7 +865,7 @@ button[aria-label*="theme" i] {
   </svg>
   <div class="error-title">Book Not Found</div>
   <div class="error-msg" id="errorMsg">We couldn't load the requested book. It may have been moved or doesn't exist.</div>
-  <a href="books.html" class="error-link">Return to Library</a>
+  <a href="books.html" class="error-link">Back to the books</a>
 </div>
 
 <!-- Progress bar -->
@@ -886,12 +874,12 @@ button[aria-label*="theme" i] {
 <!-- Top bar -->
 <header class="topbar" id="topbar">
   <div class="topbar-left">
-    <a href="books.html" class="tb-btn" title="Back to Library" id="backBtn">
+    <a href="books.html" class="tb-btn" title="Back to the books" aria-label="Back to the books" id="backBtn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 18 9 12 15 6"/>
       </svg>
     </a>
-    <button class="tb-btn" id="tocToggle" title="Table of Contents (T)">
+    <button class="tb-btn" id="tocToggle" title="Contents (T)" aria-label="Contents">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
         <line x1="3" y1="6" x2="15" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/>
       </svg>
@@ -902,7 +890,7 @@ button[aria-label*="theme" i] {
     <div class="topbar-chapter" id="topbarChapter"></div>
   </div>
   <div class="topbar-right">
-    <button class="tb-btn" id="bookmarkBtn" title="Bookmark (B)">
+    <button class="tb-btn" id="bookmarkBtn" title="Bookmark (B)" aria-label="Bookmark this page">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
       </svg>
@@ -954,7 +942,7 @@ button[aria-label*="theme" i] {
         <line x1="16" y1="14" x2="22" y2="14"/>
       </svg>
     </button>
-    <span class="font-label" id="fontLabel">17</span>
+    <span class="font-label" id="fontLabel">18</span>
     <button class="tool-btn" id="fontUp" title="Increase font (+)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <text x="2" y="18" font-family="Georgia" font-size="16" fill="currentColor" stroke="none">A</text>
@@ -989,16 +977,16 @@ button[aria-label*="theme" i] {
 <!-- Theme picker popup -->
 <div class="theme-popup" id="themePopup">
   <div style="text-align:center">
-    <div class="theme-swatch active" data-theme="dark"></div>
-    <div class="theme-swatch-label">Dark</div>
-  </div>
-  <div style="text-align:center">
-    <div class="theme-swatch" data-theme="sepia"></div>
-    <div class="theme-swatch-label">Sepia</div>
-  </div>
-  <div style="text-align:center">
-    <div class="theme-swatch" data-theme="light"></div>
+    <button type="button" class="theme-swatch active" data-theme="light" aria-label="Light"></button>
     <div class="theme-swatch-label">Light</div>
+  </div>
+  <div style="text-align:center">
+    <button type="button" class="theme-swatch" data-theme="sepia" aria-label="Cream"></button>
+    <div class="theme-swatch-label">Cream</div>
+  </div>
+  <div style="text-align:center">
+    <button type="button" class="theme-swatch" data-theme="dark" aria-label="Night"></button>
+    <div class="theme-swatch-label">Night</div>
   </div>
 </div>
 
@@ -1020,8 +1008,8 @@ button[aria-label*="theme" i] {
     activeIdx: 0,
     currentPage: 0,
     totalPages: 1,
-    fontSize: 17,
-    theme: 'dark',
+    fontSize: 18,
+    theme: 'light',
     bookmarks: {},
     tocOpen: false,
     themeOpen: false,
@@ -1482,11 +1470,11 @@ button[aria-label*="theme" i] {
 
   // ── Preferences ──
   function savePrefs() {
-    try { localStorage.setItem('goe-reader-prefs', JSON.stringify({ fontSize: state.fontSize, theme: state.theme })); } catch {}
+    try { localStorage.setItem('poo-reader-prefs-v2', JSON.stringify({ fontSize: state.fontSize, theme: state.theme })); } catch {}
   }
   function loadPrefs() {
     try {
-      const raw = localStorage.getItem('goe-reader-prefs');
+      const raw = localStorage.getItem('poo-reader-prefs-v2');
       if (raw) {
         const prefs = JSON.parse(raw);
         if (prefs.fontSize) setFontSize(prefs.fontSize);
@@ -1496,10 +1484,8 @@ button[aria-label*="theme" i] {
         // who toggled light mode on the homepage doesn't get jarred into
         // dark when they open a book. They can still pick sepia/dark/light
         // explicitly, and that choice will stick from then on.
-        const siteTheme = localStorage.getItem('site-theme');
-        const prefersLight = !siteTheme && window.matchMedia &&
-          window.matchMedia('(prefers-color-scheme: light)').matches;
-        if (siteTheme === 'light' || prefersLight) setTheme('light');
+        // First visit: start in the bright site look (Light). Readers can switch to Cream or Night.
+        setTheme('light');
       }
     } catch {}
   }

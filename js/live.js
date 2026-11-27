@@ -266,10 +266,12 @@
     });
   }
 
-  // Book reading pages: on the live site they open in the built-in reader; in a preview copy they open the published reader on pastorolumideoni.com
+  // Book reading pages open in the site's reader. In a preview copy only the sample books
+  // listed here are bundled; the rest open the published reader on pastorolumideoni.com.
+  var PREVIEW_BOOKS = ['connecting-to-your-next-miracle', 'preparation-for-manifestation'];
   function bookLink(slug) {
-    return LIVE ? 'href="reader.html?book=' + esc(slug) + '"'
-                : 'href="https://pastorolumideoni.com/reader.html?book=' + esc(slug) + '" target="_blank" rel="noopener"';
+    return (LIVE || PREVIEW_BOOKS.indexOf(slug) > -1) ? 'href="reader.html?book=' + esc(slug) + '"'
+      : 'href="https://pastorolumideoni.com/reader.html?book=' + esc(slug) + '" target="_blank" rel="noopener"';
   }
 
   window.Site = {

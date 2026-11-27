@@ -25,6 +25,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/live.css">
 <script src="js/live.js" defer></script>
+<script src="js/word.js" defer></script>
 </head>
 <body data-page="daily-word">
 <a href="#main" class="btn btn-sun" style="position:absolute;left:-9999px;top:8px;z-index:99" onfocus="this.style.left='8px'" onblur="this.style.left='-9999px'">Skip to content</a>
@@ -62,12 +63,23 @@
         <a class="btn btn-white" href="https://www.instagram.com/pastorolumideoni" target="_blank" rel="noopener">Follow on Instagram</a>
       </div>
     </div>
-    <article class="word-card" id="todayCard" style="color:var(--blue-ink)">
-      <div class="row" style="justify-content:space-between"><b style="color:var(--blue)">Today's word</b><span class="date" id="wordDate"></span></div>
-      <p class="hand" id="wordHand">Joy is coming.</p>
-      <blockquote id="wordQuote">"Weeping may endure for a night, but joy cometh in the morning."</blockquote>
-      <span class="muted" style="font-weight:600" id="wordRef">Psalm 30:5 (KJV)</span>
-      <button class="btn btn-blue" type="button" id="openToday" style="align-self:flex-start">Read today's post</button>
+    <article class="word-card" data-word-card style="color:var(--blue-ink)">
+      <div class="row" style="justify-content:space-between">
+        <b style="color:var(--blue)">Today's word</b><span class="date" data-w="date"></span>
+      </div>
+      <p class="hand" data-w="head">Joy is coming.</p>
+      <blockquote data-w="verse">"Weeping may endure for a night, but joy cometh in the morning."</blockquote>
+      <span class="muted" style="font-weight:600" data-w="ref">Psalm 30:5 (KJV)</span>
+      <div class="share-wrap">
+        <button class="btn btn-blue" type="button" data-w="share" aria-expanded="false" aria-haspopup="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Share today's word</button>
+        <div class="share-menu" hidden>
+          <a data-s="wa" href="#" target="_blank" rel="noopener"><span class="si" style="background:#25D366"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.6-.1 1.2z"/></svg></span>WhatsApp</a>
+          <a data-s="fb" href="#" target="_blank" rel="noopener"><span class="si" style="background:#1877F2"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.8.3-1.4 1.4-1.4h1.6V4.5c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.2H8v3h2.4V21z" fill="#fff"/></svg></span>Facebook</a>
+          <a data-s="x" href="#" target="_blank" rel="noopener"><span class="si" style="background:#000"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.7 8 10.3h-6.2l-4.9-6.3L5.4 21H2.3l7.2-8.3L1.8 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></svg></span>X</a>
+          <a data-s="tg" href="#" target="_blank" rel="noopener"><span class="si" style="background:#229ED9"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M21.5 3.5L2.8 10.7c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.2-15c.3-1.3-.5-1.9-1.4-1.6zM8.8 13.4l9.3-5.9c.4-.3.8-.1.5.2l-7.9 7.1-.3 3.3z"/></svg></span>Telegram</a>
+          <button type="button" data-s="copy"><span class="si" style="background:var(--mist)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1B3D" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></span>Copy text</button>
+        </div>
+      </div>
     </article>
   </div>
 </section>
@@ -139,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var S = window.Site, esc = S.esc, posts = [], cur = 0, n = 0;
   var lb = document.getElementById('dwLb'), track = document.getElementById('dwTrack'), dots = document.getElementById('dwDots');
   var prev = lb.querySelector('.lb-prev'), next = lb.querySelector('.lb-next'), opener = null;
-  document.getElementById('wordDate').textContent = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'short', day: 'numeric' }).format(new Date());
 
   function go(i) {
     cur = Math.max(0, Math.min(i, n - 1));
@@ -184,7 +195,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var grid = document.getElementById('dwGrid');
     if (!posts.length) {
       grid.innerHTML = '<div class="empty">The latest words are taking a moment to load. Please refresh, or read them on <a href="' + S.CHANNEL + '/posts" target="_blank" rel="noopener">YouTube</a>.</div>';
-      document.getElementById('openToday').style.display = 'none';
       return;
     }
     grid.innerHTML = posts.map(function (p, i) {
@@ -195,12 +205,6 @@ document.addEventListener('DOMContentLoaded', function () {
         (p.images.length > 1 ? '<span class="tag">' + p.images.length + ' images</span>' : '') + '</button>';
     }).join('');
     grid.addEventListener('click', function (e) { var c = e.target.closest('[data-i]'); if (c) open(+c.dataset.i, c); });
-    var p = posts[0], t = S.postTitle(p.text), ex = S.postExcerpt(p.text, 170);
-    document.getElementById('wordHand').textContent = t;
-    document.getElementById('wordQuote').textContent = ex || t;
-    if (!ex) document.getElementById('wordHand').style.display = 'none';
-    document.getElementById('wordRef').textContent = 'From the Daily Word';
-    document.getElementById('openToday').addEventListener('click', function (e) { open(0, e.currentTarget); });
   });
 });
 </script>
