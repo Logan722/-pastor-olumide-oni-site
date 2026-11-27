@@ -132,6 +132,9 @@
     return new Intl.DateTimeFormat('en-US', { timeZone: tz, hour: 'numeric', minute: '2-digit' }).format(new Date(ms));
   }
   function initCountdowns() {
+    // Lagos time of the next live service in running text (follows US daylight-saving changes)
+    var at0 = nextLive(Date.now());
+    document.querySelectorAll('[data-lagos]').forEach(function (el) { el.textContent = fmtTime(at0, 'Africa/Lagos'); });
     var boxes = document.querySelectorAll('[data-countdown]');
     if (!boxes.length) return;
     function tick() {
@@ -144,6 +147,7 @@
         box.querySelectorAll('[data-tz]').forEach(function (el) { el.textContent = fmtTime(at, el.dataset.tz); });
         var ln = box.querySelector('.live-now'); if (ln) ln.style.display = live ? 'block' : 'none';
         var ct = box.querySelector('.count'); if (ct) ct.style.display = live ? 'none' : '';
+        var lb = box.querySelector('[data-live-btn]'); if (lb) lb.textContent = live ? 'Watch live now' : 'Remind me on YouTube';
       });
     }
     tick(); setInterval(tick, 1000);

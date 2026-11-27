@@ -171,7 +171,7 @@ img, svg { display: block; max-width: 100%; }
   text-overflow: ellipsis;
 }
 .topbar-chapter {
-  font-size: 12px;
+  font-size: 13px;
   color: #DCE4FF;
   letter-spacing: 0.05em;
   margin-top: 1px;
@@ -233,7 +233,7 @@ img, svg { display: block; max-width: 100%; }
   color: var(--r-cream);
 }
 .toc-close {
-  width: 36px; height: 36px;
+  width: 44px; height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -251,7 +251,7 @@ img, svg { display: block; max-width: 100%; }
   overscroll-behavior: contain;
 }
 .toc-section-label {
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--r-gold-dim);
@@ -275,7 +275,7 @@ img, svg { display: block; max-width: 100%; }
   background: var(--r-gold-glow);
 }
 .toc-item-num {
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.15em;
   color: var(--r-gold-dim);
   text-transform: uppercase;
@@ -353,7 +353,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .reading-content .hero-eyebrow {
   font-family: var(--r-sans);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.32em;
   color: var(--r-gold);
   text-transform: uppercase;
@@ -415,7 +415,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .reading-content .scripture-ref {
   font-family: var(--r-sans);
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.28em;
   color: var(--r-gold);
   text-transform: uppercase;
@@ -430,7 +430,7 @@ img, svg { display: block; max-width: 100%; }
 .reading-content .section:first-of-type { border-top: none; padding-top: 0; }
 .reading-content .section-eyebrow {
   font-family: var(--r-sans);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.32em;
   color: var(--r-gold);
   text-transform: uppercase;
@@ -478,7 +478,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .reading-content .chapter-number {
   font-family: var(--r-sans);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.32em;
   color: var(--r-gold);
   text-transform: uppercase;
@@ -573,14 +573,14 @@ img, svg { display: block; max-width: 100%; }
 }
 .reading-content .book-meta .meta-line {
   font-family: var(--r-sans);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.2em;
   color: var(--r-muted);
   text-transform: uppercase;
   margin-bottom: 10px;
 }
 .reading-content .book-meta .isbn {
-  font-size: 10px;
+  font-size: 13px;
   color: var(--r-gold-dim);
   letter-spacing: 0.15em;
   font-family: var(--r-sans);
@@ -627,7 +627,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* Font size label */
 .font-label {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   color: var(--r-muted);
   min-width: 30px;
@@ -638,7 +638,7 @@ img, svg { display: block; max-width: 100%; }
 /* Chapter nav in toolbar */
 .chapter-nav-label {
   font-family: var(--r-sans);
-  font-size: 11px;
+  font-size: 13px;
   color: var(--r-muted);
   letter-spacing: 0.05em;
   max-width: 160px;
@@ -697,7 +697,7 @@ img, svg { display: block; max-width: 100%; }
 .theme-swatch[data-theme="sepia"] { background: #FFF6D9; }
 .theme-swatch[data-theme="light"] { background: #FFFFFF; }
 .theme-swatch-label {
-  font-size: 9px;
+  font-size: 13px;
   text-align: center;
   color: var(--r-muted);
   margin-top: 6px;
@@ -902,10 +902,10 @@ body[data-reading-mode="scroll"] .toolbar-group:first-child {
 <div class="toc-overlay" id="tocOverlay"></div>
 
 <!-- TOC panel -->
-<nav class="toc-panel" id="tocPanel">
+<nav class="toc-panel" id="tocPanel" aria-label="Contents">
   <div class="toc-panel-header">
     <div class="toc-panel-title">Contents</div>
-    <button class="toc-close" id="tocClose">
+    <button class="toc-close" id="tocClose" aria-label="Close contents">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
@@ -915,20 +915,20 @@ body[data-reading-mode="scroll"] .toolbar-group:first-child {
 </nav>
 
 <!-- Reading pane -->
-<div class="reading-pane" id="readingPane">
+<main class="reading-pane" id="readingPane" aria-label="Book text">
   <div class="reading-content" id="readingContent"></div>
-</div>
+</main>
 
 <!-- Bottom toolbar -->
-<div class="toolbar" id="toolbar">
+<div class="toolbar" id="toolbar" role="toolbar" aria-label="Reading controls">
   <div class="toolbar-group">
-    <button class="tool-btn" id="prevPage" title="Previous page (←)">
+    <button class="tool-btn" id="prevPage" title="Previous page (←)" aria-label="Previous page">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 18 9 12 15 6"/>
       </svg>
     </button>
     <span class="chapter-nav-label" id="pageLabel">Page 1 of 1</span>
-    <button class="tool-btn" id="nextPage" title="Next page (→)">
+    <button class="tool-btn" id="nextPage" title="Next page (→)" aria-label="Next page">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="9 18 15 12 9 6"/>
       </svg>
@@ -936,14 +936,14 @@ body[data-reading-mode="scroll"] .toolbar-group:first-child {
   </div>
 
   <div class="toolbar-group">
-    <button class="tool-btn" id="fontDown" title="Decrease font (-)">
+    <button class="tool-btn" id="fontDown" title="Smaller text (-)" aria-label="Smaller text">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <text x="4" y="18" font-family="Georgia" font-size="12" fill="currentColor" stroke="none">A</text>
         <line x1="16" y1="14" x2="22" y2="14"/>
       </svg>
     </button>
     <span class="font-label" id="fontLabel">18</span>
-    <button class="tool-btn" id="fontUp" title="Increase font (+)">
+    <button class="tool-btn" id="fontUp" title="Bigger text (+)" aria-label="Bigger text">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <text x="2" y="18" font-family="Georgia" font-size="16" fill="currentColor" stroke="none">A</text>
         <line x1="16" y1="14" x2="22" y2="14"/><line x1="19" y1="11" x2="19" y2="17"/>
@@ -952,12 +952,12 @@ body[data-reading-mode="scroll"] .toolbar-group:first-child {
   </div>
 
   <div class="toolbar-group">
-    <button class="tool-btn" id="themeToggle" title="Reading theme">
+    <button class="tool-btn" id="themeToggle" title="Page color" aria-label="Page color">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
       </svg>
     </button>
-    <button class="tool-btn" id="scrollToggle" title="Toggle scroll mode (S)">
+    <button class="tool-btn" id="scrollToggle" title="Scroll or page mode (S)" aria-label="Switch between scroll and page mode">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <rect x="5" y="2" width="14" height="20" rx="2"/>
         <line x1="9" y1="8" x2="15" y2="8"/>
@@ -966,7 +966,7 @@ body[data-reading-mode="scroll"] .toolbar-group:first-child {
         <path d="M12 20 L10 18 L14 18 Z" fill="currentColor" stroke="none"/>
       </svg>
     </button>
-    <button class="tool-btn" id="fullscreenBtn" title="Fullscreen (F)">
+    <button class="tool-btn" id="fullscreenBtn" title="Full screen (F)" aria-label="Full screen">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
       </svg>

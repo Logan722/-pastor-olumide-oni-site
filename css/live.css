@@ -219,3 +219,22 @@ body.lb-lock{overflow:hidden}
   .books-row.m-rail>*{flex-basis:42%}
   .m-rail>.empty{flex-basis:100%}
 }
+/* ---- QA fixes: contrast, tap targets, small text ---- */
+.on-blue .eyebrow,.page-hero .eyebrow,.tile-blue .eyebrow{color:#FFDF7E!important}
+.btn-yt{background:#D90000}.btn-yt:hover{background:#B80000;color:#fff}
+.btn-fb{background:#1466D8}.btn-fb:hover{background:#0F55B8;color:#fff}
+.brand{min-height:44px}
+.head-row a,.text-link{display:inline-flex;align-items:center;min-height:44px}
+.count span{font-size:13px}
+.site-foot h2{font:700 15px var(--sans);color:#fff;margin:0 0 10px}
+.site-foot ul{gap:0}.site-foot ul a{display:inline-flex;align-items:center;min-height:44px}
+/* ---- QA fixes: no lonely cards on tablet/laptop ---- */
+.tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+#homeBooks{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media (max-width:999px){#homeBooks{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:899px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.tiles .tile-img{grid-column:1/-1;max-height:320px;min-height:220px}}
+@media (max-width:600px){.tiles{grid-template-columns:minmax(0,1fr)}.tiles .tile-img{grid-column:auto}}
+.split>img.photo-frame{margin-inline:auto}
+#reasonCards{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))!important}
+#topicGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:899px){#topicGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
